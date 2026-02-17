@@ -1,17 +1,10 @@
-# Business Understanding 
+# BUSINESS UNDERSTANDING
+
 ## 1.1 Latar Belakang
 
-Di era digital saat ini, data menjadi salah satu aset paling berharga
-dalam berbagai bidang, termasuk pendidikan, bisnis, kesehatan, dan
-teknologi. Namun, data mentah tidak secara langsung memberikan informasi
-yang bermakna. Diperlukan suatu proses sistematis untuk mengolah data
-tersebut sehingga dapat menghasilkan pola, informasi, dan pengetahuan
-yang berguna. Proses inilah yang dikenal sebagai *Data Mining*.
+Di era digital saat ini, data menjadi salah satu aset paling berharga dalam berbagai bidang, termasuk pendidikan, bisnis, kesehatan, dan teknologi. Namun, data mentah tidak secara langsung memberikan informasi yang bermakna. Diperlukan suatu proses sistematis untuk mengolah data tersebut sehingga dapat menghasilkan pola,informasi, dan pengetahuan yang berguna. Proses inilah yang dikenal sebagai *Data Mining*.
 
-Pada catatan ini, proses penambangan data dilakukan menggunakan **Iris
-Flower Dataset**, salah satu dataset klasik yang sering digunakan dalam
-pembelajaran data mining dan machine learning. Dataset ini berisi data
-pengukuran morfologi bunga iris yang terdiri dari tiga spesies berbeda.
+Pada catatan ini, proses penambangan data dilakukan menggunakan **Iris Flower Dataset**, salah satu dataset klasik yang sering digunakan dalam pembelajaran data mining dan machine learning. Dataset ini berisi data pengukuran morfologi bunga iris yang terdiri dari tiga spesies berbeda.
 
 Pemilihan dataset Iris didasarkan pada beberapa pertimbangan:
 

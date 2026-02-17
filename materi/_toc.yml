@@ -3,6 +3,8 @@
 
 format: jb-book
 root: intro
+title: BERANDA
 chapters:
 - file: business-understanding
 - file: data-understanding
+- file: data-preparation
