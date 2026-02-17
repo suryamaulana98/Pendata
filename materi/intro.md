@@ -1,11 +1,26 @@
-# Welcome to your Jupyter Book
+## Selamat Datang Di Catatan Saya
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Mata kuliah **Penambangan Data (Data Mining)** merupakan bidang dalam ilmu komputer 
+yang berfokus pada proses menemukan pola, informasi tersembunyi, serta pengetahuan 
+yang bernilai dari sekumpulan data dalam jumlah besar.
 
-Check out the content pages bundled with this sample book to see more.
+Melalui mata kuliah ini, saya diharapkan mampu memahami proses pengolahan data 
+secara sistematis, melakukan analisis terhadap dataset nyata, serta 
+menginterpretasikan hasilnya untuk mendukung pengambilan keputusan berbasis data.
+
+Website ini dibuat menggunakan **Jupyter Book** sebagai media dokumentasi 
+tugas, materi, serta hasil praktik selama mengikuti perkuliahan 
+Penambangan Data.
+
+---
+
+## Identitas Diri
+
+- **Nama:** Surya Maulana Akhmad  
+- **NIM:** 240411100160  
+- **Mata Kuliah:** Penambangan Data  
+- **Dosen Pengampu:** Mula'ab, S.Si., M.Kom.
+
+---
 
 ```{tableofcontents}
-```
