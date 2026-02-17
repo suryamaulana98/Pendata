@@ -1,115 +1,82 @@
 # Data Understanding (Pemahaman Data)
 
-## 2.1 Deskripsi Dataset
+## 1. Cara Memulai Proses Data Mining
 
-Dataset yang digunakan dalam proses penambangan data ini adalah **Iris
-Flower Dataset**. Dataset ini terdiri dari 150 data observasi bunga iris
-yang terbagi ke dalam tiga spesies, yaitu:
+Langkah awal dalam melakukan data mining adalah:
 
--   Iris-setosa
--   Iris-versicolor
--   Iris-virginica
+1.  Memastikan dataset telah tersedia dan dapat dibaca dengan benar.
+2.  Memahami struktur data (jumlah baris, kolom, dan tipe data).
+3.  Melakukan pemeriksaan kualitas data (missing value dan duplikasi).
+4.  Melakukan eksplorasi awal melalui statistik deskriptif dan
+    visualisasi.
 
-Setiap data memiliki empat fitur numerik yang merepresentasikan ukuran
-morfologi bunga dalam satuan centimeter (cm), serta satu kolom label
-yang menunjukkan spesiesnya.
-
-------------------------------------------------------------------------
-
-## 2.2 Struktur Dataset
-
-Dataset memiliki struktur sebagai berikut:
-
-  No   Nama Atribut   Tipe Data   Keterangan
-  ---- -------------- ----------- --------------------
-  1    sepal_length   Float       Panjang sepal (cm)
-  2    sepal_width    Float       Lebar sepal (cm)
-  3    petal_length   Float       Panjang petal (cm)
-  4    petal_width    Float       Lebar petal (cm)
-  5    species        Object      Jenis spesies iris
-
-Jumlah total data: **150 baris**\
-Jumlah total atribut: **5 kolom**
-
-Empat atribut pertama bertipe numerik (float), sedangkan kolom *species*
-bertipe kategorikal (object).
+Tahap ini sangat penting karena kesalahan dalam memahami data dapat
+menyebabkan kesalahan dalam proses modeling.
 
 ------------------------------------------------------------------------
 
-## 2.3 Statistik Deskriptif
+## 2. Struktur Dataset
 
-Statistik deskriptif dilakukan untuk memahami distribusi dasar setiap
-fitur numerik, seperti nilai minimum, maksimum, rata-rata (mean), dan
-standar deviasi.
+Dataset Iris memiliki:
 
-Secara umum hasil analisis menunjukkan:
+-   150 baris data
+-   4 fitur numerik
+-   1 label kategorikal (species)
 
--   Tidak terdapat nilai negatif pada fitur numerik.
--   Rentang nilai berada dalam batas biologis yang wajar.
--   Distribusi data relatif stabil dan tidak menunjukkan anomali
-    ekstrem.
-
-Statistik ini penting untuk memastikan bahwa tidak ada kesalahan input
-data seperti angka yang tidak masuk akal atau format yang keliru.
+Seluruh fitur numerik bertipe float dan label bertipe object.
 
 ------------------------------------------------------------------------
 
-## 2.4 Pemeriksaan Missing Value
-
-Pemeriksaan dilakukan untuk memastikan tidak terdapat nilai kosong
-(missing value) pada dataset.
+## 3. Pemeriksaan Kualitas Data
 
 Hasil pemeriksaan menunjukkan:
 
--   Tidak terdapat missing value pada seluruh kolom.
--   Dataset lengkap sebanyak 150 data.
-
-Hal ini menunjukkan bahwa dataset berada dalam kondisi yang baik dan
-tidak memerlukan proses imputasi data.
-
-------------------------------------------------------------------------
-
-## 2.5 Pemeriksaan Duplikasi Data
-
-Selanjutnya dilakukan pemeriksaan untuk memastikan tidak terdapat baris
-data yang identik (duplikat).
-
-Hasil analisis menunjukkan:
-
+-   Tidak terdapat missing value.
 -   Tidak terdapat data duplikat.
--   Seluruh 150 baris data bersifat unik.
+-   Nilai berada dalam rentang biologis yang wajar.
 
-Dengan demikian, dataset tidak memerlukan proses penghapusan duplikasi.
-
-------------------------------------------------------------------------
-
-## 2.6 Pemeriksaan Konsistensi dan Kualitas Data
-
-Tahap ini bertujuan untuk memastikan bahwa:
-
--   Semua nilai numerik berada dalam rentang logis.
--   Tidak terdapat nilai ekstrem yang tidak wajar.
--   Penulisan label spesies konsisten dan tidak mengandung kesalahan
-    pengetikan.
-
-Hasil pemeriksaan menunjukkan bahwa:
-
--   Nilai fitur numerik konsisten dan berada dalam rentang normal.
--   Tidak ditemukan nilai anomali yang mencurigakan.
--   Label spesies konsisten pada seluruh data.
+Dataset berada dalam kondisi bersih dan siap untuk tahap berikutnya.
 
 ------------------------------------------------------------------------
 
-## 2.7 Kesimpulan Tahap Data Understanding
+## 4. Visualisasi Data
 
-Berdasarkan proses pemahaman data yang telah dilakukan, dapat
-disimpulkan bahwa:
+### 4.1 Distribusi Jumlah Data per Species
 
-1.  Dataset memiliki struktur yang jelas dan terdefinisi dengan baik.
-2.  Tidak terdapat missing value.
-3.  Tidak terdapat data duplikat.
-4.  Tidak ditemukan inkonsistensi atau kesalahan data.
-5.  Dataset dalam kondisi siap untuk masuk ke tahap Data Preparation.
+![Jumlah Data per Species](visualisasi_jumlah_species.png)
 
-Tahap Data Understanding ini menjadi fondasi penting sebelum dilakukan
-proses pembersihan dan transformasi data pada tahap berikutnya.
+Berdasarkan grafik di atas, setiap spesies memiliki jumlah data yang
+sama, yaitu 50 data. Hal ini menunjukkan dataset dalam kondisi seimbang
+(balanced dataset).
+
+------------------------------------------------------------------------
+
+### 4.2 Distribusi Sepal Length
+
+![Histogram Sepal Length](histogram_sepal_length.png)
+
+Histogram menunjukkan distribusi panjang sepal. Sebaran data relatif
+normal dan tidak menunjukkan anomali ekstrem.
+
+------------------------------------------------------------------------
+
+### 4.3 Hubungan Petal Length dan Petal Width
+
+![Scatter Plot Petal](scatter_petal.png)
+
+Scatter plot menunjukkan adanya pola pemisahan antar data berdasarkan
+ukuran petal. Variabel petal_length dan petal_width berpotensi kuat
+digunakan dalam proses klasifikasi.
+
+------------------------------------------------------------------------
+
+## 5. Kesimpulan Tahap Data Understanding
+
+Dari proses eksplorasi yang telah dilakukan dapat disimpulkan:
+
+1.  Dataset memiliki kualitas yang baik.
+2.  Tidak ditemukan kesalahan data.
+3.  Dataset seimbang antar kelas.
+4.  Terdapat pola awal yang menunjukkan potensi klasifikasi.
+
+Dengan demikian, dataset siap untuk masuk ke tahap Data Preparation.
