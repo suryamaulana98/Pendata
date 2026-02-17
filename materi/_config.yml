@@ -20,10 +20,12 @@ repository:
   branch: master
 
 html:
+  baseurl: "/Pendata"
   use_issues_button: true
   use_repository_button: true
   extra_css:
-    - custom.css
+    - _static/custom.css
+
 
 sphinx:
   config:
