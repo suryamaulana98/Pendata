@@ -1,12 +1,6 @@
 /* Paragraf rata kanan kiri */
 .bd-article p {
     text-align: justify;
-    text-indent: 10px;
     line-height: 1.8;
     margin-bottom: 15px;
-}
-
-/* Supaya paragraf pertama juga ikut indent */
-.bd-article p:first-of-type {
-    text-indent: 10px;
 }
