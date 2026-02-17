@@ -1,0 +1,32 @@
+title: Catatan Penambangan Data
+author: Surya Maulana Akhmad
+copyright: "2026 Surya Maulana Akhmad"
+logo: surya.png
+
+
+execute:
+  execute_notebooks: force
+
+latex:
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - references.bib
+
+repository:
+  url: https://github.com/executablebooks/jupyter-book
+  path_to_book: docs
+  branch: master
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  extra_css:
+    - custom.css
+
+sphinx:
+  config:
+    html_theme_options:
+      secondary_sidebar_items:
+        - page-toc
