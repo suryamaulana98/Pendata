@@ -61,6 +61,7 @@
     <link rel="canonical" href="/Pendata/data-understanding.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Business Understanding" href="business-understanding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -172,8 +171,9 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="business-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding (Pemahaman Data)</a></li>
 </ul>
 
     </div>
@@ -322,13 +322,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-dataset">2.1 Deskripsi Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">2.2 Struktur Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">2.3 Statistik Deskriptif</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-missing-value">2.4 Pemeriksaan Missing Value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-duplikasi-data">2.5 Pemeriksaan Duplikasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-konsistensi-dan-kualitas-data">2.6 Pemeriksaan Konsistensi dan Kualitas Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-data-understanding">2.7 Kesimpulan Tahap Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-memulai-proses-data-mining">1. Cara Memulai Proses Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">2. Struktur Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-kualitas-data">3. Pemeriksaan Kualitas Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-data">4. Visualisasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-jumlah-data-per-species">4.1 Distribusi Jumlah Data per Species</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">4.2 Distribusi Sepal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-petal-length-dan-petal-width">4.3 Hubungan Petal Length dan Petal Width</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-data-understanding">5. Kesimpulan Tahap Data Understanding</a></li>
 </ul>
             </nav>
         </div>
@@ -342,108 +345,78 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-understanding-pemahaman-data">
 <h1>Data Understanding (Pemahaman Data)<a class="headerlink" href="#data-understanding-pemahaman-data" title="Link to this heading">#</a></h1>
-<section id="deskripsi-dataset">
-<h2>2.1 Deskripsi Dataset<a class="headerlink" href="#deskripsi-dataset" title="Link to this heading">#</a></h2>
-<p>Dataset yang digunakan dalam proses penambangan data ini adalah <strong>Iris
-Flower Dataset</strong>. Dataset ini terdiri dari 150 data observasi bunga iris
-yang terbagi ke dalam tiga spesies, yaitu:</p>
-<ul class="simple">
-<li><p>Iris-setosa</p></li>
-<li><p>Iris-versicolor</p></li>
-<li><p>Iris-virginica</p></li>
-</ul>
-<p>Setiap data memiliki empat fitur numerik yang merepresentasikan ukuran
-morfologi bunga dalam satuan centimeter (cm), serta satu kolom label
-yang menunjukkan spesiesnya.</p>
+<section id="cara-memulai-proses-data-mining">
+<h2>1. Cara Memulai Proses Data Mining<a class="headerlink" href="#cara-memulai-proses-data-mining" title="Link to this heading">#</a></h2>
+<p>Langkah awal dalam melakukan data mining adalah:</p>
+<ol class="arabic simple">
+<li><p>Memastikan dataset telah tersedia dan dapat dibaca dengan benar.</p></li>
+<li><p>Memahami struktur data (jumlah baris, kolom, dan tipe data).</p></li>
+<li><p>Melakukan pemeriksaan kualitas data (missing value dan duplikasi).</p></li>
+<li><p>Melakukan eksplorasi awal melalui statistik deskriptif dan
+visualisasi.</p></li>
+</ol>
+<p>Tahap ini sangat penting karena kesalahan dalam memahami data dapat
+menyebabkan kesalahan dalam proses modeling.</p>
 </section>
 <hr class="docutils" />
 <section id="struktur-dataset">
-<h2>2.2 Struktur Dataset<a class="headerlink" href="#struktur-dataset" title="Link to this heading">#</a></h2>
-<p>Dataset memiliki struktur sebagai berikut:</p>
-<p>No   Nama Atribut   Tipe Data   Keterangan</p>
-<hr class="docutils" />
-<p>1    sepal_length   Float       Panjang sepal (cm)
-2    sepal_width    Float       Lebar sepal (cm)
-3    petal_length   Float       Panjang petal (cm)
-4    petal_width    Float       Lebar petal (cm)
-5    species        Object      Jenis spesies iris</p>
-<p>Jumlah total data: <strong>150 baris</strong><br />
-Jumlah total atribut: <strong>5 kolom</strong></p>
-<p>Empat atribut pertama bertipe numerik (float), sedangkan kolom <em>species</em>
-bertipe kategorikal (object).</p>
-</section>
-<hr class="docutils" />
-<section id="statistik-deskriptif">
-<h2>2.3 Statistik Deskriptif<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h2>
-<p>Statistik deskriptif dilakukan untuk memahami distribusi dasar setiap
-fitur numerik, seperti nilai minimum, maksimum, rata-rata (mean), dan
-standar deviasi.</p>
-<p>Secara umum hasil analisis menunjukkan:</p>
+<h2>2. Struktur Dataset<a class="headerlink" href="#struktur-dataset" title="Link to this heading">#</a></h2>
+<p>Dataset Iris memiliki:</p>
 <ul class="simple">
-<li><p>Tidak terdapat nilai negatif pada fitur numerik.</p></li>
-<li><p>Rentang nilai berada dalam batas biologis yang wajar.</p></li>
-<li><p>Distribusi data relatif stabil dan tidak menunjukkan anomali
-ekstrem.</p></li>
+<li><p>150 baris data</p></li>
+<li><p>4 fitur numerik</p></li>
+<li><p>1 label kategorikal (species)</p></li>
 </ul>
-<p>Statistik ini penting untuk memastikan bahwa tidak ada kesalahan input
-data seperti angka yang tidak masuk akal atau format yang keliru.</p>
+<p>Seluruh fitur numerik bertipe float dan label bertipe object.</p>
 </section>
 <hr class="docutils" />
-<section id="pemeriksaan-missing-value">
-<h2>2.4 Pemeriksaan Missing Value<a class="headerlink" href="#pemeriksaan-missing-value" title="Link to this heading">#</a></h2>
-<p>Pemeriksaan dilakukan untuk memastikan tidak terdapat nilai kosong
-(missing value) pada dataset.</p>
+<section id="pemeriksaan-kualitas-data">
+<h2>3. Pemeriksaan Kualitas Data<a class="headerlink" href="#pemeriksaan-kualitas-data" title="Link to this heading">#</a></h2>
 <p>Hasil pemeriksaan menunjukkan:</p>
 <ul class="simple">
-<li><p>Tidak terdapat missing value pada seluruh kolom.</p></li>
-<li><p>Dataset lengkap sebanyak 150 data.</p></li>
-</ul>
-<p>Hal ini menunjukkan bahwa dataset berada dalam kondisi yang baik dan
-tidak memerlukan proses imputasi data.</p>
-</section>
-<hr class="docutils" />
-<section id="pemeriksaan-duplikasi-data">
-<h2>2.5 Pemeriksaan Duplikasi Data<a class="headerlink" href="#pemeriksaan-duplikasi-data" title="Link to this heading">#</a></h2>
-<p>Selanjutnya dilakukan pemeriksaan untuk memastikan tidak terdapat baris
-data yang identik (duplikat).</p>
-<p>Hasil analisis menunjukkan:</p>
-<ul class="simple">
+<li><p>Tidak terdapat missing value.</p></li>
 <li><p>Tidak terdapat data duplikat.</p></li>
-<li><p>Seluruh 150 baris data bersifat unik.</p></li>
+<li><p>Nilai berada dalam rentang biologis yang wajar.</p></li>
 </ul>
-<p>Dengan demikian, dataset tidak memerlukan proses penghapusan duplikasi.</p>
+<p>Dataset berada dalam kondisi bersih dan siap untuk tahap berikutnya.</p>
 </section>
 <hr class="docutils" />
-<section id="pemeriksaan-konsistensi-dan-kualitas-data">
-<h2>2.6 Pemeriksaan Konsistensi dan Kualitas Data<a class="headerlink" href="#pemeriksaan-konsistensi-dan-kualitas-data" title="Link to this heading">#</a></h2>
-<p>Tahap ini bertujuan untuk memastikan bahwa:</p>
-<ul class="simple">
-<li><p>Semua nilai numerik berada dalam rentang logis.</p></li>
-<li><p>Tidak terdapat nilai ekstrem yang tidak wajar.</p></li>
-<li><p>Penulisan label spesies konsisten dan tidak mengandung kesalahan
-pengetikan.</p></li>
-</ul>
-<p>Hasil pemeriksaan menunjukkan bahwa:</p>
-<ul class="simple">
-<li><p>Nilai fitur numerik konsisten dan berada dalam rentang normal.</p></li>
-<li><p>Tidak ditemukan nilai anomali yang mencurigakan.</p></li>
-<li><p>Label spesies konsisten pada seluruh data.</p></li>
-</ul>
+<section id="visualisasi-data">
+<h2>4. Visualisasi Data<a class="headerlink" href="#visualisasi-data" title="Link to this heading">#</a></h2>
+<section id="distribusi-jumlah-data-per-species">
+<h3>4.1 Distribusi Jumlah Data per Species<a class="headerlink" href="#distribusi-jumlah-data-per-species" title="Link to this heading">#</a></h3>
+<p><img alt="Jumlah Data per Species" src="visualisasi_jumlah_species.png" /></p>
+<p>Berdasarkan grafik di atas, setiap spesies memiliki jumlah data yang
+sama, yaitu 50 data. Hal ini menunjukkan dataset dalam kondisi seimbang
+(balanced dataset).</p>
+</section>
+<hr class="docutils" />
+<section id="distribusi-sepal-length">
+<h3>4.2 Distribusi Sepal Length<a class="headerlink" href="#distribusi-sepal-length" title="Link to this heading">#</a></h3>
+<p><img alt="Histogram Sepal Length" src="histogram_sepal_length.png" /></p>
+<p>Histogram menunjukkan distribusi panjang sepal. Sebaran data relatif
+normal dan tidak menunjukkan anomali ekstrem.</p>
+</section>
+<hr class="docutils" />
+<section id="hubungan-petal-length-dan-petal-width">
+<h3>4.3 Hubungan Petal Length dan Petal Width<a class="headerlink" href="#hubungan-petal-length-dan-petal-width" title="Link to this heading">#</a></h3>
+<p><img alt="Scatter Plot Petal" src="scatter_petal.png" /></p>
+<p>Scatter plot menunjukkan adanya pola pemisahan antar data berdasarkan
+ukuran petal. Variabel petal_length dan petal_width berpotensi kuat
+digunakan dalam proses klasifikasi.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="kesimpulan-tahap-data-understanding">
-<h2>2.7 Kesimpulan Tahap Data Understanding<a class="headerlink" href="#kesimpulan-tahap-data-understanding" title="Link to this heading">#</a></h2>
-<p>Berdasarkan proses pemahaman data yang telah dilakukan, dapat
-disimpulkan bahwa:</p>
+<h2>5. Kesimpulan Tahap Data Understanding<a class="headerlink" href="#kesimpulan-tahap-data-understanding" title="Link to this heading">#</a></h2>
+<p>Dari proses eksplorasi yang telah dilakukan dapat disimpulkan:</p>
 <ol class="arabic simple">
-<li><p>Dataset memiliki struktur yang jelas dan terdefinisi dengan baik.</p></li>
-<li><p>Tidak terdapat missing value.</p></li>
-<li><p>Tidak terdapat data duplikat.</p></li>
-<li><p>Tidak ditemukan inkonsistensi atau kesalahan data.</p></li>
-<li><p>Dataset dalam kondisi siap untuk masuk ke tahap Data Preparation.</p></li>
+<li><p>Dataset memiliki kualitas yang baik.</p></li>
+<li><p>Tidak ditemukan kesalahan data.</p></li>
+<li><p>Dataset seimbang antar kelas.</p></li>
+<li><p>Terdapat pola awal yang menunjukkan potensi klasifikasi.</p></li>
 </ol>
-<p>Tahap Data Understanding ini menjadi fondasi penting sebelum dilakukan
-proses pembersihan dan transformasi data pada tahap berikutnya.</p>
+<p>Dengan demikian, dataset siap untuk masuk ke tahap Data Preparation.</p>
 </section>
 </section>
 
@@ -477,6 +450,15 @@ proses pembersihan dan transformasi data pada tahap berikutnya.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="business-understanding.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Business Understanding</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -493,13 +475,16 @@ proses pembersihan dan transformasi data pada tahap berikutnya.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-dataset">2.1 Deskripsi Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">2.2 Struktur Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">2.3 Statistik Deskriptif</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-missing-value">2.4 Pemeriksaan Missing Value</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-duplikasi-data">2.5 Pemeriksaan Duplikasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-konsistensi-dan-kualitas-data">2.6 Pemeriksaan Konsistensi dan Kualitas Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-data-understanding">2.7 Kesimpulan Tahap Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-memulai-proses-data-mining">1. Cara Memulai Proses Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">2. Struktur Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-kualitas-data">3. Pemeriksaan Kualitas Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-data">4. Visualisasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-jumlah-data-per-species">4.1 Distribusi Jumlah Data per Species</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">4.2 Distribusi Sepal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-petal-length-dan-petal-width">4.3 Hubungan Petal Length dan Petal Width</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-data-understanding">5. Kesimpulan Tahap Data Understanding</a></li>
 </ul>
   </nav></div>
 
