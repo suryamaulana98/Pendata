@@ -381,11 +381,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
@@ -945,7 +947,6 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 </section>
 <section id="analisis-distribusi-fitur">
 <h2>2.18 Analisis Distribusi Fitur<a class="headerlink" href="#analisis-distribusi-fitur" title="Link to this heading">#</a></h2>
-<p><img alt="distribusi Orange" src="_images/mean.png" /></p>
 <p>Analisis distribusi dilakukan untuk memahami pola penyebaran nilai pada setiap fitur numerik dalam dataset Iris. Dengan melihat histogram, kita dapat mengidentifikasi:</p>
 <ul class="simple">
 <li><p>Rentang nilai</p></li>
@@ -961,9 +962,8 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li><p>petal_width</p></li>
 </ul>
 <p>Berikut analisis masing-masing fitur.</p>
-</section>
 <section id="distribusi-petal-length">
-<h2>Distribusi Petal Length<a class="headerlink" href="#distribusi-petal-length" title="Link to this heading">#</a></h2>
+<h3>Distribusi Petal Length<a class="headerlink" href="#distribusi-petal-length" title="Link to this heading">#</a></h3>
 <p><img alt="distribusi Orange" src="_images/petal-length.png" /></p>
 <p>Histogram menunjukkan dua kelompok distribusi yang cukup jelas:</p>
 <ul class="simple">
@@ -978,7 +978,7 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <p>Distribusi ini tidak berbentuk normal tunggal, melainkan multimodal (lebih dari satu puncak). Hal ini menunjukkan bahwa fitur petal_length memiliki kemampuan diskriminatif yang kuat dalam membedakan spesies bunga.</p>
 </section>
 <section id="distribusi-petal-width">
-<h2>Distribusi Petal Width<a class="headerlink" href="#distribusi-petal-width" title="Link to this heading">#</a></h2>
+<h3>Distribusi Petal Width<a class="headerlink" href="#distribusi-petal-width" title="Link to this heading">#</a></h3>
 <p><img alt="distribusi Orange" src="_images/petal-width.png" /></p>
 <p>Histogram menunjukkan dua kelompok utama:</p>
 <ul class="simple">
@@ -993,7 +993,7 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 </ul>
 </section>
 <section id="distribusi-sepal-length">
-<h2>Distribusi Sepal Length<a class="headerlink" href="#distribusi-sepal-length" title="Link to this heading">#</a></h2>
+<h3>Distribusi Sepal Length<a class="headerlink" href="#distribusi-sepal-length" title="Link to this heading">#</a></h3>
 <p><img alt="distribusi Orange" src="_images/sepal-length.png" /></p>
 <p>Distribusi sepal_length lebih menyebar dibandingkan petal.</p>
 <ul class="simple">
@@ -1008,7 +1008,7 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 </ul>
 </section>
 <section id="distribusi-sepal-width">
-<h2>Distribusi Sepal Width<a class="headerlink" href="#distribusi-sepal-width" title="Link to this heading">#</a></h2>
+<h3>Distribusi Sepal Width<a class="headerlink" href="#distribusi-sepal-width" title="Link to this heading">#</a></h3>
 <p><img alt="distribusi Orange" src="_images/sepal-width.png" /></p>
 <p>Distribusi berada pada rentang sekitar 2.0 – 4.4</p>
 <p>Karakteristik distribusi:</p>
@@ -1019,6 +1019,7 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 </ul>
 <p>Interpretasi:</p>
 <p>Sepal_width memiliki daya diskriminasi paling rendah dibandingkan fitur lainnya.</p>
+</section>
 </section>
 <section id="analisis-scatter-plot-petal-length-vs-petal-width">
 <h2>2.19 Analisis Scatter Plot (Petal Length vs Petal Width)<a class="headerlink" href="#analisis-scatter-plot-petal-length-vs-petal-width" title="Link to this heading">#</a></h2>
@@ -1161,11 +1162,13 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
