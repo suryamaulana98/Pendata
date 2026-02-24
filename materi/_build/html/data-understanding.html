@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -173,10 +173,9 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">24-160 Surya Maulana Akhmad</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="business-understanding.html">BUSINESS UNDERSTANDING</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DATA UNDERSTANDING</a></li>
+
 
 
 
@@ -375,6 +374,20 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-fitur-numerik">2.12 Histogram Fitur Numerik</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-untuk-deteksi-outlier">2.13 Boxplot untuk Deteksi Outlier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-petal-length-vs-petal-width">2.14 Scatter Plot Petal Length vs Petal Width</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
@@ -827,6 +840,207 @@ Sebaran nilai antar fitur stabil.</p>
 Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasifikasi.</p>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementasi-menggunakan-orange-data-mining">
+<h1>Implementasi Menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-menggunakan-orange-data-mining" title="Link to this heading">#</a></h1>
+<section id="penjelasan-orange">
+<h2>2.15 Penjelasan Orange<a class="headerlink" href="#penjelasan-orange" title="Link to this heading">#</a></h2>
+<p>Orange Data Mining merupakan tools visual programming untuk analisis data dan machine learning. Berbeda dengan Python yang berbasis coding, Orange menggunakan pendekatan berbasis workflow (drag-and-drop), sehingga proses analisis dilakukan dengan menghubungkan widget.</p>
+<p>Pada analisi ini, Orange digunakan untuk:</p>
+<ul class="simple">
+<li><p>Mengimpor dataset Iris</p></li>
+<li><p>Melihat statistik kolom (mean, median, mode)</p></li>
+<li><p>Melihat distribusi fitur</p></li>
+<li><p>Melakukan visualisasi scatter plot</p></li>
+<li><p>Membandingkan hasil dengan analisis Python</p></li>
+</ul>
+</section>
+<section id="workflow-analisis-di-orange">
+<h2>2.16 Workflow Analisis di Orange<a class="headerlink" href="#workflow-analisis-di-orange" title="Link to this heading">#</a></h2>
+<p><img alt="Workflow Orange" src="_images/workflow.png" /></p>
+<p>Alur kerja terdiri dari:</p>
+<ol class="arabic simple">
+<li><p><strong>CSV File Import</strong></p>
+<ul class="simple">
+<li><p>Digunakan untuk mengimpor dataset IRIS.csv.</p></li>
+</ul>
+</li>
+<li><p><strong>Column Statistics</strong></p>
+<ul class="simple">
+<li><p>Untuk melihat ringkasan statistik tiap kolom.</p></li>
+</ul>
+</li>
+<li><p><strong>Scatter Plot</strong></p>
+<ul class="simple">
+<li><p>Untuk melihat hubungan antar fitur.</p></li>
+</ul>
+</li>
+<li><p><strong>Distributions</strong></p>
+<ul class="simple">
+<li><p>Untuk melihat distribusi masing-masing fitur.</p></li>
+</ul>
+</li>
+</ol>
+<p>Workflow ini menunjukkan pendekatan visual dari proses Data Understanding yang sebelumnya dilakukan menggunakan Python.</p>
+</section>
+<section id="proses-import-dataset-iris-di-orange">
+<h2>2.17 Proses Import Dataset Iris di Orange<a class="headerlink" href="#proses-import-dataset-iris-di-orange" title="Link to this heading">#</a></h2>
+<p><img alt="import Orange" src="_images/import.png" /></p>
+<p>Pada tahap ini:</p>
+<ul class="simple">
+<li><p>Encoding: UTF-8</p></li>
+<li><p>Delimiter: Comma (,)</p></li>
+<li><p>Kolom dikenali otomatis sebagai:</p>
+<ul>
+<li><p>4 kolom numerik</p></li>
+<li><p>1 kolom kategorikal (species)</p></li>
+</ul>
+</li>
+</ul>
+<p>Dari tampilan preview terlihat bahwa:</p>
+<ul class="simple">
+<li><p>Struktur data sudah sesuai.</p></li>
+<li><p>Tidak terdapat kesalahan pembacaan kolom.</p></li>
+<li><p>Tidak ada nilai kosong pada baris awal.</p></li>
+</ul>
+<p>Hal ini menandakan dataset valid dan siap dianalisis.</p>
+</section>
+<section id="analisis-statistik-kolom-mean-median-mode">
+<h2>2.18 Analisis Statistik Kolom (Mean, Median, Mode)<a class="headerlink" href="#analisis-statistik-kolom-mean-median-mode" title="Link to this heading">#</a></h2>
+<p><img alt="statistik Orange" src="_images/mean.png" /></p>
+<p>Pada widget Column Statistics diperoleh informasi:</p>
+<p>Untuk fitur numerik:</p>
+<ul class="simple">
+<li><p>Mean (Rata-rata)</p></li>
+<li><p>Median</p></li>
+<li><p>Mode</p></li>
+<li><p>Minimum</p></li>
+<li><p>Maximum</p></li>
+<li><p>Dispersion (variasi data)</p></li>
+<li><p>Missing value (0%)</p></li>
+</ul>
+<p>Contoh interpretasi:</p>
+<ul class="simple">
+<li><p><strong>sepal_length</strong></p>
+<ul>
+<li><p>Mean sekitar 5.84</p></li>
+<li><p>Median sekitar 5.8</p></li>
+<li><p>Tidak ada missing value</p></li>
+</ul>
+</li>
+<li><p><strong>petal_width</strong></p>
+<ul>
+<li><p>Mean sekitar 1.19</p></li>
+<li><p>Nilai minimum 0.1</p></li>
+<li><p>Nilai maksimum 2.5</p></li>
+</ul>
+</li>
+</ul>
+<p>Kesimpulan:</p>
+<ul class="simple">
+<li><p>Tidak ada data kosong.</p></li>
+<li><p>Rentang nilai masih dalam batas biologis yang wajar.</p></li>
+<li><p>Hasil ini konsisten dengan analisis statistik deskriptif pada Python.</p></li>
+</ul>
+<p>Artinya, validasi silang antara Python dan Orange menunjukkan hasil yang konsisten.</p>
+</section>
+<section id="analisis-distribusi-fitur">
+<h2>2.18 Analisis Distribusi Fitur<a class="headerlink" href="#analisis-distribusi-fitur" title="Link to this heading">#</a></h2>
+<p><img alt="distribusi Orange" src="_images/mean.png" /></p>
+<p>Analisis distribusi dilakukan untuk memahami pola penyebaran nilai pada setiap fitur numerik dalam dataset Iris. Dengan melihat histogram, kita dapat mengidentifikasi:</p>
+<ul class="simple">
+<li><p>Rentang nilai</p></li>
+<li><p>Pola distribusi (normal/tidak)</p></li>
+<li><p>Kemungkinan adanya pemisahan kelas</p></li>
+<li><p>Indikasi outlier</p></li>
+</ul>
+<p>Dataset memiliki empat fitur numerik, yaitu:</p>
+<ul class="simple">
+<li><p>sepal_length</p></li>
+<li><p>sepal_width</p></li>
+<li><p>petal_length</p></li>
+<li><p>petal_width</p></li>
+</ul>
+<p>Berikut analisis masing-masing fitur.</p>
+</section>
+<section id="distribusi-petal-length">
+<h2>Distribusi Petal Length<a class="headerlink" href="#distribusi-petal-length" title="Link to this heading">#</a></h2>
+<p><img alt="distribusi Orange" src="_images/petal-length.png" /></p>
+<p>Histogram menunjukkan dua kelompok distribusi yang cukup jelas:</p>
+<ul class="simple">
+<li><p>Kelompok pertama berada pada rentang sekitar 1.0 – 2.0</p></li>
+<li><p>Kelompok kedua berada pada rentang sekitar 3.0 – 7.0</p></li>
+</ul>
+<p>Interpretasi:</p>
+<ul class="simple">
+<li><p>Kelompok pertama merepresentasikan Iris-setosa</p></li>
+<li><p>Kelompok kedua mencakup Iris-versicolor dan Iris-virginica</p></li>
+</ul>
+<p>Distribusi ini tidak berbentuk normal tunggal, melainkan multimodal (lebih dari satu puncak). Hal ini menunjukkan bahwa fitur petal_length memiliki kemampuan diskriminatif yang kuat dalam membedakan spesies bunga.</p>
+</section>
+<section id="distribusi-petal-width">
+<h2>Distribusi Petal Width<a class="headerlink" href="#distribusi-petal-width" title="Link to this heading">#</a></h2>
+<p><img alt="distribusi Orange" src="_images/petal-width.png" /></p>
+<p>Histogram menunjukkan dua kelompok utama:</p>
+<ul class="simple">
+<li><p>Rentang 0.1 – 0.6 → dominan Iris-setosa</p></li>
+<li><p>Rentang 1.0 – 2.5 → dominan Versicolor &amp; Virginica</p></li>
+</ul>
+<p>Distribusi ini sangat terpisah antara Setosa dan dua spesies lainnya.</p>
+<p>Interpretasi:</p>
+<ul class="simple">
+<li><p>Fitur petal_width memiliki pemisahan kelas yang sangat jelas.</p></li>
+<li><p>Hampir tidak ada overlap antara Setosa dan spesies lainnya.</p></li>
+</ul>
+</section>
+<section id="distribusi-sepal-length">
+<h2>Distribusi Sepal Length<a class="headerlink" href="#distribusi-sepal-length" title="Link to this heading">#</a></h2>
+<p><img alt="distribusi Orange" src="_images/sepal-length.png" /></p>
+<p>Distribusi sepal_length lebih menyebar dibandingkan petal.</p>
+<ul class="simple">
+<li><p>Rentang nilai sekitar 4.3 – 7.9</p></li>
+<li><p>Distribusi cenderung mendekati normal</p></li>
+<li><p>Terjadi overlap antar kelas</p></li>
+</ul>
+<p>Interpretasi:</p>
+<ul class="simple">
+<li><p>Fitur ini tidak menunjukkan pemisahan kelas yang sangat jelas.</p></li>
+<li><p>Ketiga spesies memiliki nilai yang saling bertumpang tindih.</p></li>
+</ul>
+</section>
+<section id="distribusi-sepal-width">
+<h2>Distribusi Sepal Width<a class="headerlink" href="#distribusi-sepal-width" title="Link to this heading">#</a></h2>
+<p><img alt="distribusi Orange" src="_images/sepal-width.png" /></p>
+<p>Distribusi berada pada rentang sekitar 2.0 – 4.4</p>
+<p>Karakteristik distribusi:</p>
+<ul class="simple">
+<li><p>Cenderung mendekati normal</p></li>
+<li><p>Terjadi banyak overlap antar kelas</p></li>
+<li><p>Tidak menunjukkan pemisahan yang tegas</p></li>
+</ul>
+<p>Interpretasi:</p>
+<p>Sepal_width memiliki daya diskriminasi paling rendah dibandingkan fitur lainnya.</p>
+</section>
+<section id="analisis-scatter-plot-petal-length-vs-petal-width">
+<h2>2.19 Analisis Scatter Plot (Petal Length vs Petal Width)<a class="headerlink" href="#analisis-scatter-plot-petal-length-vs-petal-width" title="Link to this heading">#</a></h2>
+<p><img alt="Workflow Orange" src="_images/scatter.png" /></p>
+<p>Scatter plot digunakan untuk melihat hubungan antara dua variabel numerik serta untuk mengamati pola pemisahan kelas dalam dataset.</p>
+<p>Pada analisis ini digunakan:</p>
+<ul class="simple">
+<li><p>Sumbu X → <strong>petal_length</strong></p></li>
+<li><p>Sumbu Y → <strong>petal_width</strong></p></li>
+</ul>
+<p>Tujuan analisis ini adalah untuk melihat apakah kedua fitur tersebut mampu membedakan spesies bunga Iris secara visual.</p>
+</section>
+<section id="konsistensi-dengan-analisis-python">
+<h2>2.20 Konsistensi dengan Analisis Python<a class="headerlink" href="#konsistensi-dengan-analisis-python" title="Link to this heading">#</a></h2>
+<p>Scatter plot ini konsisten dengan hasil implementasi menggunakan Python sebelumnya, di mana:</p>
+<ul class="simple">
+<li><p>Visualisasi seaborn menunjukkan pemisahan kelas yang jelas.</p></li>
+<li><p>Fitur petal menjadi fitur paling informatif dibandingkan sepal.</p></li>
+</ul>
+<p>Artinya, hasil analisis menggunakan Orange maupun Python memberikan kesimpulan yang sama.</p>
+</section>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="kesimpulan">
 <h1>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h1>
 <p>Berdasarkan seluruh proses Data Understanding:</p>
@@ -838,6 +1052,7 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li><p>Dataset seimbang antar kelas.</p></li>
 <li><p>Tidak ditemukan outlier ekstrem.</p></li>
 <li><p>Fitur petal menunjukkan pemisahan kelas yang jelas.</p></li>
+<li><p>Hasil analisis menggunakan Python dan Orange menunjukkan kesimpulan yang konsisten.</p></li>
 </ol>
 <p>Dengan demikian, dataset dinyatakan siap untuk masuk ke tahap Data Preparation.</p>
 </section>
@@ -939,6 +1154,20 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-fitur-numerik">2.12 Histogram Fitur Numerik</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-untuk-deteksi-outlier">2.13 Boxplot untuk Deteksi Outlier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-petal-length-vs-petal-width">2.14 Scatter Plot Petal Length vs Petal Width</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
