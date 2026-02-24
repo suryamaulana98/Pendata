@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -172,11 +172,15 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">24-160 Surya Maulana Akhmad</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="business-understanding.html">BUSINESS UNDERSTANDING</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data-understanding.html">DATA UNDERSTANDING</a></li>
+
+
+
+
+
+
+
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DATA PREPARATION</a></li>
 
@@ -431,18 +435,6 @@ untuk membangun model machine learning.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -458,6 +450,76 @@ untuk membangun model machine learning.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Dataset terdiri dari empat fitur numerik dan satu label kategorikal (species).</p>
 </section>
@@ -475,6 +537,12 @@ untuk membangun model machine learning.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah duplikasi sebelum: 3
+Jumlah duplikasi sesudah: 0
+</pre></div>
+</div>
+</div>
 </div>
 <p>Jika hasil akhir menunjukkan nilai 0, maka dataset telah bersih dari duplikasi.</p>
 </section>
@@ -484,6 +552,16 @@ untuk membangun model machine learning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sepal_length    0
+sepal_width     0
+petal_length    0
+petal_width     0
+species         0
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -505,6 +583,82 @@ maka label species perlu dikonversi menjadi bentuk numerik menggunakan LabelEnco
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+      <th>species_encoded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Kolom species_encoded kini merepresentasikan label dalam bentuk angka.</p>
 </section>
@@ -526,6 +680,70 @@ maka label species perlu dikonversi menjadi bentuk numerik menggunakan LabelEnco
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -543,6 +761,70 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.915509</td>
+      <td>1.019971</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.157560</td>
+      <td>-0.128082</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.399610</td>
+      <td>0.331139</td>
+      <td>-1.414778</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.520635</td>
+      <td>0.101529</td>
+      <td>-1.300696</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.036535</td>
+      <td>1.249582</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Setelah scaling, seluruh fitur memiliki mean sekitar 0 dan standar deviasi sekitar 1.</p>
 </section>
@@ -559,6 +841,9 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/571bab54237195dc4f00a242c2394d5a53c7179b8afead8aa199346da4532e9b.png" src="_images/571bab54237195dc4f00a242c2394d5a53c7179b8afead8aa199346da4532e9b.png" />
+</div>
 </div>
 </section>
 <section id="sesudah-scaling">
@@ -570,6 +855,9 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1673a91b698ff59d16c2ed78e897ce6d6b176778a751e16c63352341462371af.png" src="_images/1673a91b698ff59d16c2ed78e897ce6d6b176778a751e16c63352341462371af.png" />
 </div>
 </div>
 <p>Distribusi setelah scaling terlihat lebih terpusat dan seragam.</p>
@@ -586,6 +874,76 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.915509</td>
+      <td>1.019971</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.157560</td>
+      <td>-0.128082</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.399610</td>
+      <td>0.331139</td>
+      <td>-1.414778</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.520635</td>
+      <td>0.101529</td>
+      <td>-1.300696</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.036535</td>
+      <td>1.249582</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Dataset ini kini siap digunakan untuk tahap Modeling tanpa perlu pengolahan tambahan.</p>
 </section>
