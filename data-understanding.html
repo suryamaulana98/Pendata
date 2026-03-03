@@ -390,20 +390,28 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-minkowski-distance">1. Konsep Dasar Minkowski Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance-p-1">2. Manhattan Distance (p = 1)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance-p-2">3. Euclidean Distance (p = 2)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">4. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">5. Penerapan pada Dataset Iris</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-spearman-distance">4. Konsep Spearman Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-dataset-iris">5. Spearman Distance pada Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-iris">Interpretasi Iris</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">6. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">7. Penerapan pada Dataset Iris</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-di-orange">6. Workflow di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">7. Kesimpulan Pengukuran Jarak</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset">Analisis Pengukuran Jarak pada Data Campuran (Bank Loan Dataset)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-euclidean-distance-tidak-cocok">4. Kenapa Euclidean Distance Tidak Cocok?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">5. Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">6. Implementasi Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">7. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">4. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">5. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">6. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">7. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
@@ -1066,8 +1074,116 @@ d(x,y) = \sqrt{ \sum_{i=1}^{n} (x_i - y_i)^2 }
 </div>
 </div>
 </section>
+<section id="konsep-spearman-distance">
+<h2>4. Konsep Spearman Distance<a class="headerlink" href="#konsep-spearman-distance" title="Link to this heading">#</a></h2>
+<p>Spearman correlation (<span class="math notranslate nohighlight">\(\rho\)</span>) mengukur hubungan monoton antar dua variabel.</p>
+<p>Rumus Spearman:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
+\]</div>
+<p>di mana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d_i\)</span> = selisih ranking antar pasangan data</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> = jumlah data</p></li>
+</ul>
+<p>Spearman Distance dapat dihitung sebagai:</p>
+<div class="math notranslate nohighlight">
+\[
+D = 1 - \rho
+\]</div>
+<p>Jika:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> mendekati 1 → hubungan kuat → jarak kecil</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> mendekati 0 → hubungan lemah → jarak besar</p></li>
+</ul>
+</section>
+<section id="spearman-distance-pada-dataset-iris">
+<h2>5. Spearman Distance pada Dataset Iris<a class="headerlink" href="#spearman-distance-pada-dataset-iris" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">)</span>
+<span class="n">X_iris</span> <span class="o">=</span> <span class="n">df_iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">corr_spearman</span> <span class="o">=</span> <span class="n">X_iris</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">)</span>
+<span class="n">spearman_distance</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">corr_spearman</span>
+
+<span class="n">spearman_distance</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sepal_length</th>
+      <td>0.000000</td>
+      <td>1.159457</td>
+      <td>0.118614</td>
+      <td>0.165579</td>
+    </tr>
+    <tr>
+      <th>sepal_width</th>
+      <td>1.159457</td>
+      <td>0.000000</td>
+      <td>1.303421</td>
+      <td>1.277511</td>
+    </tr>
+    <tr>
+      <th>petal_length</th>
+      <td>0.118614</td>
+      <td>1.303421</td>
+      <td>0.000000</td>
+      <td>0.063997</td>
+    </tr>
+    <tr>
+      <th>petal_width</th>
+      <td>0.165579</td>
+      <td>1.277511</td>
+      <td>0.063997</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="interpretasi-iris">
+<h3>Interpretasi Iris<a class="headerlink" href="#interpretasi-iris" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Nilai distance kecil → fitur memiliki hubungan monoton kuat.</p></li>
+<li><p>Petal_length dan petal_width biasanya memiliki korelasi tinggi.</p></li>
+<li><p>Spearman cocok jika hubungan tidak linear tetapi monoton.</p></li>
+<li><p>Tetap termasuk dalam tahap Data Understanding.</p></li>
+</ul>
+</section>
+</section>
 <section id="hubungan-minkowski-manhattan-dan-euclidean">
-<h2>4. Hubungan Minkowski, Manhattan, dan Euclidean<a class="headerlink" href="#hubungan-minkowski-manhattan-dan-euclidean" title="Link to this heading">#</a></h2>
+<h2>6. Hubungan Minkowski, Manhattan, dan Euclidean<a class="headerlink" href="#hubungan-minkowski-manhattan-dan-euclidean" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Manhattan adalah Minkowski dengan <span class="math notranslate nohighlight">\(p = 1\)</span></p></li>
 <li><p>Euclidean adalah Minkowski dengan <span class="math notranslate nohighlight">\(p = 2\)</span></p></li>
@@ -1075,7 +1191,7 @@ d(x,y) = \sqrt{ \sum_{i=1}^{n} (x_i - y_i)^2 }
 <p>Perbedaan utama terletak pada penggunaan kuadrat dan akar.</p>
 </section>
 <section id="penerapan-pada-dataset-iris">
-<h2>5. Penerapan pada Dataset Iris<a class="headerlink" href="#penerapan-pada-dataset-iris" title="Link to this heading">#</a></h2>
+<h2>7. Penerapan pada Dataset Iris<a class="headerlink" href="#penerapan-pada-dataset-iris" title="Link to this heading">#</a></h2>
 <p>Karena seluruh fitur Iris bersifat numerik, maka pengukuran jarak seperti
 Manhattan dan Euclidean dapat diterapkan.</p>
 <p>Distance Matrix membantu melihat:</p>
@@ -1126,7 +1242,7 @@ Manhattan dan Euclidean dapat diterapkan.</p>
 <p>Hasil akan menampilkan matriks jarak antar data.</p>
 </section>
 <section id="kesimpulan-pengukuran-jarak">
-<h2>3. Kesimpulan Pengukuran Jarak<a class="headerlink" href="#kesimpulan-pengukuran-jarak" title="Link to this heading">#</a></h2>
+<h2>7. Kesimpulan Pengukuran Jarak<a class="headerlink" href="#kesimpulan-pengukuran-jarak" title="Link to this heading">#</a></h2>
 <p>Berdasarkan analisis jarak yang dilakukan:</p>
 <ul class="simple">
 <li><p>Data dalam kelas yang sama cenderung berdekatan.</p></li>
@@ -1309,24 +1425,8 @@ maka metode seperti Euclidean Distance tidak bisa langsung digunakan.</p>
 </div>
 </div>
 </section>
-<section id="kenapa-euclidean-distance-tidak-cocok">
-<h2>4. Kenapa Euclidean Distance Tidak Cocok?<a class="headerlink" href="#kenapa-euclidean-distance-tidak-cocok" title="Link to this heading">#</a></h2>
-<p>Euclidean Distance memiliki rumus:</p>
-<div class="math notranslate nohighlight">
-\[
-d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
-\]</div>
-<p>Masalahnya:</p>
-<ul class="simple">
-<li><p>employment_status tidak memiliki nilai numerik</p></li>
-<li><p>education_level bersifat ordinal (bertingkat)</p></li>
-<li><p>has_credit_card bersifat biner</p></li>
-</ul>
-<p>Jika dipaksa diubah menjadi angka, maka makna kategorinya bisa rusak.
-Karena itu diperlukan metode khusus untuk data campuran.</p>
-</section>
 <section id="gower-distance">
-<h2>5. Gower Distance<a class="headerlink" href="#gower-distance" title="Link to this heading">#</a></h2>
+<h2>4. Gower Distance<a class="headerlink" href="#gower-distance" title="Link to this heading">#</a></h2>
 <p>Gower Distance dirancang untuk menangani data campuran.</p>
 <p>Rumus umum:</p>
 <div class="math notranslate nohighlight">
@@ -1355,7 +1455,7 @@ d =
 <p>Nilai akhir berada dalam rentang 0 sampai 1.</p>
 </section>
 <section id="implementasi-gower-distance">
-<h2>6. Implementasi Gower Distance<a class="headerlink" href="#implementasi-gower-distance" title="Link to this heading">#</a></h2>
+<h2>5. Implementasi Gower Distance<a class="headerlink" href="#implementasi-gower-distance" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1396,7 +1496,7 @@ d =
 </div>
 </section>
 <section id="interpretasi-distance-matrix">
-<h2>7. Interpretasi Distance Matrix<a class="headerlink" href="#interpretasi-distance-matrix" title="Link to this heading">#</a></h2>
+<h2>6. Interpretasi Distance Matrix<a class="headerlink" href="#interpretasi-distance-matrix" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Nilai mendekati 0 → dua data sangat mirip</p></li>
 <li><p>Nilai mendekati 1 → dua data sangat berbeda</p></li>
@@ -1405,6 +1505,90 @@ d =
 </ul>
 <p>Analisis ini membantu memahami struktur kemiripan data
 sebelum masuk ke tahap modeling.</p>
+</section>
+<section id="spearman-distance-pada-bank-loan-dataset">
+<h2>7. Spearman Distance pada Bank Loan Dataset<a class="headerlink" href="#spearman-distance-pada-bank-loan-dataset" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_bank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;bank_loan_mixed_dataset.csv&quot;</span><span class="p">)</span>
+
+<span class="n">numeric_bank</span> <span class="o">=</span> <span class="n">df_bank</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">])</span>
+
+<span class="n">corr_bank</span> <span class="o">=</span> <span class="n">numeric_bank</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">)</span>
+<span class="n">spearman_distance_bank</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">corr_bank</span>
+
+<span class="n">spearman_distance_bank</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>income</th>
+      <th>loan_amount</th>
+      <th>has_credit_card</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>0.000000</td>
+      <td>0.946588</td>
+      <td>1.109235</td>
+      <td>1.205845</td>
+    </tr>
+    <tr>
+      <th>income</th>
+      <td>0.946588</td>
+      <td>0.000000</td>
+      <td>1.050115</td>
+      <td>1.061835</td>
+    </tr>
+    <tr>
+      <th>loan_amount</th>
+      <td>1.109235</td>
+      <td>1.050115</td>
+      <td>0.000000</td>
+      <td>1.074347</td>
+    </tr>
+    <tr>
+      <th>has_credit_card</th>
+      <td>1.205845</td>
+      <td>1.061835</td>
+      <td>1.074347</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="interpretasi-bank-loan">
+<h3>Interpretasi Bank Loan<a class="headerlink" href="#interpretasi-bank-loan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Spearman digunakan hanya pada fitur numerik (age, income, loan_amount).</p></li>
+<li><p>Mengukur apakah kenaikan income berhubungan monoton dengan loan_amount.</p></li>
+<li><p>Tidak cocok untuk fitur kategorikal langsung.</p></li>
+<li><p>Untuk data campuran tetap lebih tepat menggunakan Gower.</p></li>
+</ul>
+<p>Spearman memberikan insight tambahan mengenai hubungan ranking antar variabel.</p>
+</section>
 </section>
 <section id="kesimpulan">
 <h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
@@ -1819,20 +2003,28 @@ SQL Table → Scatter Plot</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-minkowski-distance">1. Konsep Dasar Minkowski Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance-p-1">2. Manhattan Distance (p = 1)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance-p-2">3. Euclidean Distance (p = 2)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">4. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">5. Penerapan pada Dataset Iris</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-spearman-distance">4. Konsep Spearman Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-dataset-iris">5. Spearman Distance pada Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-iris">Interpretasi Iris</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">6. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">7. Penerapan pada Dataset Iris</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-di-orange">6. Workflow di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">7. Kesimpulan Pengukuran Jarak</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset">Analisis Pengukuran Jarak pada Data Campuran (Bank Loan Dataset)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-euclidean-distance-tidak-cocok">4. Kenapa Euclidean Distance Tidak Cocok?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">5. Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">6. Implementasi Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">7. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">4. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">5. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">6. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">7. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
