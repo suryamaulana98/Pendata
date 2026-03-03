@@ -1,0 +1,121 @@
+age,income,loan_amount,employment_status,education_level,has_credit_card,loan_status
+59,3769598,11524227,Contract,Bachelor,0,Approved
+49,18452902,13344096,Contract,Master,1,Approved
+35,10971379,8328141,Contract,Master,1,Rejected
+28,6331068,6072148,Contract,High School,0,Rejected
+41,6256415,14062959,Permanent,Bachelor,0,Rejected
+59,3874371,2707923,Contract,High School,1,Rejected
+39,8654237,14690359,Contract,Bachelor,1,Rejected
+43,15261606,6134207,Self-Employed,Bachelor,0,Approved
+31,6344014,9516999,Contract,Bachelor,0,Approved
+31,12602083,7730886,Self-Employed,Bachelor,1,Approved
+44,5959034,10405634,Permanent,Bachelor,0,Approved
+56,3043585,6853584,Permanent,Master,0,Rejected
+44,17744108,9170528,Permanent,High School,0,Approved
+23,5539448,5301754,Permanent,Master,1,Rejected
+42,19886772,3269042,Self-Employed,Bachelor,1,Approved
+22,17643995,2983509,Contract,High School,1,Rejected
+44,13511699,8740141,Permanent,Bachelor,1,Rejected
+50,11306461,1116381,Contract,High School,1,Approved
+58,5009021,2521701,Self-Employed,Master,1,Approved
+22,4201482,11008805,Self-Employed,High School,1,Approved
+41,14822585,11620268,Self-Employed,High School,0,Approved
+53,5484413,11166834,Permanent,High School,0,Rejected
+32,5907360,7105525,Contract,High School,0,Approved
+42,8895544,10587994,Contract,High School,0,Approved
+45,5235000,4438618,Contract,Bachelor,0,Rejected
+47,7322252,8913697,Self-Employed,High School,0,Approved
+48,8822184,11403092,Permanent,High School,0,Approved
+36,3402690,12326237,Self-Employed,Master,1,Approved
+35,5548421,3457184,Self-Employed,High School,1,Approved
+23,15604871,12532571,Contract,Master,0,Approved
+57,15195226,5103022,Self-Employed,Bachelor,0,Rejected
+27,17381704,2418175,Contract,High School,1,Approved
+41,4954109,4806688,Permanent,Master,0,Approved
+29,17421668,14312815,Contract,Master,0,Approved
+59,14501362,8265795,Permanent,Bachelor,1,Approved
+38,19266473,4772962,Contract,High School,0,Approved
+24,10205547,13580031,Self-Employed,High School,1,Rejected
+45,11323735,5041776,Self-Employed,Master,0,Approved
+34,15414325,3727423,Permanent,High School,1,Rejected
+29,3061087,6709840,Permanent,Master,1,Rejected
+46,16596255,11149035,Permanent,High School,1,Approved
+22,17665175,13707035,Contract,Master,0,Approved
+40,13274621,6130397,Contract,High School,1,Approved
+48,16022704,4451356,Permanent,Bachelor,0,Approved
+27,19816569,10520173,Self-Employed,High School,0,Rejected
+28,9484531,4444084,Contract,High School,0,Approved
+55,10654909,3927109,Contract,Bachelor,0,Approved
+34,7259622,13761186,Contract,High School,1,Approved
+37,8725570,7979451,Permanent,Bachelor,1,Approved
+56,18421040,11897687,Permanent,High School,0,Approved
+24,7965050,12275612,Permanent,Master,0,Approved
+22,3813168,11320368,Permanent,Master,1,Rejected
+26,3225281,9519981,Permanent,High School,0,Rejected
+24,14506305,8778484,Self-Employed,High School,1,Approved
+49,10734102,9503902,Self-Employed,High School,0,Approved
+38,8674719,12521122,Permanent,Master,0,Approved
+46,11658144,7214624,Contract,High School,1,Rejected
+54,9609280,5842611,Permanent,Master,0,Approved
+30,7372093,7357182,Self-Employed,Bachelor,1,Rejected
+56,13611417,5335868,Self-Employed,Master,0,Approved
+34,8478047,10814996,Contract,Master,0,Approved
+51,4119043,13240032,Self-Employed,Bachelor,0,Approved
+35,14718070,3215167,Permanent,Master,1,Approved
+28,19351434,4886402,Contract,High School,0,Rejected
+34,13595511,7545535,Permanent,High School,0,Rejected
+43,17012538,7842385,Permanent,Master,0,Approved
+41,10103230,10078552,Contract,High School,0,Approved
+36,5558231,1688105,Permanent,Master,1,Rejected
+38,9659908,11999518,Self-Employed,High School,1,Rejected
+44,6080389,2989173,Permanent,High School,0,Rejected
+46,4661909,4080761,Contract,Master,1,Rejected
+45,19887294,2414466,Contract,High School,0,Approved
+49,9314127,1445101,Contract,Master,0,Rejected
+35,12792712,9106609,Permanent,High School,0,Approved
+21,5008187,8413023,Contract,High School,1,Rejected
+45,4659066,14635502,Contract,Bachelor,1,Rejected
+27,5148815,8613269,Permanent,Bachelor,1,Rejected
+29,10355740,14649558,Self-Employed,Master,1,Rejected
+44,9404003,2105534,Permanent,Bachelor,1,Rejected
+21,7135314,12616410,Contract,Master,1,Approved
+28,3910681,10972201,Contract,Bachelor,1,Approved
+44,13421958,11192257,Permanent,High School,1,Rejected
+31,13700595,10613273,Self-Employed,Master,1,Rejected
+37,15984808,11683152,Contract,Master,0,Approved
+28,17764960,5353127,Contract,High School,1,Rejected
+55,19848511,8315360,Contract,Master,1,Rejected
+55,12132582,9073461,Permanent,Master,1,Approved
+53,10613287,1498863,Contract,Bachelor,1,Rejected
+25,19385802,9756262,Self-Employed,Master,1,Rejected
+59,6612600,3676188,Contract,High School,1,Approved
+48,15105878,4295990,Contract,Bachelor,1,Approved
+27,13245534,8782937,Self-Employed,Bachelor,1,Approved
+29,13047453,7526818,Contract,High School,1,Rejected
+28,5026793,10881393,Permanent,High School,1,Approved
+32,3554594,10185687,Permanent,Bachelor,1,Approved
+54,11536326,14246988,Permanent,Master,0,Approved
+53,19037627,6491590,Self-Employed,Bachelor,0,Approved
+43,16228175,7512440,Contract,High School,1,Approved
+44,5204664,13431395,Permanent,Bachelor,1,Approved
+57,7341747,7099628,Self-Employed,High School,0,Rejected
+55,15956528,13316691,Contract,Bachelor,1,Rejected
+42,18487428,7555968,Self-Employed,Master,0,Approved
+47,11506404,3699015,Permanent,Bachelor,0,Approved
+55,4241082,12803135,Permanent,Bachelor,0,Approved
+21,8184502,10674733,Permanent,High School,0,Rejected
+55,16281288,13128655,Self-Employed,High School,0,Rejected
+57,15503247,9837590,Self-Employed,High School,1,Rejected
+34,9041495,2172622,Permanent,Bachelor,0,Rejected
+23,3501157,3503771,Self-Employed,Master,1,Rejected
+21,14002109,4177825,Permanent,High School,1,Rejected
+25,8946594,1996161,Permanent,High School,0,Rejected
+46,14310552,5183839,Contract,Bachelor,0,Rejected
+34,14471761,1666326,Self-Employed,High School,1,Rejected
+59,5904941,1649150,Permanent,Master,0,Approved
+47,10983441,4375957,Permanent,Master,0,Approved
+29,8320385,1118834,Self-Employed,High School,1,Approved
+35,16364386,4239576,Contract,High School,1,Approved
+35,18134415,12587257,Contract,Bachelor,0,Rejected
+46,12749436,6893309,Permanent,Master,1,Rejected
+33,8333152,6948540,Self-Employed,Master,0,Approved
