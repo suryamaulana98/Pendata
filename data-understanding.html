@@ -183,6 +183,8 @@
 
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="data-preparation.html">DATA PREPARATION</a></li>
 
 
@@ -351,6 +353,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">2.3 Import Library</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dan-pengumpulan-data">Sumber dan Pengumpulan Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dataset">Sumber Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-dan-struktur-data">Format dan Struktur Data</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-dataset">Membaca Dataset</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-dataset">2.4 Memuat Dataset</a></li>
 </ul>
@@ -376,8 +383,21 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-petal-length-vs-petal-width">2.14 Scatter Plot Petal Length vs Petal Width</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-distance-matrix">Analisis Pengukuran Jarak (Distance Matrix)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">2. Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
@@ -452,6 +472,38 @@ Tahap ini bertujuan untuk memahami karakteristik data secara menyeluruh, baik da
 </div>
 </div>
 </div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sumber-dan-pengumpulan-data">
+<h1>Sumber dan Pengumpulan Data<a class="headerlink" href="#sumber-dan-pengumpulan-data" title="Link to this heading">#</a></h1>
+<section id="sumber-dataset">
+<h2>Sumber Dataset<a class="headerlink" href="#sumber-dataset" title="Link to this heading">#</a></h2>
+<p>Dataset yang digunakan dalam penelitian ini adalah <strong>Iris Flower Dataset</strong> yang diperoleh dari platform Kaggle. Dataset ini merupakan dataset klasik dalam machine learning yang sering digunakan untuk studi klasifikasi dan analisis eksploratif data.</p>
+<p>Dataset ini berisi 150 observasi bunga Iris yang terdiri dari tiga spesies:</p>
+<ul class="simple">
+<li><p>Iris-setosa</p></li>
+<li><p>Iris-versicolor</p></li>
+<li><p>Iris-virginica</p></li>
+</ul>
+<p>Masing-masing spesies memiliki 50 data sehingga dataset bersifat seimbang (balanced dataset).</p>
+</section>
+<hr class="docutils" />
+<section id="format-dan-struktur-data">
+<h2>Format dan Struktur Data<a class="headerlink" href="#format-dan-struktur-data" title="Link to this heading">#</a></h2>
+<p>Dataset tersedia dalam format <strong>CSV (Comma Separated Values)</strong> dengan struktur sebagai berikut:</p>
+<ul class="simple">
+<li><p>sepal_length (numerik)</p></li>
+<li><p>sepal_width (numerik)</p></li>
+<li><p>petal_length (numerik)</p></li>
+<li><p>petal_width (numerik)</p></li>
+<li><p>species (kategorikal / kelas)</p></li>
+</ul>
+<p>Format CSV dipilih karena:</p>
+<ul class="simple">
+<li><p>Mudah dibaca oleh berbagai tools (Python, Orange, MySQL, PostgreSQL)</p></li>
+<li><p>Ringan dan portabel</p></li>
+<li><p>Mendukung pemisahan atribut berbasis delimiter koma</p></li>
+</ul>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="membaca-dataset">
@@ -624,7 +676,7 @@ Informasi yang diperoleh meliputi:</p>
 <p>Langkah ini membantu mendeteksi anomali atau nilai ekstrem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -639,79 +691,149 @@ Informasi yang diperoleh meliputi:</p>
         vertical-align: top;
     }
 
-    .dataframe thead th {
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
         text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
-      <th>sepal_length</th>
-      <th>sepal_width</th>
-      <th>petal_length</th>
-      <th>petal_width</th>
+      <th colspan="8" halign="left">sepal_length</th>
+      <th colspan="2" halign="left">sepal_width</th>
+      <th>...</th>
+      <th colspan="2" halign="left">petal_length</th>
+      <th colspan="8" halign="left">petal_width</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>...</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>species</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>count</th>
-      <td>150.000000</td>
-      <td>150.000000</td>
-      <td>150.000000</td>
-      <td>150.000000</td>
+      <th>Iris-setosa</th>
+      <td>50.0</td>
+      <td>5.006</td>
+      <td>0.352490</td>
+      <td>4.3</td>
+      <td>4.800</td>
+      <td>5.0</td>
+      <td>5.2</td>
+      <td>5.8</td>
+      <td>50.0</td>
+      <td>3.418</td>
+      <td>...</td>
+      <td>1.575</td>
+      <td>1.9</td>
+      <td>50.0</td>
+      <td>0.244</td>
+      <td>0.107210</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>0.2</td>
+      <td>0.3</td>
+      <td>0.6</td>
     </tr>
     <tr>
-      <th>mean</th>
-      <td>5.843333</td>
-      <td>3.054000</td>
-      <td>3.758667</td>
-      <td>1.198667</td>
+      <th>Iris-versicolor</th>
+      <td>50.0</td>
+      <td>5.936</td>
+      <td>0.516171</td>
+      <td>4.9</td>
+      <td>5.600</td>
+      <td>5.9</td>
+      <td>6.3</td>
+      <td>7.0</td>
+      <td>50.0</td>
+      <td>2.770</td>
+      <td>...</td>
+      <td>4.600</td>
+      <td>5.1</td>
+      <td>50.0</td>
+      <td>1.326</td>
+      <td>0.197753</td>
+      <td>1.0</td>
+      <td>1.2</td>
+      <td>1.3</td>
+      <td>1.5</td>
+      <td>1.8</td>
     </tr>
     <tr>
-      <th>std</th>
-      <td>0.828066</td>
-      <td>0.433594</td>
-      <td>1.764420</td>
-      <td>0.763161</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>4.300000</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>0.100000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>5.100000</td>
-      <td>2.800000</td>
-      <td>1.600000</td>
-      <td>0.300000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5.800000</td>
-      <td>3.000000</td>
-      <td>4.350000</td>
-      <td>1.300000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>6.400000</td>
-      <td>3.300000</td>
-      <td>5.100000</td>
-      <td>1.800000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>7.900000</td>
-      <td>4.400000</td>
-      <td>6.900000</td>
-      <td>2.500000</td>
+      <th>Iris-virginica</th>
+      <td>50.0</td>
+      <td>6.588</td>
+      <td>0.635880</td>
+      <td>4.9</td>
+      <td>6.225</td>
+      <td>6.5</td>
+      <td>6.9</td>
+      <td>7.9</td>
+      <td>50.0</td>
+      <td>2.974</td>
+      <td>...</td>
+      <td>5.875</td>
+      <td>6.9</td>
+      <td>50.0</td>
+      <td>2.026</td>
+      <td>0.274650</td>
+      <td>1.4</td>
+      <td>1.8</td>
+      <td>2.0</td>
+      <td>2.3</td>
+      <td>2.5</td>
     </tr>
   </tbody>
 </table>
+<p>3 rows × 32 columns</p>
 </div></div></div>
 </div>
 <p>Berdasarkan hasil statistik:</p>
@@ -842,8 +964,117 @@ Sebaran nilai antar fitur stabil.</p>
 Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasifikasi.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="implementasi-menggunakan-orange-data-mining">
-<h1>Implementasi Menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-menggunakan-orange-data-mining" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-pengukuran-jarak-distance-matrix">
+<h1>Analisis Pengukuran Jarak (Distance Matrix)<a class="headerlink" href="#analisis-pengukuran-jarak-distance-matrix" title="Link to this heading">#</a></h1>
+<p>Pada tahap Data Understanding ini, saya mencoba melihat hubungan antar data
+menggunakan pengukuran jarak. Tujuannya untuk mengetahui apakah data dalam
+kelas yang sama memang saling berdekatan dan apakah antar kelas memiliki jarak
+yang cukup jauh.</p>
+<p>Dengan cara ini, struktur dataset bisa dipahami lebih dalam sebelum masuk ke tahap modeling.</p>
+<section id="euclidean-distance">
+<h2>1. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
+<p>Metode pertama yang digunakan adalah <strong>Euclidean Distance</strong>.</p>
+<p>Euclidean Distance merupakan jarak garis lurus antara dua titik dalam ruang multidimensi.
+Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
+<ul class="simple">
+<li><p>sepal_length</p></li>
+<li><p>sepal_width</p></li>
+<li><p>petal_length</p></li>
+<li><p>petal_width</p></li>
+</ul>
+<p>Semakin kecil nilai jarak berarti dua data semakin mirip.
+Semakin besar nilai jarak berarti semakin berbeda.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_distances</span>
+
+<span class="c1"># Membaca dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Mengambil fitur numerik saja</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Menghitung distance matrix Euclidean</span>
+<span class="n">euclidean_matrix</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
+
+<span class="n">euclidean_matrix</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        , 0.53851648, 0.50990195, 0.64807407, 0.14142136],
+       [0.53851648, 0.        , 0.3       , 0.33166248, 0.60827625],
+       [0.50990195, 0.3       , 0.        , 0.24494897, 0.50990195],
+       [0.64807407, 0.33166248, 0.24494897, 0.        , 0.64807407],
+       [0.14142136, 0.60827625, 0.50990195, 0.64807407, 0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dari hasil distance matrix di atas, terlihat bahwa:</p>
+<ul class="simple">
+<li><p>Nilai diagonal selalu 0 (karena jarak data dengan dirinya sendiri adalah nol).</p></li>
+<li><p>Data dalam kelas yang sama cenderung memiliki jarak yang kecil.</p></li>
+<li><p>Jarak antara Setosa dan Virginica relatif lebih besar dibandingkan jarak dalam kelas yang sama.</p></li>
+</ul>
+</section>
+<section id="mahalanobis-distance">
+<h2>2. Mahalanobis Distance<a class="headerlink" href="#mahalanobis-distance" title="Link to this heading">#</a></h2>
+<p>Selain Euclidean, saya juga mempelajari <strong>Mahalanobis Distance</strong>.</p>
+<p>Perbedaannya adalah Mahalanobis mempertimbangkan:</p>
+<ul class="simple">
+<li><p>Variansi masing-masing fitur</p></li>
+<li><p>Korelasi antar fitur</p></li>
+</ul>
+<p>Artinya, jika ada dua fitur yang saling berkorelasi, metode ini tidak akan
+menganggapnya sebagai dua informasi yang benar-benar terpisah.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">mahalanobis</span>
+
+<span class="c1"># Menghitung matriks kovarians dan inversnya</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">inv_cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">)</span>
+
+<span class="c1"># Fungsi untuk menghitung Mahalanobis Distance</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mahalanobis_distance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mahalanobis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inv_cov_matrix</span><span class="p">)</span>
+
+<span class="c1"># Menghitung distance matrix Mahalanobis</span>
+<span class="n">mahalanobis_matrix</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">mahalanobis_distance</span><span class="p">)</span>
+
+<span class="n">mahalanobis_matrix</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        , 1.35971517, 0.96949963, 1.4051749 , 0.59237982],
+       [1.35971517, 0.        , 0.97318639, 1.45780085, 1.81903532],
+       [0.96949963, 0.97318639, 0.        , 0.7175178 , 1.12917957],
+       [1.4051749 , 1.45780085, 0.7175178 , 0.        , 1.32978712],
+       [0.59237982, 1.81903532, 1.12917957, 1.32978712, 0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kesimpulan-pengukuran-jarak">
+<h2>3. Kesimpulan Pengukuran Jarak<a class="headerlink" href="#kesimpulan-pengukuran-jarak" title="Link to this heading">#</a></h2>
+<p>Berdasarkan analisis jarak yang dilakukan:</p>
+<ul class="simple">
+<li><p>Data dalam kelas yang sama cenderung berdekatan.</p></li>
+<li><p>Setosa merupakan kelas yang paling berbeda dibanding dua kelas lainnya.</p></li>
+<li><p>Fitur petal_length dan petal_width memiliki pengaruh besar terhadap perbedaan jarak.</p></li>
+<li><p>Dataset Iris memiliki struktur yang cukup jelas untuk proses klasifikasi.</p></li>
+</ul>
+<p>Tahap ini masih termasuk dalam Data Understanding karena bertujuan untuk
+memahami pola dan hubungan antar data sebelum dilakukan modeling.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementasi-orange-data-mining">
+<h1>Implementasi Orange Data Mining<a class="headerlink" href="#implementasi-orange-data-mining" title="Link to this heading">#</a></h1>
 <section id="penjelasan-orange">
 <h2>2.15 Penjelasan Orange<a class="headerlink" href="#penjelasan-orange" title="Link to this heading">#</a></h2>
 <p>Orange Data Mining merupakan tools visual programming untuk analisis data dan machine learning. Berbeda dengan Python yang berbasis coding, Orange menggunakan pendekatan berbasis workflow (drag-and-drop), sehingga proses analisis dilakukan dengan menghubungkan widget.</p>
@@ -855,6 +1086,84 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li><p>Melakukan visualisasi scatter plot</p></li>
 <li><p>Membandingkan hasil dengan analisis Python</p></li>
 </ul>
+</section>
+<section id="id1">
+<h2>1. Euclidean Distance<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Metode pertama yang digunakan adalah <strong>Euclidean Distance</strong>.</p>
+<p>Euclidean Distance merupakan jarak garis lurus antara dua titik dalam ruang multidimensi.
+Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
+<ul class="simple">
+<li><p>sepal_length</p></li>
+<li><p>sepal_width</p></li>
+<li><p>petal_length</p></li>
+<li><p>petal_width</p></li>
+</ul>
+<p>Semakin kecil nilai jarak berarti dua data semakin mirip.
+Semakin besar nilai jarak berarti semakin berbeda.</p>
+</section>
+<section id="penarikan-data-dari-mysql-postgresql-ke-orange">
+<h2>2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange<a class="headerlink" href="#penarikan-data-dari-mysql-postgresql-ke-orange" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini dijelaskan bagaimana dataset Iris tidak hanya diimpor melalui file CSV,
+tetapi juga dapat diintegrasikan melalui sistem manajemen basis data seperti
+MySQL atau PostgreSQL.</p>
+</section>
+<section id="tambahkan-widget-sql-table">
+<h2>1. Tambahkan Widget SQL Table<a class="headerlink" href="#tambahkan-widget-sql-table" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Buka Orange</p></li>
+<li><p>Tambahkan widget <strong>SQL Table</strong></p></li>
+<li><p>Klik dua kali untuk membuka konfigurasi</p></li>
+</ol>
+</section>
+<section id="konfigurasi-koneksi-postgresql">
+<h2>2. Konfigurasi Koneksi PostgreSQL<a class="headerlink" href="#konfigurasi-koneksi-postgresql" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Host: localhost</p></li>
+<li><p>Port: 5432</p></li>
+<li><p>Database: iris_flower</p></li>
+<li><p>User: postgres</p></li>
+<li><p>Password: (sesuai Laragon)</p></li>
+</ul>
+<p>Klik Connect → pilih tabel <code class="docutils literal notranslate"><span class="pre">iris-flower</span></code></p>
+<p><img alt="import Orange" src="_images/postgresql.png" /></p>
+</section>
+<section id="konfigurasi-koneksi-mysql">
+<h2>3. Konfigurasi Koneksi MySQL<a class="headerlink" href="#konfigurasi-koneksi-mysql" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Host: localhost</p></li>
+<li><p>Port: 3306</p></li>
+<li><p>Database: iris_db</p></li>
+<li><p>User: root</p></li>
+<li><p>Password: (kosong jika default XAMPP)</p></li>
+</ul>
+<p>Klik Connect → pilih tabel <code class="docutils literal notranslate"><span class="pre">iris-flower</span></code></p>
+</section>
+<section id="menghubungkan-ke-widget-analisis">
+<h2>4. Menghubungkan ke Widget Analisis<a class="headerlink" href="#menghubungkan-ke-widget-analisis" title="Link to this heading">#</a></h2>
+<p>Setelah SQL Table berhasil terkoneksi:</p>
+<p>Hubungkan ke:</p>
+<ul class="simple">
+<li><p>Column Statistics</p></li>
+<li><p>Distributions</p></li>
+<li><p>Scatter Plot</p></li>
+<li><p>Distances</p></li>
+</ul>
+<p>Workflow di Orange menjadi:</p>
+<p>SQL Table → Column Statistics<br />
+SQL Table → Distributions<br />
+SQL Table → Scatter Plot</p>
+<p>Dengan demikian, data dapat dianalisis langsung dari database tanpa perlu file CSV.</p>
+</section>
+<section id="kesimpulan-integrasi">
+<h2>Kesimpulan Integrasi<a class="headerlink" href="#kesimpulan-integrasi" title="Link to this heading">#</a></h2>
+<p>Integrasi database memungkinkan:</p>
+<ul class="simple">
+<li><p>Penyimpanan data secara terstruktur</p></li>
+<li><p>Pengelolaan dataset dalam skala lebih besar</p></li>
+<li><p>Analisis langsung melalui Orange tanpa file CSV</p></li>
+<li><p>Fleksibilitas penggunaan di berbagai sistem</p></li>
+</ul>
+<p>Tahap ini merupakan bagian dari Data Acquisition sebelum masuk ke analisis lanjutan.</p>
 </section>
 <section id="workflow-analisis-di-orange">
 <h2>2.16 Workflow Analisis di Orange<a class="headerlink" href="#workflow-analisis-di-orange" title="Link to this heading">#</a></h2>
@@ -1132,6 +1441,11 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">2.3 Import Library</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dan-pengumpulan-data">Sumber dan Pengumpulan Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-dataset">Sumber Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-dan-struktur-data">Format dan Struktur Data</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-dataset">Membaca Dataset</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-dataset">2.4 Memuat Dataset</a></li>
 </ul>
@@ -1157,8 +1471,21 @@ Fitur petal_length dan petal_width memiliki kontribusi besar dalam proses klasif
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-petal-length-vs-petal-width">2.14 Scatter Plot Petal Length vs Petal Width</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-distance-matrix">Analisis Pengukuran Jarak (Distance Matrix)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">2. Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
