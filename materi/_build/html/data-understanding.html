@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'data-understanding';</script>
     <link rel="canonical" href="/Pendata/data-understanding.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -175,6 +177,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="business-understanding.html">BUSINESS UNDERSTANDING</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">DATA UNDERSTANDING</a></li>
+
 
 
 
@@ -384,14 +387,29 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-distance-matrix">Analisis Pengukuran Jarak (Distance Matrix)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">2. Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-minkowski-distance">1. Konsep Dasar Minkowski Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance-p-1">2. Manhattan Distance (p = 1)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance-p-2">3. Euclidean Distance (p = 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">4. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">5. Penerapan pada Dataset Iris</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-di-orange">6. Workflow di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset">Analisis Pengukuran Jarak pada Data Campuran (Bank Loan Dataset)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-euclidean-distance-tidak-cocok">4. Kenapa Euclidean Distance Tidak Cocok?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">5. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">6. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">7. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
@@ -412,7 +430,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Kesimpulan</a></li>
 </ul>
 
             </nav>
@@ -971,33 +989,110 @@ menggunakan pengukuran jarak. Tujuannya untuk mengetahui apakah data dalam
 kelas yang sama memang saling berdekatan dan apakah antar kelas memiliki jarak
 yang cukup jauh.</p>
 <p>Dengan cara ini, struktur dataset bisa dipahami lebih dalam sebelum masuk ke tahap modeling.</p>
-<section id="euclidean-distance">
-<h2>1. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
-<p>Metode pertama yang digunakan adalah <strong>Euclidean Distance</strong>.</p>
-<p>Euclidean Distance merupakan jarak garis lurus antara dua titik dalam ruang multidimensi.
-Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
+<section id="konsep-dasar-minkowski-distance">
+<h2>1. Konsep Dasar Minkowski Distance<a class="headerlink" href="#konsep-dasar-minkowski-distance" title="Link to this heading">#</a></h2>
+<p>Rumus umum Minkowski Distance:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}
+\]</div>
+<p>Keterangan:</p>
 <ul class="simple">
-<li><p>sepal_length</p></li>
-<li><p>sepal_width</p></li>
-<li><p>petal_length</p></li>
-<li><p>petal_width</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> = nilai fitur ke-i pada data pertama</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> = nilai fitur ke-i pada data kedua</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span> = parameter jenis jarak</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> = jumlah fitur</p></li>
 </ul>
-<p>Semakin kecil nilai jarak berarti dua data semakin mirip.
-Semakin besar nilai jarak berarti semakin berbeda.</p>
+<p>Nilai parameter <span class="math notranslate nohighlight">\(p\)</span> menentukan bentuk jarak yang digunakan.</p>
+</section>
+<section id="manhattan-distance-p-1">
+<h2>2. Manhattan Distance (p = 1)<a class="headerlink" href="#manhattan-distance-p-1" title="Link to this heading">#</a></h2>
+<p>Jika <span class="math notranslate nohighlight">\(p = 1\)</span>, maka Minkowski menjadi Manhattan Distance.</p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \sum_{i=1}^{n} |x_i - y_i|
+\]</div>
+<p>Langkah:</p>
+<ol class="arabic simple">
+<li><p>Hitung selisih tiap fitur.</p></li>
+<li><p>Ambil nilai absolutnya.</p></li>
+<li><p>Jumlahkan semuanya.</p></li>
+<li><p>Tidak ada pengkuadratan dan tidak ada akar.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+
+<span class="n">manhattan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">))</span>
+<span class="n">manhattan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(8)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="euclidean-distance-p-2">
+<h2>3. Euclidean Distance (p = 2)<a class="headerlink" href="#euclidean-distance-p-2" title="Link to this heading">#</a></h2>
+<p>Jika <span class="math notranslate nohighlight">\(p = 2\)</span>, maka Minkowski menjadi Euclidean Distance.</p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \sqrt{ \sum_{i=1}^{n} (x_i - y_i)^2 }
+\]</div>
+<p>Langkah:</p>
+<ol class="arabic simple">
+<li><p>Hitung selisih tiap fitur.</p></li>
+<li><p>Kuadratkan selisihnya.</p></li>
+<li><p>Jumlahkan seluruh hasil kuadrat.</p></li>
+<li><p>Akar kuadratkan hasilnya.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">euclidean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">euclidean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(5.656854249492381)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hubungan-minkowski-manhattan-dan-euclidean">
+<h2>4. Hubungan Minkowski, Manhattan, dan Euclidean<a class="headerlink" href="#hubungan-minkowski-manhattan-dan-euclidean" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Manhattan adalah Minkowski dengan <span class="math notranslate nohighlight">\(p = 1\)</span></p></li>
+<li><p>Euclidean adalah Minkowski dengan <span class="math notranslate nohighlight">\(p = 2\)</span></p></li>
+</ul>
+<p>Perbedaan utama terletak pada penggunaan kuadrat dan akar.</p>
+</section>
+<section id="penerapan-pada-dataset-iris">
+<h2>5. Penerapan pada Dataset Iris<a class="headerlink" href="#penerapan-pada-dataset-iris" title="Link to this heading">#</a></h2>
+<p>Karena seluruh fitur Iris bersifat numerik, maka pengukuran jarak seperti
+Manhattan dan Euclidean dapat diterapkan.</p>
+<p>Distance Matrix membantu melihat:</p>
+<ul class="simple">
+<li><p>Kedekatan data dalam kelas yang sama</p></li>
+<li><p>Jarak antar kelas berbeda</p></li>
+<li><p>Struktur alami dataset sebelum modeling</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_distances</span>
 
-<span class="c1"># Membaca dataset</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">)</span>
-
-<span class="c1"># Mengambil fitur numerik saja</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Menghitung distance matrix Euclidean</span>
 <span class="n">euclidean_matrix</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
-
 <span class="n">euclidean_matrix</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1012,53 +1107,23 @@ Semakin besar nilai jarak berarti semakin berbeda.</p>
 </div>
 </div>
 </div>
-<p>Dari hasil distance matrix di atas, terlihat bahwa:</p>
-<ul class="simple">
-<li><p>Nilai diagonal selalu 0 (karena jarak data dengan dirinya sendiri adalah nol).</p></li>
-<li><p>Data dalam kelas yang sama cenderung memiliki jarak yang kecil.</p></li>
-<li><p>Jarak antara Setosa dan Virginica relatif lebih besar dibandingkan jarak dalam kelas yang sama.</p></li>
-</ul>
 </section>
-<section id="mahalanobis-distance">
-<h2>2. Mahalanobis Distance<a class="headerlink" href="#mahalanobis-distance" title="Link to this heading">#</a></h2>
-<p>Selain Euclidean, saya juga mempelajari <strong>Mahalanobis Distance</strong>.</p>
-<p>Perbedaannya adalah Mahalanobis mempertimbangkan:</p>
+<section id="workflow-di-orange">
+<h2>6. Workflow di Orange<a class="headerlink" href="#workflow-di-orange" title="Link to this heading">#</a></h2>
+<p><img alt="import Orange" src="_images/distance-iris.png" /></p>
+<ol class="arabic simple">
+<li><p>Tambahkan widget <strong>File</strong> → load Iris</p></li>
+<li><p>Tambahkan widget <strong>Distances</strong></p></li>
+<li><p>Pilih Metric:</p>
 <ul class="simple">
-<li><p>Variansi masing-masing fitur</p></li>
-<li><p>Korelasi antar fitur</p></li>
+<li><p>Euclidean</p></li>
+<li><p>Manhattan</p></li>
+<li><p>Minkowski (atur <span class="math notranslate nohighlight">\(p\)</span>)</p></li>
 </ul>
-<p>Artinya, jika ada dua fitur yang saling berkorelasi, metode ini tidak akan
-menganggapnya sebagai dua informasi yang benar-benar terpisah.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">mahalanobis</span>
-
-<span class="c1"># Menghitung matriks kovarians dan inversnya</span>
-<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">inv_cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">)</span>
-
-<span class="c1"># Fungsi untuk menghitung Mahalanobis Distance</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">mahalanobis_distance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">mahalanobis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inv_cov_matrix</span><span class="p">)</span>
-
-<span class="c1"># Menghitung distance matrix Mahalanobis</span>
-<span class="n">mahalanobis_matrix</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">mahalanobis_distance</span><span class="p">)</span>
-
-<span class="n">mahalanobis_matrix</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        , 1.35971517, 0.96949963, 1.4051749 , 0.59237982],
-       [1.35971517, 0.        , 0.97318639, 1.45780085, 1.81903532],
-       [0.96949963, 0.97318639, 0.        , 0.7175178 , 1.12917957],
-       [1.4051749 , 1.45780085, 0.7175178 , 0.        , 1.32978712],
-       [0.59237982, 1.81903532, 1.12917957, 1.32978712, 0.        ]])
-</pre></div>
-</div>
-</div>
-</div>
+</li>
+<li><p>Hubungkan ke <strong>Distance Matrix</strong></p></li>
+</ol>
+<p>Hasil akan menampilkan matriks jarak antar data.</p>
 </section>
 <section id="kesimpulan-pengukuran-jarak">
 <h2>3. Kesimpulan Pengukuran Jarak<a class="headerlink" href="#kesimpulan-pengukuran-jarak" title="Link to this heading">#</a></h2>
@@ -1071,6 +1136,285 @@ menganggapnya sebagai dua informasi yang benar-benar terpisah.</p>
 </ul>
 <p>Tahap ini masih termasuk dalam Data Understanding karena bertujuan untuk
 memahami pola dan hubungan antar data sebelum dilakukan modeling.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset">
+<h1>Analisis Pengukuran Jarak pada Data Campuran (Bank Loan Dataset)<a class="headerlink" href="#analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset" title="Link to this heading">#</a></h1>
+<p>Pada tahap <strong>Data Understanding</strong>, dilakukan analisis pengukuran jarak untuk memahami
+tingkat kemiripan antar data pada dataset campuran.</p>
+<p>Tujuan analisis ini:</p>
+<ul class="simple">
+<li><p>Mengetahui apakah data dengan karakteristik mirip memiliki jarak kecil</p></li>
+<li><p>Memahami struktur kedekatan antar record</p></li>
+<li><p>Menganalisis apakah metode jarak numerik (Euclidean) cocok digunakan</p></li>
+<li><p>Menggunakan metode yang sesuai untuk data campuran (Gower Distance)</p></li>
+</ul>
+<p>Referensi dataset serupa di Kaggle:
+<a class="reference external" href="https://www.kaggle.com/datasets/uciml/german-credit">https://www.kaggle.com/datasets/uciml/german-credit</a></p>
+<section id="load-dataset">
+<h2>1. Load Dataset<a class="headerlink" href="#load-dataset" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;bank_loan_mixed_dataset.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>income</th>
+      <th>loan_amount</th>
+      <th>employment_status</th>
+      <th>education_level</th>
+      <th>has_credit_card</th>
+      <th>loan_status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>59</td>
+      <td>3769598</td>
+      <td>11524227</td>
+      <td>Contract</td>
+      <td>Bachelor</td>
+      <td>0</td>
+      <td>Approved</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>49</td>
+      <td>18452902</td>
+      <td>13344096</td>
+      <td>Contract</td>
+      <td>Master</td>
+      <td>1</td>
+      <td>Approved</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>10971379</td>
+      <td>8328141</td>
+      <td>Contract</td>
+      <td>Master</td>
+      <td>1</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>6331068</td>
+      <td>6072148</td>
+      <td>Contract</td>
+      <td>High School</td>
+      <td>0</td>
+      <td>Rejected</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>41</td>
+      <td>6256415</td>
+      <td>14062959</td>
+      <td>Permanent</td>
+      <td>Bachelor</td>
+      <td>0</td>
+      <td>Rejected</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="identifikasi-tipe-data">
+<h2>2. Identifikasi Tipe Data<a class="headerlink" href="#identifikasi-tipe-data" title="Link to this heading">#</a></h2>
+<p>Dataset ini mengandung tipe data campuran:</p>
+<ul class="simple">
+<li><p><strong>Numerik</strong>: age, income, loan_amount</p></li>
+<li><p><strong>Kategorikal (Nominal)</strong>: employment_status</p></li>
+<li><p><strong>Ordinal</strong>: education_level</p></li>
+<li><p><strong>Biner</strong>: has_credit_card</p></li>
+<li><p><strong>Target</strong>: loan_status</p></li>
+</ul>
+<p>Karena terdapat kombinasi tipe atribut yang berbeda,
+maka metode seperti Euclidean Distance tidak bisa langsung digunakan.</p>
+</section>
+<section id="visualisasi-distribusi-fitur-numerik">
+<h2>3. Visualisasi Distribusi Fitur Numerik<a class="headerlink" href="#visualisasi-distribusi-fitur-numerik" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribusi Age&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/476e99d0684e38b2abecfc93126d45d9418f816eb171b3a62d03183635f701f4.png" src="_images/476e99d0684e38b2abecfc93126d45d9418f816eb171b3a62d03183635f701f4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;income&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribusi Income&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Income&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a1108b7621d719dda49715cccae3125d90f84ae9d2ab56818355d44dcabc08bb.png" src="_images/a1108b7621d719dda49715cccae3125d90f84ae9d2ab56818355d44dcabc08bb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;loan_amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribusi Loan Amount&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Loan Amount&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b3b1ac4fa98e5c4234e8d8cb299e64f4155cd8729037dcdd4d0cc2a72c23b77.png" src="_images/0b3b1ac4fa98e5c4234e8d8cb299e64f4155cd8729037dcdd4d0cc2a72c23b77.png" />
+</div>
+</div>
+</section>
+<section id="kenapa-euclidean-distance-tidak-cocok">
+<h2>4. Kenapa Euclidean Distance Tidak Cocok?<a class="headerlink" href="#kenapa-euclidean-distance-tidak-cocok" title="Link to this heading">#</a></h2>
+<p>Euclidean Distance memiliki rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
+\]</div>
+<p>Masalahnya:</p>
+<ul class="simple">
+<li><p>employment_status tidak memiliki nilai numerik</p></li>
+<li><p>education_level bersifat ordinal (bertingkat)</p></li>
+<li><p>has_credit_card bersifat biner</p></li>
+</ul>
+<p>Jika dipaksa diubah menjadi angka, maka makna kategorinya bisa rusak.
+Karena itu diperlukan metode khusus untuk data campuran.</p>
+</section>
+<section id="gower-distance">
+<h2>5. Gower Distance<a class="headerlink" href="#gower-distance" title="Link to this heading">#</a></h2>
+<p>Gower Distance dirancang untuk menangani data campuran.</p>
+<p>Rumus umum:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{ij} = \frac{1}{p} \sum_{k=1}^{p} d_{ijk}
+\]</div>
+<p>di mana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p\)</span> = jumlah atribut</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{ijk}\)</span> = jarak atribut ke-k antara data i dan j</p></li>
+</ul>
+<p>Untuk atribut numerik:</p>
+<div class="math notranslate nohighlight">
+\[
+d = \frac{|x_i - x_j|}{range}
+\]</div>
+<p>Untuk atribut kategorikal/biner:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d = 
+\begin{cases}
+0 &amp; \text{jika sama} \\
+1 &amp; \text{jika berbeda}
+\end{cases}
+\end{split}\]</div>
+<p>Nilai akhir berada dalam rentang 0 sampai 1.</p>
+</section>
+<section id="implementasi-gower-distance">
+<h2>6. Implementasi Gower Distance<a class="headerlink" href="#implementasi-gower-distance" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">gower_distance</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">cat_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+    
+    <span class="c1"># Normalisasi numerik</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+    
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">num_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">cat_dist</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">cat_cols</span><span class="p">]</span> <span class="o">!=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">cat_cols</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">dist_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_dist</span> <span class="o">+</span> <span class="n">cat_dist</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">dist_matrix</span>
+
+<span class="n">gower_matrix</span> <span class="o">=</span> <span class="n">gower_distance</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;loan_status&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">gower_matrix</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        , 0.54482775, 0.54910014, 0.39491983, 0.30139237],
+       [0.54482775, 0.        , 0.19702024, 0.63467068, 0.66459711],
+       [0.54910014, 0.19702024, 0.        , 0.43765043, 0.64338421],
+       [0.39491983, 0.63467068, 0.43765043, 0.        , 0.4892039 ],
+       [0.30139237, 0.66459711, 0.64338421, 0.4892039 , 0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretasi-distance-matrix">
+<h2>7. Interpretasi Distance Matrix<a class="headerlink" href="#interpretasi-distance-matrix" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Nilai mendekati 0 → dua data sangat mirip</p></li>
+<li><p>Nilai mendekati 1 → dua data sangat berbeda</p></li>
+<li><p>Data dengan karakteristik finansial dan status serupa akan memiliki jarak kecil</p></li>
+<li><p>Perbedaan besar pada income atau loan_amount akan meningkatkan jarak</p></li>
+</ul>
+<p>Analisis ini membantu memahami struktur kemiripan data
+sebelum masuk ke tahap modeling.</p>
+</section>
+<section id="kesimpulan">
+<h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Dataset Bank Loan mengandung tipe data campuran.</p></li>
+<li><p>Euclidean tidak cocok untuk data campuran.</p></li>
+<li><p>Gower Distance mampu menangani numerik dan kategorikal secara bersamaan.</p></li>
+<li><p>Distance Matrix membantu memahami kedekatan antar data.</p></li>
+<li><p>Analisis ini termasuk dalam tahap Data Understanding.</p></li>
+</ol>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="implementasi-orange-data-mining">
@@ -1087,8 +1431,8 @@ memahami pola dan hubungan antar data sebelum dilakukan modeling.</p>
 <li><p>Membandingkan hasil dengan analisis Python</p></li>
 </ul>
 </section>
-<section id="id1">
-<h2>1. Euclidean Distance<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="euclidean-distance">
+<h2>1. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
 <p>Metode pertama yang digunakan adalah <strong>Euclidean Distance</strong>.</p>
 <p>Euclidean Distance merupakan jarak garis lurus antara dua titik dalam ruang multidimensi.
 Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
@@ -1351,8 +1695,8 @@ SQL Table → Scatter Plot</p>
 <p>Artinya, hasil analisis menggunakan Orange maupun Python memberikan kesimpulan yang sama.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="kesimpulan">
-<h1>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Kesimpulan<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>Berdasarkan seluruh proses Data Understanding:</p>
 <ol class="arabic simple">
 <li><p>Dataset berhasil dibaca tanpa error.</p></li>
@@ -1472,14 +1816,29 @@ SQL Table → Scatter Plot</p>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-distance-matrix">Analisis Pengukuran Jarak (Distance Matrix)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mahalanobis-distance">2. Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-minkowski-distance">1. Konsep Dasar Minkowski Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance-p-1">2. Manhattan Distance (p = 1)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance-p-2">3. Euclidean Distance (p = 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hubungan-minkowski-manhattan-dan-euclidean">4. Hubungan Minkowski, Manhattan, dan Euclidean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penerapan-pada-dataset-iris">5. Penerapan pada Dataset Iris</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-di-orange">6. Workflow di Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-pengukuran-jarak">3. Kesimpulan Pengukuran Jarak</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-pengukuran-jarak-pada-data-campuran-bank-loan-dataset">Analisis Pengukuran Jarak pada Data Campuran (Bank Loan Dataset)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kenapa-euclidean-distance-tidak-cocok">4. Kenapa Euclidean Distance Tidak Cocok?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">5. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">6. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">7. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
@@ -1500,7 +1859,7 @@ SQL Table → Scatter Plot</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Kesimpulan</a></li>
 </ul>
 
   </nav></div>
