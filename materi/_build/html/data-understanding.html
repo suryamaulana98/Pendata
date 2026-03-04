@@ -188,6 +188,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="data-preparation.html">DATA PREPARATION</a></li>
 
 
@@ -412,6 +413,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-gower-distance">Perhitungan Manual Gower Distance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">1. Kontribusi Atribut Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">2. Kontribusi Atribut Kategorikal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">3. Kontribusi Atribut Biner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">4. Total Gower Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
@@ -1590,6 +1598,132 @@ sebelum masuk ke tahap modeling.</p>
 <p>Spearman memberikan insight tambahan mengenai hubungan ranking antar variabel.</p>
 </section>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perhitungan-manual-gower-distance">
+<h1>Perhitungan Manual Gower Distance<a class="headerlink" href="#perhitungan-manual-gower-distance" title="Link to this heading">#</a></h1>
+<p>Pada bagian ini dilakukan perhitungan manual Gower Distance pada data campuran.
+Rumus dituliskan dalam format LaTeX agar lebih jelas secara matematis.</p>
+<section id="kontribusi-atribut-numerik">
+<h2>1. Kontribusi Atribut Numerik<a class="headerlink" href="#kontribusi-atribut-numerik" title="Link to this heading">#</a></h2>
+<p>Untuk atribut numerik, rumusnya:</p>
+<div class="math notranslate nohighlight">
+\[
+d_{ijk} = \frac{|x_{ik} - x_{jk}|}{\max(x_k) - \min(x_k)}
+\]</div>
+<p>Langkah:</p>
+<ol class="arabic simple">
+<li><p>Hitung selisih absolut antar dua data.</p></li>
+<li><p>Bagi dengan range atribut tersebut.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;income&quot;</span><span class="p">,</span> <span class="s2">&quot;loan_amount&quot;</span><span class="p">]</span>
+
+<span class="n">ranges</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> -&gt; |</span><span class="si">{</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2">| / </span><span class="si">{</span><span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">norm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">numeric_distance</span> <span class="o">+=</span> <span class="n">norm</span>
+
+<span class="n">numeric_distance</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> -&gt; |</span><span class="si">{</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2">| / </span><span class="si">{</span><span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">norm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;data1&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kontribusi-atribut-kategorikal">
+<h2>2. Kontribusi Atribut Kategorikal<a class="headerlink" href="#kontribusi-atribut-kategorikal" title="Link to this heading">#</a></h2>
+<p>Untuk atribut kategorikal (nominal):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d_{ijk} =
+\begin{cases}
+0 &amp; \text{jika } x_{ik} = x_{jk} \\
+1 &amp; \text{jika } x_{ik} \ne x_{jk}
+\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;employment_status&quot;</span><span class="p">,</span> <span class="s2">&quot;education_level&quot;</span><span class="p">]</span>
+
+<span class="n">categorical_distance</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="s1">&#39;0 (Sama)&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">diff</span><span class="o">==</span><span class="mi">0</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;1 (Berbeda)&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">categorical_distance</span> <span class="o">+=</span> <span class="n">diff</span>
+
+<span class="n">categorical_distance</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kontribusi-atribut-biner">
+<h2>3. Kontribusi Atribut Biner<a class="headerlink" href="#kontribusi-atribut-biner" title="Link to this heading">#</a></h2>
+<p>Untuk atribut biner, perlakuannya sama seperti kategorikal:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d_{ijk} =
+\begin{cases}
+0 &amp; \text{jika sama} \\
+1 &amp; \text{jika berbeda}
+\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binary_col</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;has_credit_card&quot;</span><span class="p">]</span>
+
+<span class="n">binary_distance</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">binary_col</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="s1">&#39;0 (Sama)&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">diff</span><span class="o">==</span><span class="mi">0</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;1 (Berbeda)&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">binary_distance</span> <span class="o">+=</span> <span class="n">diff</span>
+
+<span class="n">binary_distance</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="total-gower-distance">
+<h2>4. Total Gower Distance<a class="headerlink" href="#total-gower-distance" title="Link to this heading">#</a></h2>
+<p>Total jarak dihitung dengan:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{ij} = \frac{\text{Total kontribusi numerik + kategorikal + biner}}{p}
+\]</div>
+<p>Di mana <span class="math notranslate nohighlight">\(p\)</span> adalah jumlah seluruh atribut yang digunakan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary_col</span><span class="p">)</span>
+
+<span class="n">gower_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">numeric_distance</span> <span class="o">+</span> <span class="n">categorical_distance</span> <span class="o">+</span> <span class="n">binary_distance</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
+<span class="n">gower_total</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="kesimpulan">
 <h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -2025,6 +2159,13 @@ SQL Table → Scatter Plot</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-gower-distance">Perhitungan Manual Gower Distance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">1. Kontribusi Atribut Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">2. Kontribusi Atribut Kategorikal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">3. Kontribusi Atribut Biner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">4. Total Gower Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
