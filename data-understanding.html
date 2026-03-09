@@ -426,25 +426,27 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">2.16 Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.17 Penarikan Data dari MySQL / PostgreSQL ke Orange</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.18 Workflow Analisis di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.19 Proses Import Dataset Iris di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.20 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.21 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.22 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.23 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Kesimpulan</a></li>
@@ -1806,7 +1808,7 @@ D_{ij} = \frac{\text{Total kontribusi numerik + kategorikal + biner}}{p}
 </ul>
 </section>
 <section id="euclidean-distance">
-<h2>1. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
+<h2>2.16 Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
 <p>Metode pertama yang digunakan adalah <strong>Euclidean Distance</strong>.</p>
 <p>Euclidean Distance merupakan jarak garis lurus antara dua titik dalam ruang multidimensi.
 Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
@@ -1820,13 +1822,12 @@ Pada dataset Iris, jarak dihitung berdasarkan empat fitur numerik:</p>
 Semakin besar nilai jarak berarti semakin berbeda.</p>
 </section>
 <section id="penarikan-data-dari-mysql-postgresql-ke-orange">
-<h2>2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange<a class="headerlink" href="#penarikan-data-dari-mysql-postgresql-ke-orange" title="Link to this heading">#</a></h2>
+<h2>2.17 Penarikan Data dari MySQL / PostgreSQL ke Orange<a class="headerlink" href="#penarikan-data-dari-mysql-postgresql-ke-orange" title="Link to this heading">#</a></h2>
 <p>Pada tahap ini dijelaskan bagaimana dataset Iris tidak hanya diimpor melalui file CSV,
 tetapi juga dapat diintegrasikan melalui sistem manajemen basis data seperti
 MySQL atau PostgreSQL.</p>
-</section>
 <section id="tambahkan-widget-sql-table">
-<h2>1. Tambahkan Widget SQL Table<a class="headerlink" href="#tambahkan-widget-sql-table" title="Link to this heading">#</a></h2>
+<h3>1. Tambahkan Widget SQL Table<a class="headerlink" href="#tambahkan-widget-sql-table" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Buka Orange</p></li>
 <li><p>Tambahkan widget <strong>SQL Table</strong></p></li>
@@ -1834,7 +1835,7 @@ MySQL atau PostgreSQL.</p>
 </ol>
 </section>
 <section id="konfigurasi-koneksi-postgresql">
-<h2>2. Konfigurasi Koneksi PostgreSQL<a class="headerlink" href="#konfigurasi-koneksi-postgresql" title="Link to this heading">#</a></h2>
+<h3>2. Konfigurasi Koneksi PostgreSQL<a class="headerlink" href="#konfigurasi-koneksi-postgresql" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Host: localhost</p></li>
 <li><p>Port: 5432</p></li>
@@ -1846,7 +1847,7 @@ MySQL atau PostgreSQL.</p>
 <p><img alt="import Orange" src="_images/postgresql.png" /></p>
 </section>
 <section id="konfigurasi-koneksi-mysql">
-<h2>3. Konfigurasi Koneksi MySQL<a class="headerlink" href="#konfigurasi-koneksi-mysql" title="Link to this heading">#</a></h2>
+<h3>3. Konfigurasi Koneksi MySQL<a class="headerlink" href="#konfigurasi-koneksi-mysql" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Host: localhost</p></li>
 <li><p>Port: 3306</p></li>
@@ -1857,7 +1858,7 @@ MySQL atau PostgreSQL.</p>
 <p>Klik Connect → pilih tabel <code class="docutils literal notranslate"><span class="pre">iris-flower</span></code></p>
 </section>
 <section id="menghubungkan-ke-widget-analisis">
-<h2>4. Menghubungkan ke Widget Analisis<a class="headerlink" href="#menghubungkan-ke-widget-analisis" title="Link to this heading">#</a></h2>
+<h3>4. Menghubungkan ke Widget Analisis<a class="headerlink" href="#menghubungkan-ke-widget-analisis" title="Link to this heading">#</a></h3>
 <p>Setelah SQL Table berhasil terkoneksi:</p>
 <p>Hubungkan ke:</p>
 <ul class="simple">
@@ -1873,7 +1874,7 @@ SQL Table → Scatter Plot</p>
 <p>Dengan demikian, data dapat dianalisis langsung dari database tanpa perlu file CSV.</p>
 </section>
 <section id="kesimpulan-integrasi">
-<h2>Kesimpulan Integrasi<a class="headerlink" href="#kesimpulan-integrasi" title="Link to this heading">#</a></h2>
+<h3>Kesimpulan Integrasi<a class="headerlink" href="#kesimpulan-integrasi" title="Link to this heading">#</a></h3>
 <p>Integrasi database memungkinkan:</p>
 <ul class="simple">
 <li><p>Penyimpanan data secara terstruktur</p></li>
@@ -1883,8 +1884,9 @@ SQL Table → Scatter Plot</p>
 </ul>
 <p>Tahap ini merupakan bagian dari Data Acquisition sebelum masuk ke analisis lanjutan.</p>
 </section>
+</section>
 <section id="workflow-analisis-di-orange">
-<h2>2.16 Workflow Analisis di Orange<a class="headerlink" href="#workflow-analisis-di-orange" title="Link to this heading">#</a></h2>
+<h2>2.18 Workflow Analisis di Orange<a class="headerlink" href="#workflow-analisis-di-orange" title="Link to this heading">#</a></h2>
 <p><img alt="Workflow Orange" src="_images/workflow.png" /></p>
 <p>Alur kerja terdiri dari:</p>
 <ol class="arabic simple">
@@ -1912,7 +1914,7 @@ SQL Table → Scatter Plot</p>
 <p>Workflow ini menunjukkan pendekatan visual dari proses Data Understanding yang sebelumnya dilakukan menggunakan Python.</p>
 </section>
 <section id="proses-import-dataset-iris-di-orange">
-<h2>2.17 Proses Import Dataset Iris di Orange<a class="headerlink" href="#proses-import-dataset-iris-di-orange" title="Link to this heading">#</a></h2>
+<h2>2.19 Proses Import Dataset Iris di Orange<a class="headerlink" href="#proses-import-dataset-iris-di-orange" title="Link to this heading">#</a></h2>
 <p><img alt="import Orange" src="_images/import.png" /></p>
 <p>Pada tahap ini:</p>
 <ul class="simple">
@@ -1934,7 +1936,7 @@ SQL Table → Scatter Plot</p>
 <p>Hal ini menandakan dataset valid dan siap dianalisis.</p>
 </section>
 <section id="analisis-statistik-kolom-mean-median-mode">
-<h2>2.18 Analisis Statistik Kolom (Mean, Median, Mode)<a class="headerlink" href="#analisis-statistik-kolom-mean-median-mode" title="Link to this heading">#</a></h2>
+<h2>2.20 Analisis Statistik Kolom (Mean, Median, Mode)<a class="headerlink" href="#analisis-statistik-kolom-mean-median-mode" title="Link to this heading">#</a></h2>
 <p><img alt="statistik Orange" src="_images/mean.png" /></p>
 <p>Pada widget Column Statistics diperoleh informasi:</p>
 <p>Untuk fitur numerik:</p>
@@ -1973,7 +1975,7 @@ SQL Table → Scatter Plot</p>
 <p>Artinya, validasi silang antara Python dan Orange menunjukkan hasil yang konsisten.</p>
 </section>
 <section id="analisis-distribusi-fitur">
-<h2>2.18 Analisis Distribusi Fitur<a class="headerlink" href="#analisis-distribusi-fitur" title="Link to this heading">#</a></h2>
+<h2>2.21 Analisis Distribusi Fitur<a class="headerlink" href="#analisis-distribusi-fitur" title="Link to this heading">#</a></h2>
 <p>Analisiss distribusi dilakukan untuk memahami pola penyebaran nilai pada setiap fitur numerik dalam dataset Iris. Dengan melihat histogram, kita dapat mengidentifikasi:</p>
 <ul class="simple">
 <li><p>Rentang nilai</p></li>
@@ -2049,7 +2051,7 @@ SQL Table → Scatter Plot</p>
 </section>
 </section>
 <section id="analisis-scatter-plot-petal-length-vs-petal-width">
-<h2>2.19 Analisis Scatter Plot (Petal Length vs Petal Width)<a class="headerlink" href="#analisis-scatter-plot-petal-length-vs-petal-width" title="Link to this heading">#</a></h2>
+<h2>2.22 Analisis Scatter Plot (Petal Length vs Petal Width)<a class="headerlink" href="#analisis-scatter-plot-petal-length-vs-petal-width" title="Link to this heading">#</a></h2>
 <p><img alt="Workflow Orange" src="_images/scatter.png" /></p>
 <p>Scatter plot digunakan untuk melihat hubungan antara dua variabel numerik serta untuk mengamati pola pemisahan kelas dalam dataset.</p>
 <p>Pada analisis ini digunakan:</p>
@@ -2060,7 +2062,7 @@ SQL Table → Scatter Plot</p>
 <p>Tujuan analisis ini adalah untuk melihat apakah kedua fitur tersebut mampu membedakan spesies bunga Iris secara visual.</p>
 </section>
 <section id="konsistensi-dengan-analisis-python">
-<h2>2.20 Konsistensi dengan Analisis Python<a class="headerlink" href="#konsistensi-dengan-analisis-python" title="Link to this heading">#</a></h2>
+<h2>2.23 Konsistensi dengan Analisis Python<a class="headerlink" href="#konsistensi-dengan-analisis-python" title="Link to this heading">#</a></h2>
 <p>Scatter plot ini konsisten dengan hasil implementasi menggunakan Python sebelumnya, di mana:</p>
 <ul class="simple">
 <li><p>Visualisasi seaborn menunjukkan pemisahan kelas yang jelas.</p></li>
@@ -2228,25 +2230,27 @@ SQL Table → Scatter Plot</p>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-orange-data-mining">Implementasi Orange Data Mining</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-orange">2.15 Penjelasan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.15 Penarikan Data dari MySQL / PostgreSQL ke Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.16 Workflow Analisis di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.17 Proses Import Dataset Iris di Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.18 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.18 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">2.16 Euclidean Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penarikan-data-dari-mysql-postgresql-ke-orange">2.17 Penarikan Data dari MySQL / PostgreSQL ke Orange</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tambahkan-widget-sql-table">1. Tambahkan Widget SQL Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-postgresql">2. Konfigurasi Koneksi PostgreSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-mysql">3. Konfigurasi Koneksi MySQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghubungkan-ke-widget-analisis">4. Menghubungkan ke Widget Analisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-integrasi">Kesimpulan Integrasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-analisis-di-orange">2.18 Workflow Analisis di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-import-dataset-iris-di-orange">2.19 Proses Import Dataset Iris di Orange</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-statistik-kolom-mean-median-mode">2.20 Analisis Statistik Kolom (Mean, Median, Mode)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-distribusi-fitur">2.21 Analisis Distribusi Fitur</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-length">Distribusi Petal Length</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-petal-width">Distribusi Petal Width</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-length">Distribusi Sepal Length</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-sepal-width">Distribusi Sepal Width</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.19 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.20 Konsistensi dengan Analisis Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-scatter-plot-petal-length-vs-petal-width">2.22 Analisis Scatter Plot (Petal Length vs Petal Width)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistensi-dengan-analisis-python">2.23 Konsistensi dengan Analisis Python</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Kesimpulan</a></li>
