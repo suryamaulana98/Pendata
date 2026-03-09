@@ -416,10 +416,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-gower-distance">Perhitungan Manual Gower Distance</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">1. Kontribusi Atribut Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">2. Kontribusi Atribut Kategorikal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">3. Kontribusi Atribut Biner</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">4. Total Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-dan-ambil-2-data-contoh">1. Load Dataset dan Ambil 2 Data Contoh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">2. Kontribusi Atribut Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">3. Kontribusi Atribut Kategorikal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">4. Kontribusi Atribut Biner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">5. Total Gower Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
@@ -1603,8 +1604,45 @@ sebelum masuk ke tahap modeling.</p>
 <h1>Perhitungan Manual Gower Distance<a class="headerlink" href="#perhitungan-manual-gower-distance" title="Link to this heading">#</a></h1>
 <p>Pada bagian ini dilakukan perhitungan manual Gower Distance pada data campuran.
 Rumus dituliskan dalam format LaTeX agar lebih jelas secara matematis.</p>
+<section id="load-dataset-dan-ambil-2-data-contoh">
+<h2>1. Load Dataset dan Ambil 2 Data Contoh<a class="headerlink" href="#load-dataset-dan-ambil-2-data-contoh" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;bank_loan_mixed_dataset.csv&quot;</span><span class="p">)</span>
+
+<span class="n">data1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">data1</span><span class="p">,</span> <span class="n">data2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(age                        59
+ income                3769598
+ loan_amount          11524227
+ employment_status    Contract
+ education_level      Bachelor
+ has_credit_card             0
+ loan_status          Approved
+ Name: 0, dtype: object,
+ age                        49
+ income               18452902
+ loan_amount          13344096
+ employment_status    Contract
+ education_level        Master
+ has_credit_card             1
+ loan_status          Approved
+ Name: 1, dtype: object)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="kontribusi-atribut-numerik">
-<h2>1. Kontribusi Atribut Numerik<a class="headerlink" href="#kontribusi-atribut-numerik" title="Link to this heading">#</a></h2>
+<h2>2. Kontribusi Atribut Numerik<a class="headerlink" href="#kontribusi-atribut-numerik" title="Link to this heading">#</a></h2>
 <p>Untuk atribut numerik, rumusnya:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1634,23 +1672,19 @@ d_{ijk} = \frac{|x_{ik} - x_{jk}|}{\max(x_k) - \min(x_k)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> -&gt; |</span><span class="si">{</span><span class="n">data1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">data2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2">| / </span><span class="si">{</span><span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">norm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;data1&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>age -&gt; |59 - 49| / 38 = 0.2631578947368421
+income -&gt; |3769598 - 18452902| / 16843709 = 0.8717381664572809
+loan_amount -&gt; |11524227 - 13344096| / 13573978 = 0.13407042504415434
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.2689664862382775)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="kontribusi-atribut-kategorikal">
-<h2>2. Kontribusi Atribut Kategorikal<a class="headerlink" href="#kontribusi-atribut-kategorikal" title="Link to this heading">#</a></h2>
+<h2>3. Kontribusi Atribut Kategorikal<a class="headerlink" href="#kontribusi-atribut-kategorikal" title="Link to this heading">#</a></h2>
 <p>Untuk atribut kategorikal (nominal):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1675,10 +1709,19 @@ d_{ijk} =
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>employment_status -&gt; 0 (Sama)
+education_level -&gt; 1 (Berbeda)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="kontribusi-atribut-biner">
-<h2>3. Kontribusi Atribut Biner<a class="headerlink" href="#kontribusi-atribut-biner" title="Link to this heading">#</a></h2>
+<h2>4. Kontribusi Atribut Biner<a class="headerlink" href="#kontribusi-atribut-biner" title="Link to this heading">#</a></h2>
 <p>Untuk atribut biner, perlakuannya sama seperti kategorikal:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1703,10 +1746,18 @@ d_{ijk} =
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>has_credit_card -&gt; 1 (Berbeda)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="total-gower-distance">
-<h2>4. Total Gower Distance<a class="headerlink" href="#total-gower-distance" title="Link to this heading">#</a></h2>
+<h2>5. Total Gower Distance<a class="headerlink" href="#total-gower-distance" title="Link to this heading">#</a></h2>
 <p>Total jarak dihitung dengan:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1719,6 +1770,11 @@ D_{ij} = \frac{\text{Total kontribusi numerik + kategorikal + biner}}{p}
 
 <span class="n">gower_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">numeric_distance</span> <span class="o">+</span> <span class="n">categorical_distance</span> <span class="o">+</span> <span class="n">binary_distance</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
 <span class="n">gower_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5448277477063795)
 </pre></div>
 </div>
 </div>
@@ -2162,10 +2218,11 @@ SQL Table → Scatter Plot</p>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-gower-distance">Perhitungan Manual Gower Distance</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">1. Kontribusi Atribut Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">2. Kontribusi Atribut Kategorikal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">3. Kontribusi Atribut Biner</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">4. Total Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-dan-ambil-2-data-contoh">1. Load Dataset dan Ambil 2 Data Contoh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-numerik">2. Kontribusi Atribut Numerik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-kategorikal">3. Kontribusi Atribut Kategorikal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontribusi-atribut-biner">4. Kontribusi Atribut Biner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-gower-distance">5. Total Gower Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
 </ul>
 </li>
