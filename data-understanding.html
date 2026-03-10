@@ -189,6 +189,11 @@
 
 
 
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="data-preparation.html">DATA PREPARATION</a></li>
 
 
@@ -406,10 +411,17 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">4. Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">5. Implementasi Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">6. Interpretasi Distance Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">7. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-data-numerik">4. Perhitungan Jarak Data Numerik</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-ordinal">5. Perhitungan Data Ordinal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-kategorikal">6. Perhitungan Data Kategorikal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-biner">7. Perhitungan Data Biner</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-seluruh-jarak">8. Menggabungkan Seluruh Jarak</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">9. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">10. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">11. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">12. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
 </ul>
 </li>
@@ -1376,13 +1388,34 @@ tingkat kemiripan antar data pada dataset campuran.</p>
 <section id="identifikasi-tipe-data">
 <h2>2. Identifikasi Tipe Data<a class="headerlink" href="#identifikasi-tipe-data" title="Link to this heading">#</a></h2>
 <p>Dataset ini mengandung tipe data campuran:</p>
-<ul class="simple">
-<li><p><strong>Numerik</strong>: age, income, loan_amount</p></li>
-<li><p><strong>Kategorikal (Nominal)</strong>: employment_status</p></li>
-<li><p><strong>Ordinal</strong>: education_level</p></li>
-<li><p><strong>Biner</strong>: has_credit_card</p></li>
-<li><p><strong>Target</strong>: loan_status</p></li>
-</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kolom</p></th>
+<th class="head"><p>Tipe Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>age</p></td>
+<td><p>numerik</p></td>
+</tr>
+<tr class="row-odd"><td><p>income</p></td>
+<td><p>numerik</p></td>
+</tr>
+<tr class="row-even"><td><p>loan_amount</p></td>
+<td><p>numerik</p></td>
+</tr>
+<tr class="row-odd"><td><p>education_level</p></td>
+<td><p>ordinal</p></td>
+</tr>
+<tr class="row-even"><td><p>employment_status</p></td>
+<td><p>kategorikal</p></td>
+</tr>
+<tr class="row-odd"><td><p>has_credit_card</p></td>
+<td><p>biner</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Karena terdapat kombinasi tipe atribut yang berbeda,
 maka metode seperti Euclidean Distance tidak bisa langsung digunakan.</p>
 </section>
@@ -1436,8 +1469,342 @@ maka metode seperti Euclidean Distance tidak bisa langsung digunakan.</p>
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perhitungan-jarak-data-numerik">
+<h1>4. Perhitungan Jarak Data Numerik<a class="headerlink" href="#perhitungan-jarak-data-numerik" title="Link to this heading">#</a></h1>
+<p>Kolom numerik pada dataset:</p>
+<ul class="simple">
+<li><p>age</p></li>
+<li><p>income</p></li>
+<li><p>loan_amount</p></li>
+</ul>
+<p>Rumus jarak numerik:</p>
+<div class="math notranslate nohighlight">
+\[
+d_{ijk} = \frac{|x_{ik} - x_{jk}|}{\max(x_k) - \min(x_k)}
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{ik}\)</span> = nilai atribut ke-k pada data ke-i</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{jk}\)</span> = nilai atribut ke-k pada data ke-j</p></li>
+<li><p><span class="math notranslate nohighlight">\(\max(x_k)\)</span> = nilai maksimum atribut</p></li>
+<li><p><span class="math notranslate nohighlight">\(\min(x_k)\)</span> = nilai minimum atribut</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;income&quot;</span><span class="p">,</span><span class="s2">&quot;loan_amount&quot;</span><span class="p">]</span>
+
+<span class="n">ranges</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">ranges</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>age                  38
+income         16843709
+loan_amount    13573978
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Contoh perhitungan menggunakan <strong>baris pertama dan kedua dataset</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">row2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+    <span class="n">numeric_distance</span> <span class="o">+=</span> <span class="n">norm</span>
+
+<span class="n">numeric_distance</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>age 10 0.2631578947368421
+income 14683304 0.8717381664572809
+loan_amount 1819869 0.13407042504415434
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.2689664862382775)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perhitungan-data-ordinal">
+<h1>5. Perhitungan Data Ordinal<a class="headerlink" href="#perhitungan-data-ordinal" title="Link to this heading">#</a></h1>
+<p>Kolom ordinal pada dataset:</p>
+<ul class="simple">
+<li><p>education_level</p></li>
+</ul>
+<p>Langkah:</p>
+<ol class="arabic simple">
+<li><p>Konversi kategori menjadi ranking numerik.</p></li>
+<li><p>Normalisasi ranking.</p></li>
+<li><p>Masukkan ke perhitungan numerik.</p></li>
+</ol>
+<p>Rumus normalisasi ordinal:</p>
+<div class="math notranslate nohighlight">
+\[
+z = \frac{r - 1}{M - 1}
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r\)</span> = ranking</p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span> = jumlah kategori ordinal</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;High School&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;Bachelor&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;Master&quot;</span><span class="p">:</span><span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;education_rank&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;education_level&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;education_rank&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;education_norm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;education_rank&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;education_level&quot;</span><span class="p">,</span><span class="s2">&quot;education_rank&quot;</span><span class="p">,</span><span class="s2">&quot;education_norm&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>education_level</th>
+      <th>education_rank</th>
+      <th>education_norm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bachelor</td>
+      <td>2</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Master</td>
+      <td>3</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Master</td>
+      <td>3</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>High School</td>
+      <td>1</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bachelor</td>
+      <td>2</td>
+      <td>0.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Setelah dinormalisasi, atribut ordinal diperlakukan sebagai <strong>data numerik</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;income&quot;</span><span class="p">,</span><span class="s2">&quot;loan_amount&quot;</span><span class="p">,</span><span class="s2">&quot;education_norm&quot;</span><span class="p">]</span>
+
+<span class="n">ranges</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+    <span class="n">numeric_distance</span> <span class="o">+=</span> <span class="n">norm</span>
+
+<span class="n">numeric_distance</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>age 10 0.2631578947368421
+income 14683304 0.8717381664572809
+loan_amount 1819869 0.13407042504415434
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/pandas/core/indexes/base.py:3641,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3640</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3641</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3642</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File pandas/_libs/index.pyx:168,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/index.pyx:197,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7668,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7676,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;education_norm&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">numeric_distance</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">norm</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">norm</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/pandas/core/series.py:959,</span> in <span class="ni">Series.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">954</span>     <span class="n">key</span> <span class="o">=</span> <span class="n">unpack_1tuple</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span> <span class="k">elif</span> <span class="n">key_is_scalar</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span>     <span class="c1"># Note: GH#50617 in 3.0 we changed int key to always be treated as</span>
+<span class="g g-Whitespace">    </span><span class="mi">958</span>     <span class="c1">#  a label, matching DataFrame behavior.</span>
+<span class="ne">--&gt; </span><span class="mi">959</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">961</span> <span class="c1"># Convert generator to list before going through hashable part</span>
+<span class="g g-Whitespace">    </span><span class="mi">962</span> <span class="c1"># (We will iterate through the generator there to check for slices)</span>
+<span class="g g-Whitespace">    </span><span class="mi">963</span> <span class="k">if</span> <span class="n">is_iterator</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/pandas/core/series.py:1046,</span> in <span class="ni">Series._get_value</span><span class="nt">(self, label, takeable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1045</span> <span class="c1"># Similar to Index.get_value, but we do not fall back to positional</span>
+<span class="ne">-&gt; </span><span class="mi">1046</span> <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">loc</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span>
+
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/pandas/core/indexes/base.py:3648,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3643</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3644</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3645</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3646</span>     <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3647</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+<span class="ne">-&gt; </span><span class="mi">3648</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3649</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3650</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3651</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3652</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;education_norm&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perhitungan-data-kategorikal">
+<h1>6. Perhitungan Data Kategorikal<a class="headerlink" href="#perhitungan-data-kategorikal" title="Link to this heading">#</a></h1>
+<p>Kolom kategorikal:</p>
+<ul class="simple">
+<li><p>employment_status</p></li>
+</ul>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+D = \frac{P - M}{P}
+\]</div>
+<p>Dimana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P\)</span> = jumlah atribut kategorikal</p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span> = jumlah atribut yang sama</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;employment_status&quot;</span><span class="p">]</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cat_cols</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">]:</span>
+        <span class="n">M</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">categorical_distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="n">P</span>
+<span class="n">categorical_distance</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perhitungan-data-biner">
+<h1>7. Perhitungan Data Biner<a class="headerlink" href="#perhitungan-data-biner" title="Link to this heading">#</a></h1>
+<p>Kolom biner:</p>
+<ul class="simple">
+<li><p>has_credit_card</p></li>
+</ul>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d =
+\begin{cases}
+0 &amp; \text{jika sama} \\
+1 &amp; \text{jika berbeda}
+\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binary_col</span> <span class="o">=</span> <span class="s2">&quot;has_credit_card&quot;</span>
+
+<span class="n">binary_distance</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">binary_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">row2</span><span class="p">[</span><span class="n">binary_col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">1</span>
+<span class="n">binary_distance</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="menggabungkan-seluruh-jarak">
+<h1>8. Menggabungkan Seluruh Jarak<a class="headerlink" href="#menggabungkan-seluruh-jarak" title="Link to this heading">#</a></h1>
+<p>Rumus total jarak:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{ij} = \frac{1}{p}\sum d_{ijk}
+\]</div>
+<p>Dimana <span class="math notranslate nohighlight">\(p\)</span> adalah jumlah seluruh atribut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">total_distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">numeric_distance</span> <span class="o">+</span> <span class="n">categorical_distance</span> <span class="o">+</span> <span class="n">binary_distance</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
+<span class="n">total_distance</span>
+</pre></div>
+</div>
+</div>
+</div>
 <section id="gower-distance">
-<h2>4. Gower Distance<a class="headerlink" href="#gower-distance" title="Link to this heading">#</a></h2>
+<h2>9. Gower Distance<a class="headerlink" href="#gower-distance" title="Link to this heading">#</a></h2>
 <p>Gower Distance dirancang untuk menangani data campuran.</p>
 <p>Rumus umum:</p>
 <div class="math notranslate nohighlight">
@@ -1466,7 +1833,7 @@ d =
 <p>Nilai akhir berada dalam rentang 0 sampai 1.</p>
 </section>
 <section id="implementasi-gower-distance">
-<h2>5. Implementasi Gower Distance<a class="headerlink" href="#implementasi-gower-distance" title="Link to this heading">#</a></h2>
+<h2>10. Implementasi Gower Distance<a class="headerlink" href="#implementasi-gower-distance" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1507,7 +1874,7 @@ d =
 </div>
 </section>
 <section id="interpretasi-distance-matrix">
-<h2>6. Interpretasi Distance Matrix<a class="headerlink" href="#interpretasi-distance-matrix" title="Link to this heading">#</a></h2>
+<h2>11. Interpretasi Distance Matrix<a class="headerlink" href="#interpretasi-distance-matrix" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Nilai mendekati 0 → dua data sangat mirip</p></li>
 <li><p>Nilai mendekati 1 → dua data sangat berbeda</p></li>
@@ -1518,7 +1885,7 @@ d =
 sebelum masuk ke tahap modeling.</p>
 </section>
 <section id="spearman-distance-pada-bank-loan-dataset">
-<h2>7. Spearman Distance pada Bank Loan Dataset<a class="headerlink" href="#spearman-distance-pada-bank-loan-dataset" title="Link to this heading">#</a></h2>
+<h2>12. Spearman Distance pada Bank Loan Dataset<a class="headerlink" href="#spearman-distance-pada-bank-loan-dataset" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_bank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;bank_loan_mixed_dataset.csv&quot;</span><span class="p">)</span>
@@ -2210,10 +2577,17 @@ SQL Table → Scatter Plot</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset">1. Load Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-tipe-data">2. Identifikasi Tipe Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-distribusi-fitur-numerik">3. Visualisasi Distribusi Fitur Numerik</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">4. Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">5. Implementasi Gower Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">6. Interpretasi Distance Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">7. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-data-numerik">4. Perhitungan Jarak Data Numerik</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-ordinal">5. Perhitungan Data Ordinal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-kategorikal">6. Perhitungan Data Kategorikal</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-data-biner">7. Perhitungan Data Biner</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-seluruh-jarak">8. Menggabungkan Seluruh Jarak</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gower-distance">9. Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-gower-distance">10. Implementasi Gower Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-distance-matrix">11. Interpretasi Distance Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-distance-pada-bank-loan-dataset">12. Spearman Distance pada Bank Loan Dataset</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-bank-loan">Interpretasi Bank Loan</a></li>
 </ul>
 </li>
