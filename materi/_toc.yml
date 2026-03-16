@@ -8,3 +8,7 @@ chapters:
 - file: business-understanding
 - file: data-understanding
 - file: data-preparation
+   sections:
+      - file: normalisasi-data
+      - file: knn-missing-values
+      - file: wknn
