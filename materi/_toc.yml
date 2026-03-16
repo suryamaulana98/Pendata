@@ -1,14 +1,13 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
-title: BERANDA
+
 chapters:
-- file: business-understanding
-- file: data-understanding
-- file: data-preparation
-   sections:
+  - file: business-understanding
+
+  - file: data-understanding
+
+  - file: data-preparation
+    sections:
       - file: normalisasi-data
       - file: knn-missing-values
       - file: wknn
