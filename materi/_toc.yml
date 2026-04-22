@@ -11,3 +11,5 @@ chapters:
       - file: normalisasi-data
       - file: knn-missing-values
       - file: wknn
+
+  - file: uts
