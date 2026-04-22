@@ -29,6 +29,11 @@ html:
 
 sphinx:
   config:
+    html_static_path:
+      - _static
+    html_js_files:
+      - custom.js
     html_theme_options:
+      home_page_in_toc: true
       secondary_sidebar_items:
         - page-toc

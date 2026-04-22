@@ -1,3 +1,7 @@
+---
+title: "240411100160"
+---
+
 # Pendahuluan
 
 Selamat datang di laporan analisis menggunakan KNN.
