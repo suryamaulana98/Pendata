@@ -2,14 +2,14 @@ format: jb-book
 root: intro
 
 chapters:
+  - url: intro.html
+    title: 240411100160
   - file: business-understanding
-
   - file: data-understanding
-
   - file: data-preparation
     sections:
       - file: normalisasi-data
       - file: knn-missing-values
       - file: wknn
-
   - file: uts
+    title: UTS - Analisis Data Kesuburan Tanah dengan KNN
