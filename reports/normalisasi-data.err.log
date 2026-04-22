@@ -18,22 +18,25 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+from sklearn.preprocessing import MinMaxScaler
 
-%matplotlib inline
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+scaler = MinMaxScaler()
 
+scaled = scaler.fit_transform(df[['Luas_Tanah','Luas_Bangunan','Jumlah_Kamar','Harga']])
+
+scaled_df = pd.DataFrame(scaled,columns=['Luas_Tanah','Luas_Bangunan','Jumlah_Kamar','Harga'])
+
+scaled_df
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 4[39m
-[32m      1[39m get_ipython().run_line_magic([33m'matplotlib'[39m, [33m'inline'[39m)
-[32m      2[39m [38;5;28;01mimport[39;00m pandas [38;5;28;01mas[39;00m pd
-[32m      3[39m [38;5;28;01mimport[39;00m matplotlib.pyplot [38;5;28;01mas[39;00m plt
-[32m----> [39m[32m4[39m [38;5;28;01mfrom[39;00m sklearn.preprocessing [38;5;28;01mimport[39;00m LabelEncoder, StandardScaler
+[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m [38;5;28;01mfrom[39;00m sklearn.preprocessing [38;5;28;01mimport[39;00m MinMaxScaler
+[32m      2[39m 
+[32m      3[39m scaler = MinMaxScaler()
+[32m      4[39m 
 
 [31mModuleNotFoundError[39m: No module named 'sklearn'
 
