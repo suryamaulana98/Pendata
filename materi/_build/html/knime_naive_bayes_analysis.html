@@ -395,7 +395,6 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-klasifikasi-menggunakan-gaussian-naive-bayes">
 <h1>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes<a class="headerlink" href="#analisis-klasifikasi-menggunakan-gaussian-naive-bayes" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
 <section id="pendahuluan">
 <h2>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <p>Pada penelitian ini dilakukan analisis klasifikasi untuk menentukan kelayakan kredit (risiko kredit) seseorang menggunakan algoritma <strong>Naive Bayes</strong>, khususnya <strong>Gaussian Naive Bayes</strong>.</p>
@@ -700,9 +699,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 <h2>7. Implementasi Python (Di KNIME Python Script)<a class="headerlink" href="#implementasi-python-di-knime-python-script" title="Link to this heading">#</a></h2>
 <p>Node Python Script di KNIME berfungsi sebagai “ruang jembatan” yang menyambungkan KNIME API (<code class="docutils literal notranslate"><span class="pre">knio</span></code>) terhadap sintaks Pandas maupun <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> biasa.</p>
 <p>Berikut baris sintaks yang diisi di Node tersebut:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ================================</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ================================</span>
 <span class="c1"># IMPORT LIBRARY</span>
 <span class="c1"># ================================</span>
 
@@ -716,108 +713,52 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 <span class="c1"># LOAD DATA DARI KNIME</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># Mengambil data training (80%) dari KNIME</span>
-<span class="n">df_train</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-
-<span class="c1"># Mengambil data testing (20%) dari KNIME</span>
-<span class="n">df_test</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>  <span class="c1"># Data training (80%)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>   <span class="c1"># Data testing (20%)</span>
 
 
 <span class="c1"># ================================</span>
 <span class="c1"># MENENTUKAN TARGET (LABEL)</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># Kolom &#39;risk&#39; adalah target yang ingin diprediksi (Good / Bad)</span>
-<span class="n">target_col</span> <span class="o">=</span> <span class="s2">&quot;risk&quot;</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s2">&quot;risk&quot;</span>  <span class="c1"># Label yang diprediksi</span>
 
 
 <span class="c1"># ================================</span>
 <span class="c1"># MEMISAHKAN FITUR DAN TARGET</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># X_train → semua kolom selain target (sebagai fitur)</span>
-<span class="c1"># select_dtypes(include=[&#39;number&#39;]) → hanya ambil kolom numerik</span>
-<span class="c1"># (karena GaussianNB hanya bisa memproses angka)</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
-
-<span class="c1"># y_train → kolom target (risk)</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
 
-
-<span class="c1"># Untuk data testing (proses yang sama)</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
 
 
 <span class="c1"># ================================</span>
-<span class="c1"># MEMBUAT MODEL NAIVE BAYES</span>
+<span class="c1"># MEMBUAT &amp; TRAIN MODEL</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># Inisialisasi model Gaussian Naive Bayes</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
-
-
-<span class="c1"># ================================</span>
-<span class="c1"># TRAINING MODEL</span>
-<span class="c1"># ================================</span>
-
-<span class="c1"># Model belajar dari data training (mencari pola antara fitur dan target)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 
 <span class="c1"># ================================</span>
-<span class="c1"># PREDIKSI DATA TESTING</span>
+<span class="c1"># PREDIKSI &amp; EVALUASI</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># Model digunakan untuk memprediksi data yang belum pernah dilihat (data testing)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-
-<span class="c1"># ================================</span>
-<span class="c1"># EVALUASI MODEL</span>
-<span class="c1"># ================================</span>
-
-<span class="c1"># Menghitung akurasi: seberapa banyak prediksi yang benar</span>
 <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan hasil akurasi di console KNIME</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">acc</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
-
-
-<span class="c1"># ================================</span>
-<span class="c1"># MENYIMPAN HASIL PREDIKSI</span>
-<span class="c1"># ================================</span>
-
-<span class="c1"># Menambahkan kolom baru &quot;Prediction&quot; ke data testing</span>
-<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;Prediction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
 
 
 <span class="c1"># ================================</span>
 <span class="c1"># OUTPUT KE KNIME</span>
 <span class="c1"># ================================</span>
 
-<span class="c1"># Mengirim kembali hasil ke KNIME agar bisa diproses oleh node berikutnya (Scorer)</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;Prediction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
 <span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># ================================</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># IMPORT LIBRARY</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># ================================</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>   <span class="c1"># Untuk komunikasi data antara KNIME dan Python</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>               <span class="c1"># Untuk manipulasi data dalam bentuk tabel (DataFrame)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>  <span class="c1"># Model Gaussian Naive Bayes</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>  <span class="c1"># Untuk evaluasi akurasi model</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;knime&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <hr class="docutils" />
