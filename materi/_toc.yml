@@ -12,3 +12,5 @@ chapters:
       - file: wknn
   - file: uts
     title: UTS - Analisis Data Kesuburan Tanah dengan KNN
+  - file: knime_naive_bayes_analysis
+    title: Analisa data menggunakan naive bayes

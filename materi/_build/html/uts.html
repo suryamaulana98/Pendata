@@ -387,7 +387,17 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil">6. Analisis Hasil</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Interpretasi:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-metrik">Evaluasi Metrik</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🔹 Accuracy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🔹 Precision</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🔹 Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🔹 F1-Score</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">Analisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
 </li>
 </ul>
@@ -605,13 +615,88 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 </section>
 <section id="analisis-hasil">
 <h2>6. Analisis Hasil<a class="headerlink" href="#analisis-hasil" title="Link to this heading">#</a></h2>
-<p>Model menghasilkan akurasi tinggi.</p>
-<section id="id10">
-<h3>Interpretasi:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Actual \ Prediksi</p></th>
+<th class="head"><p>Tidak Subur</p></th>
+<th class="head"><p>Subur</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tidak Subur</p></td>
+<td><p>304</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Subur</p></td>
+<td><p>0</p></td>
+<td><p>296</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Total data uji:
+[
+304 + 296 = 600
+]</p>
+</section>
+<hr class="docutils" />
+<section id="interpretasi-hasil">
+<h3>Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Link to this heading">#</a></h3>
+<p>Berdasarkan confusion matrix di atas, dapat dilihat bahwa:</p>
 <ul class="simple">
-<li><p>Data memiliki pola jelas</p></li>
-<li><p>Model bekerja optimal</p></li>
+<li><p>Tidak terdapat <strong>False Positive (FP = 0)</strong></p></li>
+<li><p>Tidak terdapat <strong>False Negative (FN = 0)</strong></p></li>
 </ul>
+<p>Hal ini menunjukkan bahwa seluruh data uji berhasil diklasifikasikan dengan benar oleh model.</p>
+</section>
+<hr class="docutils" />
+<section id="evaluasi-metrik">
+<h3>Evaluasi Metrik<a class="headerlink" href="#evaluasi-metrik" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h4>🔹 Accuracy<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<p>[
+Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+]</p>
+<p>[
+Accuracy = \frac{304 + 296}{600} = 1.0
+]</p>
+</section>
+<section id="id11">
+<h4>🔹 Precision<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<p>[
+Precision = \frac{TP}{TP + FP} = \frac{296}{296} = 1.0
+]</p>
+</section>
+<section id="id12">
+<h4>🔹 Recall<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<p>[
+Recall = \frac{TP}{TP + FN} = \frac{296}{296} = 1.0
+]</p>
+</section>
+<section id="id13">
+<h4>🔹 F1-Score<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<p>[
+F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = 1.0
+]</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="analisis">
+<h3>Analisis<a class="headerlink" href="#analisis" title="Link to this heading">#</a></h3>
+<p>Model K-Nearest Neighbor (KNN) menunjukkan performa yang sangat baik dengan nilai semua metrik evaluasi sebesar <strong>1.0</strong>. Hal ini mengindikasikan bahwa model mampu mengklasifikasikan seluruh data uji dengan benar tanpa kesalahan.</p>
+<p>Keberhasilan ini kemungkinan disebabkan oleh:</p>
+<ul class="simple">
+<li><p>Fitur dalam dataset memiliki pola yang jelas dan tidak saling tumpang tindih</p></li>
+<li><p>Proses preprocessing yang baik, seperti normalisasi dan penanganan missing values</p></li>
+<li><p>Distribusi data yang seimbang antara kelas <em>Subur</em> dan <em>Tidak Subur</em></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="kesimpulan">
+<h3>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
+<p>Model KNN efektif dalam mengklasifikasikan tingkat kesuburan tanah pada dataset ini. Namun, untuk memastikan keandalan model, disarankan untuk melakukan pengujian tambahan seperti cross-validation atau menggunakan dataset lain.</p>
 </section>
 </section>
 </section>
@@ -713,7 +798,17 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil">6. Analisis Hasil</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Interpretasi:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-metrik">Evaluasi Metrik</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🔹 Accuracy</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">🔹 Precision</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">🔹 Recall</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">🔹 F1-Score</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">Analisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
 </li>
 </ul>
