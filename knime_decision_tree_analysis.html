@@ -1,0 +1,1019 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analisis Decision Tree Menggunakan KNIME &#8212; Catatan Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'knime_decision_tree_analysis';</script>
+    <link rel="canonical" href="/Pendata/knime_decision_tree_analysis.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Analisis Klasifikasi Menggunakan Gaussian Naive Bayes" href="knime_naive_bayes_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/surya.png" class="logo__image only-light" alt="Catatan Penambangan Data - Home"/>
+    <script>document.write(`<img src="_static/surya.png" class="logo__image only-dark" alt="Catatan Penambangan Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Pendahuluan
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="business-understanding.html">BUSINESS UNDERSTANDING</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">DATA UNDERSTANDING</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="data-preparation.html">DATA PREPARATION</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Decision Tree Menggunakan KNIME</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/knime_decision_tree_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis Decision Tree Menggunakan KNIME</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Analisis Decision Tree Menggunakan KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">2. Workflow KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader">3. Excel Reader</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-yang-terjadi">Proses yang Terjadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alasan-menggunakan-excel-reader">Alasan Menggunakan Excel Reader</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">4. Table Partitioner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-yang-digunakan">Konfigurasi yang Digunakan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data">Pembagian Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-pembagian-data">Tujuan Pembagian Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data">Training Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-menggunakan-90-10">Mengapa Menggunakan 90:10?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-learner">5. Decision Tree Learner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-view">6. Decision Tree View</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-yang-bisa-dilihat-interpretasi-visual">Hasil yang Bisa Dilihat (Interpretasi Visual)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-predictor">7. Decision Tree Predictor</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Output</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">8. Scorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Fungsi</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-writer">9. Model Writer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-yang-dihasilkan">File yang Dihasilkan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-lengkap-workflow">10. Alur Lengkap Workflow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-matematika-gain-ratio">11. Rumus Matematika (Gain Ratio)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-entropy">A. Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-information-gain">B. Information Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-split-info">C. Split Info</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gain-ratio">D. Gain Ratio</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan-decision-tree">12. Kelebihan dan Kekurangan Decision Tree</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan">Kelebihan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangan">Kekurangan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solusi-overfitting">Solusi Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">13. Kesimpulan</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-decision-tree-menggunakan-knime">
+<h1>Analisis Decision Tree Menggunakan KNIME<a class="headerlink" href="#analisis-decision-tree-menggunakan-knime" title="Permalink to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="pendahuluan">
+<h1>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h1>
+<p>Pada proyek ini dilakukan proses klasifikasi menggunakan algoritma <strong>Decision Tree</strong> pada platform <strong>KNIME Analytics Platform</strong>.</p>
+<p>Decision Tree merupakan salah satu algoritma pada teknik <strong>supervised learning</strong> yang digunakan untuk melakukan prediksi berdasarkan pola dari data historis.</p>
+<p>Algoritma ini bekerja dengan cara:</p>
+<ul class="simple">
+<li><p>Memecah data menjadi beberapa cabang berdasarkan atribut terbaik</p></li>
+<li><p>Membentuk struktur seperti pohon</p></li>
+<li><p>Menghasilkan rule klasifikasi yang mudah dipahami</p></li>
+</ul>
+<p>Pada penelitian ini, dataset dibagi menjadi:</p>
+<ul class="simple">
+<li><p><strong>90% data training</strong></p></li>
+<li><p><strong>10% data testing</strong></p></li>
+</ul>
+<p>Pembagian ini bertujuan agar model memiliki data belajar yang lebih banyak sehingga mampu menemukan pola dengan lebih baik.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="workflow-knime">
+<h1>2. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Permalink to this heading">#</a></h1>
+<p>Berikut workflow KNIME yang digunakan:</p>
+<p><img alt="Workflow KNIME" src="_images/workfloww.png" /></p>
+<p>Workflow terdiri dari beberapa node utama:</p>
+<ol class="arabic simple">
+<li><p>Excel Reader</p></li>
+<li><p>Table Partitioner</p></li>
+<li><p>Decision Tree Learner</p></li>
+<li><p>Decision Tree Predictor</p></li>
+<li><p>Scorer</p></li>
+<li><p>Decision Tree View</p></li>
+<li><p>Model Writer</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="excel-reader">
+<h1>3. Excel Reader<a class="headerlink" href="#excel-reader" title="Permalink to this heading">#</a></h1>
+<section id="fungsi">
+<h2>Fungsi<a class="headerlink" href="#fungsi" title="Permalink to this heading">#</a></h2>
+<p>Node <strong>Excel Reader</strong> digunakan untuk membaca dataset dari file Excel ke dalam KNIME.</p>
+<p><img alt="Workflow KNIME" src="_images/excell.png" /></p>
+<p>Dataset yang dimuat berisi:</p>
+<ul class="simple">
+<li><p>fitur/atribut</p></li>
+<li><p>label kelas</p></li>
+<li><p>data training untuk proses klasifikasi</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="proses-yang-terjadi">
+<h2>Proses yang Terjadi<a class="headerlink" href="#proses-yang-terjadi" title="Permalink to this heading">#</a></h2>
+<p>Pada tahap ini KNIME akan:</p>
+<ul class="simple">
+<li><p>membaca file dataset</p></li>
+<li><p>mengenali tipe data</p></li>
+<li><p>mengubah data menjadi bentuk tabel KNIME</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="alasan-menggunakan-excel-reader">
+<h2>Alasan Menggunakan Excel Reader<a class="headerlink" href="#alasan-menggunakan-excel-reader" title="Permalink to this heading">#</a></h2>
+<p>Karena dataset yang digunakan disimpan dalam format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.xlsx
+</pre></div>
+</div>
+<p>Node ini menjadi gerbang awal seluruh proses analisis.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="table-partitioner">
+<h1>4. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>Fungsi<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Node <strong>Table Partitioner</strong> digunakan untuk membagi dataset menjadi:</p>
+<ul class="simple">
+<li><p>data training</p></li>
+<li><p>data testing</p></li>
+</ul>
+<hr class="docutils" />
+<p><img alt="Workflow KNIME" src="_images/tablee.png" /></p>
+</section>
+<section id="konfigurasi-yang-digunakan">
+<h2>Konfigurasi yang Digunakan<a class="headerlink" href="#konfigurasi-yang-digunakan" title="Permalink to this heading">#</a></h2>
+<section id="pembagian-data">
+<h3>Pembagian Data<a class="headerlink" href="#pembagian-data" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>90% → Training Data
+10% → Testing Data
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tujuan-pembagian-data">
+<h2>Tujuan Pembagian Data<a class="headerlink" href="#tujuan-pembagian-data" title="Permalink to this heading">#</a></h2>
+<section id="training-data">
+<h3>Training Data<a class="headerlink" href="#training-data" title="Permalink to this heading">#</a></h3>
+<p>Digunakan untuk:</p>
+<ul class="simple">
+<li><p>melatih model</p></li>
+<li><p>mencari pola</p></li>
+<li><p>membangun struktur pohon keputusan</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="testing-data">
+<h3>Testing Data<a class="headerlink" href="#testing-data" title="Permalink to this heading">#</a></h3>
+<p>Digunakan untuk:</p>
+<ul class="simple">
+<li><p>menguji performa model</p></li>
+<li><p>mengevaluasi kemampuan prediksi</p></li>
+<li><p>mengukur akurasi</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mengapa-menggunakan-90-10">
+<h2>Mengapa Menggunakan 90:10?<a class="headerlink" href="#mengapa-menggunakan-90-10" title="Permalink to this heading">#</a></h2>
+<p>Karena:</p>
+<ul class="simple">
+<li><p>dataset relatif tidak terlalu besar</p></li>
+<li><p>model membutuhkan lebih banyak data belajar</p></li>
+<li><p>semakin banyak data training maka pola yang ditemukan biasanya lebih baik</p></li>
+</ul>
+<p>Namun tetap disisakan 10% data untuk evaluasi agar model tidak hanya menghafal data training.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="decision-tree-learner">
+<h1>5. Decision Tree Learner<a class="headerlink" href="#decision-tree-learner" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Fungsi<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Node <strong>Decision Tree Learner</strong> digunakan untuk:</p>
+<ul class="simple">
+<li><p>membangun model pohon keputusan</p></li>
+<li><p>mencari atribut terbaik sebagai root node menggunakan <strong>Information Gain</strong> atau <strong>Gain Ratio</strong> (detail rumus pada bagian 11)</p></li>
+<li><p>menghasilkan rule klasifikasi</p></li>
+</ul>
+<hr class="docutils" />
+<p><img alt="Workflow KNIME" src="_images/decision.png" /></p>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this heading">#</a></h2>
+<p>Node ini menghasilkan:</p>
+<ul class="simple">
+<li><p>model pohon keputusan</p></li>
+<li><p>rule klasifikasi</p></li>
+<li><p>struktur tree</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="decision-tree-view">
+<h1>6. Decision Tree View<a class="headerlink" href="#decision-tree-view" title="Permalink to this heading">#</a></h1>
+<section id="id3">
+<h2>Fungsi<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><img alt="Workflow KNIME" src="_images/view.png" /></p>
+<p>Node ini digunakan untuk menampilkan visualisasi pohon keputusan.</p>
+</section>
+<hr class="docutils" />
+<section id="tujuan">
+<h2>Tujuan<a class="headerlink" href="#tujuan" title="Permalink to this heading">#</a></h2>
+<p>Agar pengguna dapat:</p>
+<ul class="simple">
+<li><p>melihat struktur tree</p></li>
+<li><p>melihat root node</p></li>
+<li><p>memahami rule klasifikasi</p></li>
+<li><p>mengetahui atribut paling penting</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="hasil-yang-bisa-dilihat-interpretasi-visual">
+<h2>Hasil yang Bisa Dilihat (Interpretasi Visual)<a class="headerlink" href="#hasil-yang-bisa-dilihat-interpretasi-visual" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan visualisasi tree yang dihasilkan, model Decision Tree telah membentuk struktur pohon sebagai berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>Root Node (Node Utama)</strong>: Atribut <code class="docutils literal notranslate"><span class="pre">Humidity</span></code> terpilih sebagai root. Atribut ini dipilih sebagai pemecah utama karena memiliki nilai probabilitas Information Gain / Gain Ratio terbaik.</p></li>
+<li><p><strong>Pecahan (Splits)</strong>:</p>
+<ul class="simple">
+<li><p>Jika <code class="docutils literal notranslate"><span class="pre">Humidity</span></code> = <code class="docutils literal notranslate"><span class="pre">Normal</span></code>, maka data langsung diklasifikasikan sebagai <code class="docutils literal notranslate"><span class="pre">Yes</span></code> secara dominan (6/6 data di cabang ini masuk kelas Yes). Ini adalah daun yang sudah murni (pure).</p></li>
+<li><p>Jika <code class="docutils literal notranslate"><span class="pre">Humidity</span></code> = <code class="docutils literal notranslate"><span class="pre">High</span></code>, sebagian besar masuk kelas <code class="docutils literal notranslate"><span class="pre">No</span></code> (4 dari 6 data). Karena belum sepenuhnya murni, cabang ini masih dipisah lagi (membuka cabang lanjutan) dengan atribut selanjutnya, yaitu <code class="docutils literal notranslate"><span class="pre">Outlook</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Leaf Node (Daun Prediksi)</strong>: Node terluar akan memberikan keputusan final.</p></li>
+</ol>
+<p>Secara sederhana, <em>rule classification</em> yang bisa kita baca dari alur cabang tersebut adalah:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>IF Humidity = Normal THEN Play Tennis = Yes
+IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
+</pre></div>
+</div>
+<p>Rule-rule (<em>If-Then</em>) ini dihasilkan secara otomatis oleh model dan dapat dibaca secara intuitif untuk mengambil keputusan pada data baru.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="decision-tree-predictor">
+<h1>7. Decision Tree Predictor<a class="headerlink" href="#decision-tree-predictor" title="Permalink to this heading">#</a></h1>
+<section id="id4">
+<h2>Fungsi<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p><img alt="Workflow KNIME" src="_images/tree.png" /></p>
+<p>Node ini digunakan untuk:</p>
+<ul class="simple">
+<li><p>melakukan prediksi pada data testing</p></li>
+<li><p>menggunakan model dari Decision Tree Learner</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="cara-kerja">
+<h2>Cara Kerja<a class="headerlink" href="#cara-kerja" title="Permalink to this heading">#</a></h2>
+<p>Data testing akan:</p>
+<ul class="simple">
+<li><p>masuk ke model decision tree</p></li>
+<li><p>mengikuti percabangan tree</p></li>
+<li><p>menghasilkan kelas prediksi</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>Output<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>Node ini menghasilkan kolom baru:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Prediction
+</pre></div>
+</div>
+<p>yang berisi hasil prediksi model.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="scorer">
+<h1>8. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h1>
+<p><img alt="Workflow KNIME" src="_images/sko.png" /></p>
+<section id="id6">
+<h2>Fungsi<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>Node <strong>Scorer</strong> digunakan untuk mengevaluasi performa model secara agregat dengan membandingkan <strong>label asli</strong> dan <strong>hasil prediksi model</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="model-writer">
+<h1>9. Model Writer<a class="headerlink" href="#model-writer" title="Permalink to this heading">#</a></h1>
+<section id="id7">
+<h2>Fungsi<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>Node <strong>Model Writer</strong> digunakan untuk menyimpan model Decision Tree.</p>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>Tujuan<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<p>Agar model dapat:</p>
+<ul class="simple">
+<li><p>digunakan kembali</p></li>
+<li><p>dibuka pada workflow lain</p></li>
+<li><p>disimpan permanen</p></li>
+<li><p>deployment model</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="file-yang-dihasilkan">
+<h2>File yang Dihasilkan<a class="headerlink" href="#file-yang-dihasilkan" title="Permalink to this heading">#</a></h2>
+<p>Biasanya dalam format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.model
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="alur-lengkap-workflow">
+<h1>10. Alur Lengkap Workflow<a class="headerlink" href="#alur-lengkap-workflow" title="Permalink to this heading">#</a></h1>
+<p>Berikut urutan proses pada workflow secara visual:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Excel Reader
+      ↓
+Table Partitioner
+      ↓
+Decision Tree Learner
+      ↓
+ ┌───────────────┬─────────────────┐
+ ↓               ↓                 ↓
+Model Writer   Tree View   Decision Tree Predictor
+                                      ↓
+                                   Scorer
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="rumus-matematika-gain-ratio">
+<h1>11. Rumus Matematika (Gain Ratio)<a class="headerlink" href="#rumus-matematika-gain-ratio" title="Permalink to this heading">#</a></h1>
+<section id="a-entropy">
+<h2>A. Entropy<a class="headerlink" href="#a-entropy" title="Permalink to this heading">#</a></h2>
+<p>Entropy digunakan untuk mengukur tingkat ketidakteraturan (impurity) dari suatu kumpulan data.</p>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+Entropy(S) = - \sum_{i=1}^{k} p_i \log_2 p_i
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p>k = jumlah kelas target</p></li>
+<li><p>p_i = proporsi data pada kelas ke-i</p></li>
+<li><p>Semakin besar entropy maka data semakin acak</p></li>
+<li><p>Semakin kecil entropy maka data semakin homogen</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="b-information-gain">
+<h2>B. Information Gain<a class="headerlink" href="#b-information-gain" title="Permalink to this heading">#</a></h2>
+<p>Information Gain digunakan untuk mengukur seberapa baik suatu atribut mengurangi entropy.</p>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+Gain(S,A) = Entropy(S) - \sum \frac{|S_v|}{|S|} Entropy(S_v)
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p>A = atribut yang diuji</p></li>
+<li><p>S_v = subset data pada cabang tertentu</p></li>
+<li><p>|S_v| = jumlah data pada cabang</p></li>
+<li><p>|S| = jumlah total data</p></li>
+</ul>
+<p>Atribut dengan gain terbesar akan dipilih sebagai percabangan pohon.</p>
+</section>
+<hr class="docutils" />
+<section id="c-split-info">
+<h2>C. Split Info<a class="headerlink" href="#c-split-info" title="Permalink to this heading">#</a></h2>
+<p>Split Info digunakan untuk mengukur penyebaran data setelah proses pemisahan.</p>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+SplitInfo(A) = - \sum \frac{n_i}{n} \log_2 \frac{n_i}{n}
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p>n_i = jumlah data pada partisi ke-i</p></li>
+<li><p>n = jumlah total data</p></li>
+</ul>
+<p>Split Info berfungsi sebagai penalti agar algoritma tidak selalu memilih atribut dengan cabang terlalu banyak.</p>
+</section>
+<hr class="docutils" />
+<section id="d-gain-ratio">
+<h2>D. Gain Ratio<a class="headerlink" href="#d-gain-ratio" title="Permalink to this heading">#</a></h2>
+<p>Gain Ratio merupakan hasil akhir yang digunakan pada algoritma C4.5.</p>
+<p>Rumus:</p>
+<div class="math notranslate nohighlight">
+\[
+GainRatio(A) = \frac{Gain(A)}{SplitInfo(A)}
+\]</div>
+<p>Atribut dengan Gain Ratio tertinggi akan dipilih menjadi root node.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="kelebihan-dan-kekurangan-decision-tree">
+<h1>12. Kelebihan dan Kekurangan Decision Tree<a class="headerlink" href="#kelebihan-dan-kekurangan-decision-tree" title="Permalink to this heading">#</a></h1>
+<section id="kelebihan">
+<h2>Kelebihan<a class="headerlink" href="#kelebihan" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Mudah dipahami dan divisualisasikan</p></li>
+<li><p>Bisa menangani data kategorikal dan numerik</p></li>
+<li><p>Menghasilkan rule klasifikasi yang jelas</p></li>
+<li><p>Tidak membutuhkan normalisasi data</p></li>
+<li><p>Relatif tahan terhadap outlier</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="kekurangan">
+<h2>Kekurangan<a class="headerlink" href="#kekurangan" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Rentan terhadap overfitting</p></li>
+<li><p>Struktur pohon mudah berubah jika data berubah sedikit</p></li>
+<li><p>Bisa menghasilkan tree terlalu kompleks</p></li>
+<li><p>Kurang optimal pada data yang sangat besar</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="solusi-overfitting">
+<h2>Solusi Overfitting<a class="headerlink" href="#solusi-overfitting" title="Permalink to this heading">#</a></h2>
+<p>Biasanya digunakan teknik:</p>
+<div class="math notranslate nohighlight">
+\[
+Pruning
+\]</div>
+<p>atau pemangkasan pohon untuk mengurangi kompleksitas model.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="kesimpulan">
+<h1>13. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h1>
+<p>Berdasarkan workflow yang dibuat pada KNIME:</p>
+<ul class="simple">
+<li><p>algoritma Decision Tree berhasil membangun model klasifikasi</p></li>
+<li><p>model mampu mempelajari pola dari data training</p></li>
+<li><p>hasil prediksi dapat diuji menggunakan data testing</p></li>
+<li><p>performa model dapat dievaluasi menggunakan node Scorer</p></li>
+</ul>
+<p>Decision Tree memiliki kelebihan divisualisasikan dengan jelas dan menghasilkan rule yang gampang diinterpretasi, meskipun rentan terhadap <em>overfitting</em> yang bisa diatasi dengan <em>pruning</em>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="knime_naive_bayes_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Analisis Decision Tree Menggunakan KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">2. Workflow KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader">3. Excel Reader</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-yang-terjadi">Proses yang Terjadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alasan-menggunakan-excel-reader">Alasan Menggunakan Excel Reader</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">4. Table Partitioner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-yang-digunakan">Konfigurasi yang Digunakan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data">Pembagian Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-pembagian-data">Tujuan Pembagian Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data">Training Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-menggunakan-90-10">Mengapa Menggunakan 90:10?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-learner">5. Decision Tree Learner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-view">6. Decision Tree View</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-yang-bisa-dilihat-interpretasi-visual">Hasil yang Bisa Dilihat (Interpretasi Visual)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-predictor">7. Decision Tree Predictor</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja">Cara Kerja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Output</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">8. Scorer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Fungsi</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-writer">9. Model Writer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Fungsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Tujuan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-yang-dihasilkan">File yang Dihasilkan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-lengkap-workflow">10. Alur Lengkap Workflow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-matematika-gain-ratio">11. Rumus Matematika (Gain Ratio)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-entropy">A. Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-information-gain">B. Information Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-split-info">C. Split Info</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gain-ratio">D. Gain Ratio</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan-decision-tree">12. Kelebihan dan Kekurangan Decision Tree</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan">Kelebihan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangan">Kekurangan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solusi-overfitting">Solusi Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">13. Kesimpulan</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Surya Maulana Akhmad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 Surya Maulana Akhmad.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
