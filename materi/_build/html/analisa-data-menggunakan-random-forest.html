@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Analisa Data Menggunakan Random Forest &#8212; Catatan Penambangan Data</title>
+    <title>Analisa Data Menggunakan Random Forest (Dataset Play Tennis) &#8212; Catatan Penambangan Data</title>
   
   
   
@@ -361,7 +361,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisa Data Menggunakan Random Forest</h1>
+    <h1>Analisa Data Menggunakan Random Forest (Dataset Play Tennis)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -371,12 +371,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import Library yang Dibutuhkan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-dan-eksplorasi-dataset">Muat dan Eksplorasi Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data">Prapemrosesan Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-latih-dan-data-uji">Pembagian Data Latih dan Data Uji</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-model-random-forest">Pelatihan Model Random Forest</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-performa-model">Evaluasi Performa Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-knime-workflow">Alur KNIME (Workflow)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-python">Implementasi dengan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader-dan-pre-processing-sederhana">1 &amp; 2. Excel Reader dan Pre-processing Sederhana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">3. Table Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner-predictor">4 &amp; 5. Random Forest Learner &amp; Predictor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">6. Scorer</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -388,19 +390,56 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisa-data-menggunakan-random-forest">
-<h1>Analisa Data Menggunakan Random Forest<a class="headerlink" href="#analisa-data-menggunakan-random-forest" title="Permalink to this heading">#</a></h1>
-<p>Jupyter notebook ini akan melakukan analisa data menggunakan algoritma Random Forest.</p>
-<section id="import-library-yang-dibutuhkan">
-<h2>Import Library yang Dibutuhkan<a class="headerlink" href="#import-library-yang-dibutuhkan" title="Permalink to this heading">#</a></h2>
-<p>Mengimpor pustaka Python seperti pandas, numpy, dan sklearn.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="analisa-data-menggunakan-random-forest-dataset-play-tennis">
+<h1>Analisa Data Menggunakan Random Forest (Dataset Play Tennis)<a class="headerlink" href="#analisa-data-menggunakan-random-forest-dataset-play-tennis" title="Permalink to this heading">#</a></h1>
+<p>Jupyter notebook ini berisi penjelasan mengenai analisis data menggunakan algoritma Random Forest untuk dataset <em>Play Tennis</em>. Analisis ini mengacu pada tahapan alur (workflow) di KNIME Analytics Platform, serta implementasi kodenya menggunakan Python.</p>
+<section id="alur-knime-workflow">
+<h2>Alur KNIME (Workflow)<a class="headerlink" href="#alur-knime-workflow" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah penjelasan untuk setiap node yang digunakan di KNIME berdasarkan gambar yang Anda berikan:</p>
+<ol class="arabic">
+<li><p><strong>Excel Reader</strong>
+Node ini berfungsi untuk membaca dataset berformat <code class="docutils literal notranslate"><span class="pre">.xlsx</span></code> (dalam hal ini <code class="docutils literal notranslate"><span class="pre">play_tennis_knime.xlsx</span></code>). Node akan memuat data ke dalam <em>workflow</em> agar siap diproses.</p>
+<blockquote>
+<div><p><em>(Silakan tambahkan gambar / hasil dari node Excel Reader di sini)</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Table Partitioner</strong>
+Node ini digunakan untuk membagi (partitioning) dataset menjadi dua bagian, yaitu data latih (training data) dan data uji (testing data). Misalnya, proporsi 80% untuk latih dan 20% untuk uji.</p>
+<blockquote>
+<div><p><em>(Silakan tambahkan gambar konfigurasi / hasil pembagian di sini)</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Random Forest Learner</strong>
+Node ini merupakan inti untuk melatih (training) model machine learning menggunakan algoritma Random Forest. Algoritma ini akan membangun sekumpulan pohon keputusan (Decision Trees) berdasarkan <strong>data latih</strong>.</p>
+<blockquote>
+<div><p><em>(Silakan tambahkan gambar model/pohon yang terbentuk di sini)</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Random Forest Predictor</strong>
+Setelah model belajar pada tahap sebelumnya, node ini akan menerima model dari Learner dan mengaplikasikannya terhadap <strong>data uji</strong>. Node ini menghasilkan prediksi (misalnya prediksi apakah akan bermain tenis atau tidak).</p>
+<blockquote>
+<div><p><em>(Silakan tambahkan hasil dari prediksi di sini)</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Scorer</strong>
+Node terakhir ini bertugas mengevaluasi kinerja dan kualitas model. Ia membandingkan hasil kelas aktual dari data uji dengan kelas tebakan (prediksi), lalu menghasilkan metrik performa seperti <strong>Akurasi (Accuracy)</strong> dan matriks kebingungan (Confusion Matrix).</p>
+<blockquote>
+<div><p><em>(Silakan tambahkan gambar metrik evaluasi/Scorer di sini)</em></p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="implementasi-dengan-python">
+<h2>Implementasi dengan Python<a class="headerlink" href="#implementasi-dengan-python" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
 </pre></div>
 </div>
 </div>
@@ -417,72 +456,82 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="muat-dan-eksplorasi-dataset">
-<h2>Muat dan Eksplorasi Dataset<a class="headerlink" href="#muat-dan-eksplorasi-dataset" title="Permalink to this heading">#</a></h2>
-<p>Membaca dataset menggunakan pandas dan menampilkan sebagian data awal.</p>
+<section id="excel-reader-dan-pre-processing-sederhana">
+<h3>1 &amp; 2. Excel Reader dan Pre-processing Sederhana<a class="headerlink" href="#excel-reader-dan-pre-processing-sederhana" title="Permalink to this heading">#</a></h3>
+<p>Membaca file data ‘play_tennis_knime.xlsx’. Karena dataset <em>Play Tennis</em> umumnya berupa kategorikal (teks), algoritma di scikit-learn membutuhkan format numerik, sehingga kita mengonversinya (Label Encoding).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataset_path = &#39;german_credit_data.csv&#39; </span>
-<span class="c1"># df = pd.read_csv(dataset_path)</span>
-<span class="c1"># df.head()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengasumsikan file ada di direktori yang sama</span>
+<span class="c1"># df = pd.read_excel(&#39;play_tennis_knime.xlsx&#39;)</span>
+
+<span class="c1"># Karena kita belum meload file excel secara langsung di code ini, kita buat dummy struktur dataset *Play Tennis* </span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Outlook&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Humidity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">,</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span><span class="s1">&#39;High&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">,</span><span class="s1">&#39;Weak&#39;</span><span class="p">,</span><span class="s1">&#39;Strong&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;PlayTennis&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tampilan Awal Dataset:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># --- Label Encoding (Prapemrosesan) ---</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Outlook&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Outlook&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Humidity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Humidity&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="prapemrosesan-data">
-<h2>Prapemrosesan Data<a class="headerlink" href="#prapemrosesan-data" title="Permalink to this heading">#</a></h2>
-<p>Menangani nilai yang hilang (missing values), melakukan encoding pada data kategorikal, atau standarisasi fitur jika diperlukan.</p>
+<section id="table-partitioner">
+<h3>3. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h3>
+<p>Sama seperti Table Partitioner di KNIME, kita bagi menjadi Data Latih dan Data Uji (80% / 20%).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contoh Prapemrosesan Data</span>
-<span class="c1"># df.dropna(inplace=True)</span>
-<span class="c1"># X = df.drop(&#39;target_column&#39;, axis=1)</span>
-<span class="c1"># y = df[&#39;target_column&#39;]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="pembagian-data-latih-dan-data-uji">
-<h2>Pembagian Data Latih dan Data Uji<a class="headerlink" href="#pembagian-data-latih-dan-data-uji" title="Permalink to this heading">#</a></h2>
-<p>Menggunakan train_test_split dari sklearn untuk membagi data menjadi set pelatihan dan set pengujian.</p>
+<section id="random-forest-learner-predictor">
+<h3>4 &amp; 5. Random Forest Learner &amp; Predictor<a class="headerlink" href="#random-forest-learner-predictor" title="Permalink to this heading">#</a></h3>
+<p>Melatih model Random Forest menggunakan fungsi Fit, lalu melakukan predisksi menggunakan Predict.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Evaluasi seperti model Learner (melatih data)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Menghasilkan input seperti Random Forest Predictor</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediksi:&quot;</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="pelatihan-model-random-forest">
-<h2>Pelatihan Model Random Forest<a class="headerlink" href="#pelatihan-model-random-forest" title="Permalink to this heading">#</a></h2>
-<p>Menginisialisasi model Random Forest dan melatihnya menggunakan data latih dengan fungsi fit().</p>
+<section id="scorer">
+<h3>6. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h3>
+<p>Mengukur akurasi dan kinerja model akhir.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = RandomForestClassifier(n_estimators=100, random_state=42)</span>
-<span class="c1"># model.fit(X_train, y_train)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi Model:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="evaluasi-performa-model">
-<h2>Evaluasi Performa Model<a class="headerlink" href="#evaluasi-performa-model" title="Permalink to this heading">#</a></h2>
-<p>Membuat prediksi pada data uji dan mengevaluasi metrik seperti akurasi, precision, recall, atau RMSE (tergantung kasus klasifikasi atau regresi) serta menampilkan feature importance.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># y_pred = model.predict(X_test)</span>
-<span class="c1"># print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))</span>
-<span class="c1"># print(&quot;Classification Report:\n&quot;, classification_report(y_test, y_pred))</span>
-<span class="c1"># </span>
-<span class="c1"># importances = model.feature_importances_</span>
-<span class="c1"># print(&quot;Feature Importances:&quot;, importances)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -541,12 +590,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import Library yang Dibutuhkan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-dan-eksplorasi-dataset">Muat dan Eksplorasi Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data">Prapemrosesan Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-latih-dan-data-uji">Pembagian Data Latih dan Data Uji</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-model-random-forest">Pelatihan Model Random Forest</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-performa-model">Evaluasi Performa Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-knime-workflow">Alur KNIME (Workflow)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-python">Implementasi dengan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader-dan-pre-processing-sederhana">1 &amp; 2. Excel Reader dan Pre-processing Sederhana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">3. Table Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner-predictor">4 &amp; 5. Random Forest Learner &amp; Predictor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">6. Scorer</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
