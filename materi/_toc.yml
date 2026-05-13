@@ -15,4 +15,5 @@ chapters:
   - file: knime_naive_bayes_analysis
   - file: knime_decision_tree_analysis
   - file: analisa-data-menggunakan-random-forest
+    title: Analisa Data Menggunakan Random Forest
     title: Analisa data menggunakan naive bayes
