@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pendahuluan &#8212; Catatan Penambangan Data</title>
+    <title>Analisa Data Menggunakan Random Forest &#8212; Catatan Penambangan Data</title>
   
   
   
@@ -65,11 +65,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
-    <link rel="canonical" href="/Pendata/intro.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'analisa-data-menggunakan-random-forest';</script>
+    <link rel="canonical" href="/Pendata/analisa-data-menggunakan-random-forest.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="BUSINESS UNDERSTANDING" href="business-understanding.html" />
+    <link rel="prev" title="Analisis Decision Tree Menggunakan KNIME" href="knime_decision_tree_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -132,8 +132,6 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -152,7 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -172,13 +170,13 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Pendahuluan
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="business-understanding.html">BUSINESS UNDERSTANDING</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data-understanding.html">DATA UNDERSTANDING</a></li>
 
@@ -224,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="analisa-data-menggunakan-random-forest.html">Analisa data menggunakan naive bayes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisa data menggunakan naive bayes</a></li>
 </ul>
 
     </div>
@@ -279,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/analisa-data-menggunakan-random-forest.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +287,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -363,7 +361,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pendahuluan</h1>
+    <h1>Analisa Data Menggunakan Random Forest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,8 +371,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identitas">Identitas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigasi-materi">Navigasi Materi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import Library yang Dibutuhkan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-dan-eksplorasi-dataset">Muat dan Eksplorasi Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data">Prapemrosesan Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-latih-dan-data-uji">Pembagian Data Latih dan Data Uji</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-model-random-forest">Pelatihan Model Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-performa-model">Evaluasi Performa Model</a></li>
 </ul>
             </nav>
         </div>
@@ -386,34 +388,102 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pendahuluan">
-<h1>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h1>
-<p>Selamat datang di laporan analisis menggunakan KNN.</p>
-<p>Mata kuliah Penambangan Data secara umum membahas cara mengekstraksi informasi, pola, dan pengetahuan yang bermanfaat dari kumpulan data berukuran besar. Materi ini mencakup tahapan penting seperti pemahaman masalah, pemahaman data, pembersihan dan transformasi data, pemilihan metode analisis, evaluasi hasil, hingga interpretasi temuan untuk mendukung pengambilan keputusan. Dengan mempelajari mata kuliah ini, mahasiswa diharapkan mampu mengolah data mentah menjadi insight yang relevan untuk menyelesaikan permasalahan nyata.</p>
-<section id="identitas">
-<h2>Identitas<a class="headerlink" href="#identitas" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Nama: Surya Maulana Akhmad</p></li>
-<li><p>Kelas: Penambangan Data A</p></li>
-<li><p>NIM: 240411100160</p></li>
-<li><p>Dosen Pengampu: Mula’ab, <a class="reference external" href="http://S.Si">S.Si</a>., M.Kom.</p></li>
-</ul>
-</section>
-<section id="navigasi-materi">
-<h2>Navigasi Materi<a class="headerlink" href="#navigasi-materi" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#"><span class="doc std std-doc">240411100160</span></a></p></li>
-<li><p><a class="reference internal" href="business-understanding.html"><span class="doc std std-doc">Business Understanding</span></a></p></li>
-<li><p><a class="reference internal" href="data-understanding.html"><span class="doc std std-doc">Data Understanding</span></a></p></li>
-<li><p><a class="reference internal" href="data-preparation.html"><span class="doc std std-doc">Data Preparation</span></a></p></li>
-<li><p><a class="reference internal" href="normalisasi-data.html"><span class="doc std std-doc">Normalisasi Data</span></a></p></li>
-<li><p><a class="reference internal" href="knn-missing-values.html"><span class="doc std std-doc">K-Nearest Neighbor (KNN)</span></a></p></li>
-<li><p><a class="reference internal" href="wknn.html"><span class="doc std std-doc">Weighted K-Nearest Neighbor (WKNN)</span></a></p></li>
-<li><p><a class="reference internal" href="uts.html"><span class="doc std std-doc">UTS - Analisis Data Kesuburan Tanah dengan KNN</span></a></p></li>
-</ul>
-</section>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="analisa-data-menggunakan-random-forest">
+<h1>Analisa Data Menggunakan Random Forest<a class="headerlink" href="#analisa-data-menggunakan-random-forest" title="Permalink to this heading">#</a></h1>
+<p>Jupyter notebook ini akan melakukan analisa data menggunakan algoritma Random Forest.</p>
+<section id="import-library-yang-dibutuhkan">
+<h2>Import Library yang Dibutuhkan<a class="headerlink" href="#import-library-yang-dibutuhkan" title="Permalink to this heading">#</a></h2>
+<p>Mengimpor pustaka Python seperti pandas, numpy, dan sklearn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="muat-dan-eksplorasi-dataset">
+<h2>Muat dan Eksplorasi Dataset<a class="headerlink" href="#muat-dan-eksplorasi-dataset" title="Permalink to this heading">#</a></h2>
+<p>Membaca dataset menggunakan pandas dan menampilkan sebagian data awal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataset_path = &#39;german_credit_data.csv&#39; </span>
+<span class="c1"># df = pd.read_csv(dataset_path)</span>
+<span class="c1"># df.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prapemrosesan-data">
+<h2>Prapemrosesan Data<a class="headerlink" href="#prapemrosesan-data" title="Permalink to this heading">#</a></h2>
+<p>Menangani nilai yang hilang (missing values), melakukan encoding pada data kategorikal, atau standarisasi fitur jika diperlukan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contoh Prapemrosesan Data</span>
+<span class="c1"># df.dropna(inplace=True)</span>
+<span class="c1"># X = df.drop(&#39;target_column&#39;, axis=1)</span>
+<span class="c1"># y = df[&#39;target_column&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pembagian-data-latih-dan-data-uji">
+<h2>Pembagian Data Latih dan Data Uji<a class="headerlink" href="#pembagian-data-latih-dan-data-uji" title="Permalink to this heading">#</a></h2>
+<p>Menggunakan train_test_split dari sklearn untuk membagi data menjadi set pelatihan dan set pengujian.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pelatihan-model-random-forest">
+<h2>Pelatihan Model Random Forest<a class="headerlink" href="#pelatihan-model-random-forest" title="Permalink to this heading">#</a></h2>
+<p>Menginisialisasi model Random Forest dan melatihnya menggunakan data latih dengan fungsi fit().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = RandomForestClassifier(n_estimators=100, random_state=42)</span>
+<span class="c1"># model.fit(X_train, y_train)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluasi-performa-model">
+<h2>Evaluasi Performa Model<a class="headerlink" href="#evaluasi-performa-model" title="Permalink to this heading">#</a></h2>
+<p>Membuat prediksi pada data uji dan mengevaluasi metrik seperti akurasi, precision, recall, atau RMSE (tergantung kasus klasifikasi atau regresi) serta menampilkan feature importance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># y_pred = model.predict(X_test)</span>
+<span class="c1"># print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))</span>
+<span class="c1"># print(&quot;Classification Report:\n&quot;, classification_report(y_test, y_pred))</span>
+<span class="c1"># </span>
+<span class="c1"># importances = model.feature_importances_</span>
+<span class="c1"># print(&quot;Feature Importances:&quot;, importances)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,14 +516,14 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="right-next"
-       href="business-understanding.html"
-       title="next page">
+    <a class="left-prev"
+       href="knime_decision_tree_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">BUSINESS UNDERSTANDING</p>
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analisis Decision Tree Menggunakan KNIME</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -471,8 +541,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identitas">Identitas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigasi-materi">Navigasi Materi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-yang-dibutuhkan">Import Library yang Dibutuhkan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muat-dan-eksplorasi-dataset">Muat dan Eksplorasi Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prapemrosesan-data">Prapemrosesan Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-latih-dan-data-uji">Pembagian Data Latih dan Data Uji</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelatihan-model-random-forest">Pelatihan Model Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-performa-model">Evaluasi Performa Model</a></li>
 </ul>
   </nav></div>
 
