@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Analisa Data Menggunakan Random Forest (Dataset Play Tennis) &#8212; Catatan Penambangan Data</title>
+    <title>Perbandingan Model Klasifikasi Decision Tree dan Random Forest (Dataset Play Tennis) &#8212; Catatan Penambangan Data</title>
   
   
   
@@ -65,6 +65,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'analisa-data-menggunakan-random-forest';</script>
     <link rel="canonical" href="/Pendata/analisa-data-menggunakan-random-forest.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -361,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisa Data Menggunakan Random Forest (Dataset Play Tennis)</h1>
+    <h1>Perbandingan Model Klasifikasi Decision Tree dan Random Forest (Dataset Play Tennis)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -371,14 +373,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-knime-workflow">Alur KNIME (Workflow)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-python">Implementasi dengan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader-dan-pre-processing-sederhana">1 &amp; 2. Excel Reader dan Pre-processing Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">3. Table Partitioner</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner-predictor">4 &amp; 5. Random Forest Learner &amp; Predictor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">6. Scorer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-proyek">1. Deskripsi Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengenal-random-forest-decision-tree">2. Mengenal Random Forest &amp; Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-prediksi-random-forest-majority-voting">Rumus Prediksi Random Forest (Majority Voting)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-workflow-knime">3. Penjelasan Workflow KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-yang-digunakan">Node yang Digunakan:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-hasil-scorer-berdasarkan-gambar">4. Evaluasi Hasil Scorer (Berdasarkan Gambar)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-ulang-dengan-python">5. Implementasi Ulang dengan Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">6. Kesimpulan</a></li>
 </ul>
             </nav>
         </div>
@@ -390,81 +396,89 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisa-data-menggunakan-random-forest-dataset-play-tennis">
-<h1>Analisa Data Menggunakan Random Forest (Dataset Play Tennis)<a class="headerlink" href="#analisa-data-menggunakan-random-forest-dataset-play-tennis" title="Permalink to this heading">#</a></h1>
-<p>Jupyter notebook ini berisi penjelasan mengenai analisis data menggunakan algoritma Random Forest untuk dataset <em>Play Tennis</em>. Analisis ini mengacu pada tahapan alur (workflow) di KNIME Analytics Platform, serta implementasi kodenya menggunakan Python.</p>
-<section id="alur-knime-workflow">
-<h2>Alur KNIME (Workflow)<a class="headerlink" href="#alur-knime-workflow" title="Permalink to this heading">#</a></h2>
-<p>Berikut adalah penjelasan untuk setiap node yang digunakan di KNIME berdasarkan gambar yang Anda berikan:</p>
-<ol class="arabic">
-<li><p><strong>Excel Reader</strong>
-Node ini berfungsi untuk membaca dataset berformat <code class="docutils literal notranslate"><span class="pre">.xlsx</span></code> (dalam hal ini <code class="docutils literal notranslate"><span class="pre">play_tennis_knime.xlsx</span></code>). Node akan memuat data ke dalam <em>workflow</em> agar siap diproses.</p>
-<blockquote>
-<div><p><em>(Silakan tambahkan gambar / hasil dari node Excel Reader di sini)</em></p>
-</div></blockquote>
-</li>
-<li><p><strong>Table Partitioner</strong>
-Node ini digunakan untuk membagi (partitioning) dataset menjadi dua bagian, yaitu data latih (training data) dan data uji (testing data). Misalnya, proporsi 80% untuk latih dan 20% untuk uji.</p>
-<blockquote>
-<div><p><em>(Silakan tambahkan gambar konfigurasi / hasil pembagian di sini)</em></p>
-</div></blockquote>
-</li>
-<li><p><strong>Random Forest Learner</strong>
-Node ini merupakan inti untuk melatih (training) model machine learning menggunakan algoritma Random Forest. Algoritma ini akan membangun sekumpulan pohon keputusan (Decision Trees) berdasarkan <strong>data latih</strong>.</p>
-<blockquote>
-<div><p><em>(Silakan tambahkan gambar model/pohon yang terbentuk di sini)</em></p>
-</div></blockquote>
-</li>
-<li><p><strong>Random Forest Predictor</strong>
-Setelah model belajar pada tahap sebelumnya, node ini akan menerima model dari Learner dan mengaplikasikannya terhadap <strong>data uji</strong>. Node ini menghasilkan prediksi (misalnya prediksi apakah akan bermain tenis atau tidak).</p>
-<blockquote>
-<div><p><em>(Silakan tambahkan hasil dari prediksi di sini)</em></p>
-</div></blockquote>
-</li>
-<li><p><strong>Scorer</strong>
-Node terakhir ini bertugas mengevaluasi kinerja dan kualitas model. Ia membandingkan hasil kelas aktual dari data uji dengan kelas tebakan (prediksi), lalu menghasilkan metrik performa seperti <strong>Akurasi (Accuracy)</strong> dan matriks kebingungan (Confusion Matrix).</p>
-<blockquote>
-<div><p><em>(Silakan tambahkan gambar metrik evaluasi/Scorer di sini)</em></p>
-</div></blockquote>
-</li>
+  <section class="tex2jax_ignore mathjax_ignore" id="perbandingan-model-klasifikasi-decision-tree-dan-random-forest-dataset-play-tennis">
+<h1>Perbandingan Model Klasifikasi Decision Tree dan Random Forest (Dataset Play Tennis)<a class="headerlink" href="#perbandingan-model-klasifikasi-decision-tree-dan-random-forest-dataset-play-tennis" title="Permalink to this heading">#</a></h1>
+<section id="deskripsi-proyek">
+<h2>1. Deskripsi Proyek<a class="headerlink" href="#deskripsi-proyek" title="Permalink to this heading">#</a></h2>
+<p>Proyek ini bertujuan untuk melakukan analisis data klasifikasi menggunakan node-node yang tersedia di KNIME serta membandingkannya menggunakan bahasa pemrograman Python. Dataset yang digunakan adalah <strong>Play Tennis</strong>, yang berisi kondisi cuaca (seperti Outlook, Temperature, Humidity, Wind) untuk menentukan target apakah seseorang akan bermain tenis atau tidak (<code class="docutils literal notranslate"><span class="pre">PlayTennis</span></code> sebagai label).</p>
+<p>Pada analisis ini dilakukan perbandingan dua algoritma klasifikasi:</p>
+<ol class="arabic simple">
+<li><p><strong>Decision Tree</strong></p></li>
+<li><p><strong>Random Forest</strong></p></li>
 </ol>
+<p>Perbandingan dilakukan berdasarkan hasil evaluasi model menggunakan Scorer atau Confusion Matrix, terutama pada metrik Akurasi.</p>
+</section>
+<section id="mengenal-random-forest-decision-tree">
+<h2>2. Mengenal Random Forest &amp; Decision Tree<a class="headerlink" href="#mengenal-random-forest-decision-tree" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Decision Tree</strong>: Memecah data ke dalam aturan memecah berdasarkan kondisi secara rekursif (seperti pohon percabangan) untuk membuat keputusan tunggal.</p></li>
+<li><p><strong>Random Forest</strong>: Algoritma ansambel (kumpulan) yang terdiri dari banyak Decision Tree. Setiap tree dikembangkan dari sampel acak data.</p></li>
+</ul>
+<section id="rumus-prediksi-random-forest-majority-voting">
+<h3>Rumus Prediksi Random Forest (Majority Voting)<a class="headerlink" href="#rumus-prediksi-random-forest-majority-voting" title="Permalink to this heading">#</a></h3>
+<p>Setiap tree akan menghasilkan prediksi masing-masing, kemudian hasil akhirnya ditentukan berdasarkan suara terbanyak atau <em>majority voting</em>.</p>
+<p>Untuk klasifikasi, hasil prediksi Random Forest dapat ditulis sebagai:
+$<span class="math notranslate nohighlight">\( \hat{y} = \text{mode} \{ h_1(x), h_2(x), \dots, h_K(x) \} \)</span>$</p>
+<p>Keterangan Rumus:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{y}\)</span> = hasil prediksi akhir</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_i(x)\)</span> = hasil prediksi dari Decision Tree ke-i</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> = jumlah pohon dalam Random Forest</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{mode}\)</span> = kelas yang paling banyak muncul</p></li>
+</ul>
+<p><strong>Contoh Majority Voting:</strong>
+Jika ada 5 pohon dengan hasil prediksi: <code class="docutils literal notranslate"><span class="pre">Yes,</span> <span class="pre">Yes,</span> <span class="pre">No,</span> <span class="pre">Yes,</span> <span class="pre">No</span></code>
+Maka hasil akhirnya adalah <code class="docutils literal notranslate"><span class="pre">Yes</span></code> karena kelas “Yes” paling banyak dipilih oleh pohon-pohon di dalam Random Forest.</p>
+</section>
+</section>
+<section id="penjelasan-workflow-knime">
+<h2>3. Penjelasan Workflow KNIME<a class="headerlink" href="#penjelasan-workflow-knime" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan workflow KNIME yang Anda gunakan, alur analisis dirancang secara terpisah <em>(branching)</em> setelah memuat dataset. Hal ini bertujuan agar Decision Tree dan Random Forest menerima dan diproses dari sumber uji yang 100% sama agar perbandingannya adil.</p>
+<section id="node-yang-digunakan">
+<h3>Node yang Digunakan:<a class="headerlink" href="#node-yang-digunakan" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Excel Reader</strong>: Berfungsi untuk menjembatani dan membaca dataset murni dari file <code class="docutils literal notranslate"><span class="pre">play_tennis_knime.xlsx</span></code>.</p></li>
+<li><p><strong>Table Partitioner</strong>: Digunakan untuk membagi dataset menjadi dua kelompok (<em>Training Data</em> dan <em>Testing Data</em>). Berdasarkan gambar yang Anda tunjukkan, pengaturan <strong>Relative Size = 80</strong>. Artinya 80% dari total 14 baris (11 baris) masuk ke <em>Training</em> dan sisa 20% (3 baris) masuk sebagai <em>Testing</em>.</p></li>
+<li><p><strong>Decision Tree Learner</strong>: Membangun model Decision Tree murni berdasarkan data pelatihan.</p></li>
+<li><p><strong>Decision Tree Predictor</strong>: Melakukan <em>score</em> prediksi kelas untuk 3 baris data uji berdasarkan model Decision Tree dari node lerner.</p></li>
+<li><p><strong>Random Forest Learner</strong>: Membuat variasi pohon-pohon keputusan (ensemble) secara banyak sekaligus atas data latih.</p></li>
+<li><p><strong>Random Forest Predictor</strong>: Menghasilkan klasifikasi gabungan untuk memprediksi hasil data uji.</p></li>
+<li><p><strong>Scorer</strong>: Menghitung ketepatan (<em>accuracy, error rate</em>, dll.) dari tebakan algoritma dibandingkan kebenaran (<em>ground truth</em>).</p></li>
+</ol>
+<blockquote>
+<div><p><em>Silakan isi screenshot workflow KNIME Anda di sini</em></p>
+</div></blockquote>
+</section>
+</section>
+<section id="evaluasi-hasil-scorer-berdasarkan-gambar">
+<h2>4. Evaluasi Hasil Scorer (Berdasarkan Gambar)<a class="headerlink" href="#evaluasi-hasil-scorer-berdasarkan-gambar" title="Permalink to this heading">#</a></h2>
+<p>Mengacu pada tangkapan layar matriks hasil <strong>Random Forest Predictor &gt; Scorer</strong> Anda:</p>
+<ul class="simple">
+<li><p>Terdapat <code class="docutils literal notranslate"><span class="pre">Yes</span></code> memprediksi <code class="docutils literal notranslate"><span class="pre">Yes</span></code> <em>(True Positive)</em> = 2 data</p></li>
+<li><p>Terdapat <code class="docutils literal notranslate"><span class="pre">Yes</span></code> (Aktual) namun terprediksi <code class="docutils literal notranslate"><span class="pre">No</span></code> <em>(False Negative)</em> = 1 data</p></li>
+<li><p>Total <strong>Data Uji = 3 baris</strong></p></li>
+</ul>
+<p><strong>Analisis Perhitungan Evaluasinya:</strong></p>
+<ul class="simple">
+<li><p><strong>Accuracy</strong>: Jumlah diprediksi benar dibandingkan seluruh uji -&gt; <span class="math notranslate nohighlight">\(2 / 3 = 0.666\)</span> atau <strong>66.67%</strong>.</p></li>
+<li><p><strong>Error Rate</strong>: Persentase meleset -&gt; <span class="math notranslate nohighlight">\(1 / 3 = 0.333\)</span> atau <strong>33.33%</strong>.</p></li>
+</ul>
+<p>Kasus ini wajar mengingat total record uji hanya sangat sedikit (3 record), meleset 1 tebakan <em>entropy/information gain</em> sudah membuat error 33%.</p>
 </section>
 <hr class="docutils" />
-<section id="implementasi-dengan-python">
-<h2>Implementasi dengan Python<a class="headerlink" href="#implementasi-dengan-python" title="Permalink to this heading">#</a></h2>
+<section id="implementasi-ulang-dengan-python">
+<h2>5. Implementasi Ulang dengan Python<a class="headerlink" href="#implementasi-ulang-dengan-python" title="Permalink to this heading">#</a></h2>
+<p>Sebagai pelengkap dan perbandingan, kami mensimulasikan kembali tahapan KNIME Anda menggunakan pustaka <strong>Scikit-Learn</strong> di Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<section id="excel-reader-dan-pre-processing-sederhana">
-<h3>1 &amp; 2. Excel Reader dan Pre-processing Sederhana<a class="headerlink" href="#excel-reader-dan-pre-processing-sederhana" title="Permalink to this heading">#</a></h3>
-<p>Membaca file data ‘play_tennis_knime.xlsx’. Karena dataset <em>Play Tennis</em> umumnya berupa kategorikal (teks), algoritma di scikit-learn membutuhkan format numerik, sehingga kita mengonversinya (Label Encoding).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengasumsikan file ada di direktori yang sama</span>
-<span class="c1"># df = pd.read_excel(&#39;play_tennis_knime.xlsx&#39;)</span>
-
-<span class="c1"># Karena kita belum meload file excel secara langsung di code ini, kita buat dummy struktur dataset *Play Tennis* </span>
+<span class="c1"># 1. Menyusun Dataset Play Tennis Murni</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Outlook&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">,</span><span class="s1">&#39;Sunny&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Overcast&#39;</span><span class="p">,</span><span class="s1">&#39;Rain&#39;</span><span class="p">],</span>
     <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Cool&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">,</span><span class="s1">&#39;Hot&#39;</span><span class="p">,</span><span class="s1">&#39;Mild&#39;</span><span class="p">],</span>
@@ -473,65 +487,63 @@ Node terakhir ini bertugas mengevaluasi kinerja dan kualitas model. Ia membandin
     <span class="s1">&#39;PlayTennis&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;Yes&#39;</span><span class="p">,</span><span class="s1">&#39;No&#39;</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tampilan Awal Dataset:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
-<span class="c1"># --- Label Encoding (Prapemrosesan) ---</span>
+<span class="c1"># 2. Pre-processing: Label Encoding (diperlukan untuk Scikit-Learn)</span>
 <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Outlook&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Outlook&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Humidity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Humidity&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayTennis&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="table-partitioner">
-<h3>3. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h3>
-<p>Sama seperti Table Partitioner di KNIME, kita bagi menjadi Data Latih dan Data Uji (80% / 20%).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="random-forest-learner-predictor">
-<h3>4 &amp; 5. Random Forest Learner &amp; Predictor<a class="headerlink" href="#random-forest-learner-predictor" title="Permalink to this heading">#</a></h3>
-<p>Melatih model Random Forest menggunakan fungsi Fit, lalu melakukan predisksi menggunakan Predict.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="c1"># Evaluasi seperti model Learner (melatih data)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># Menghasilkan input seperti Random Forest Predictor</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediksi:&quot;</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="c1"># 3. Membagi Partisi 80% (Table Partitioner KNIME)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data Latih: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s2"> baris, Data Uji: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s2"> baris (Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 4. Analisis Decision Tree</span>
+<span class="n">dt_model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">dt_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">dt_pred</span> <span class="o">=</span> <span class="n">dt_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt;&gt; Hasil Evaluasi Decision Tree &lt;&lt;&lt;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi        : </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">dt_pred</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">dt_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">35</span><span class="p">)</span>
+
+<span class="c1"># 5. Analisis Random Forest</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">rf_pred</span> <span class="o">=</span> <span class="n">rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt; Hasil Evaluasi Random Forest &lt;&lt;&lt;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Akurasi        : </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">rf_pred</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="scorer">
-<h3>6. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h3>
-<p>Mengukur akurasi dan kinerja model akhir.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi Model:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
+<section id="kesimpulan">
+<h2>6. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
+<p>Pada dataset yang cukup kecil (<code class="docutils literal notranslate"><span class="pre">Play</span> <span class="pre">Tennis</span></code> dengan 14 total baris), perbedaan skor antara satu model Decision Tree dan Random Forest cenderung bervariasi bergantung pada fitur mana saja yang masuk ke dalam <em>Testing Data</em> (akibat acak sampling pada <em>Table Partitioner</em>).</p>
+<ul class="simple">
+<li><p><strong>Decision Tree</strong> sering kali bisa menemukan pemisahan kelas tunggal yang akurat secara sederhana pada dataset ini, sehingga terkadang akurasinya nampak sangat tinggi (bahkan sampai 100% pada <em>testing data</em> tertentu).</p></li>
+<li><p><strong>Random Forest</strong>, yang melakukan <em>voting</em> dari banyak pohon dengan data sampel, mungkin mendapati mayoritas pohon memprediksi kategori berlawanan akibat satu karakteristik cuaca, menghasilkan satu miss pada data tes yang membelokkan akurasi (misal 66.6% seperti hasil yang divisualisasikan oleh Scorer KNIME).</p></li>
+</ul>
+<p>Meski begitu, <strong>secara teori</strong> Random Forest lebih diunggulkan dan stabil secara kolektif <em>(ensemble)</em> karena sanggup menghindari <em>overfitting</em> yang mana hampir selalu menjebak Decision Tree tunggal pada dataset kompleks industri.</p>
 </section>
 </section>
 
@@ -590,14 +602,18 @@ Node terakhir ini bertugas mengevaluasi kinerja dan kualitas model. Ia membandin
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-knime-workflow">Alur KNIME (Workflow)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-python">Implementasi dengan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-reader-dan-pre-processing-sederhana">1 &amp; 2. Excel Reader dan Pre-processing Sederhana</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">3. Table Partitioner</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-learner-predictor">4 &amp; 5. Random Forest Learner &amp; Predictor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">6. Scorer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-proyek">1. Deskripsi Proyek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengenal-random-forest-decision-tree">2. Mengenal Random Forest &amp; Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-prediksi-random-forest-majority-voting">Rumus Prediksi Random Forest (Majority Voting)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-workflow-knime">3. Penjelasan Workflow KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-yang-digunakan">Node yang Digunakan:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-hasil-scorer-berdasarkan-gambar">4. Evaluasi Hasil Scorer (Berdasarkan Gambar)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-ulang-dengan-python">5. Implementasi Ulang dengan Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">6. Kesimpulan</a></li>
 </ul>
   </nav></div>
 

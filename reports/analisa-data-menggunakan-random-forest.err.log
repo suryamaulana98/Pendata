@@ -19,11 +19,53 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
+
+# 1. Menyusun Dataset Play Tennis Murni
+data = {
+    'Outlook': ['Sunny','Sunny','Overcast','Rain','Rain','Rain','Overcast','Sunny','Sunny','Rain','Sunny','Overcast','Overcast','Rain'],
+    'Temperature': ['Hot','Hot','Hot','Mild','Cool','Cool','Cool','Mild','Cool','Mild','Mild','Mild','Hot','Mild'],
+    'Humidity': ['High','High','High','High','Normal','Normal','Normal','High','Normal','Normal','Normal','High','Normal','High'],
+    'Wind': ['Weak','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Strong'],
+    'PlayTennis': ['No','No','Yes','Yes','Yes','No','Yes','No','Yes','Yes','Yes','Yes','Yes','No']
+}
+df = pd.DataFrame(data)
+
+# 2. Pre-processing: Label Encoding (diperlukan untuk Scikit-Learn)
+le = LabelEncoder()
+for col in df.columns:
+    df[col] = le.fit_transform(df[col])
+
+X = df.drop('PlayTennis', axis=1)
+y = df['PlayTennis']
+
+# 3. Membagi Partisi 80% (Table Partitioner KNIME)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print(f"Data Latih: {len(X_train)} baris, Data Uji: {len(X_test)} baris (Total: {len(X)})\n")
+
+# 4. Analisis Decision Tree
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)
+dt_pred = dt_model.predict(X_test)
+
+print(">>> Hasil Evaluasi Decision Tree <<<")
+print(f"Akurasi        : {accuracy_score(y_test, dt_pred) * 100:.2f}%")
+print("Confusion Matrix:\n", confusion_matrix(y_test, dt_pred))
+print("-" * 35)
+
+# 5. Analisis Random Forest
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+rf_pred = rf_model.predict(X_test)
+
+print("\n>>> Hasil Evaluasi Random Forest <<<")
+print(f"Akurasi        : {accuracy_score(y_test, rf_pred) * 100:.2f}%")
+print("Confusion Matrix:\n", confusion_matrix(y_test, rf_pred))
 ------------------
 
 
@@ -31,8 +73,8 @@ from sklearn.preprocessing import LabelEncoder
 [31mModuleNotFoundError[39m                       Traceback (most recent call last)
 [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 1[39m
 [32m----> [39m[32m1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnp[39;00m
-[32m      3[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mmodel_selection[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m train_test_split
+[32m      2[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mmodel_selection[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m train_test_split
+[32m      3[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mtree[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m DecisionTreeClassifier
 
 [31mModuleNotFoundError[39m: No module named 'pandas'
 
