@@ -16,3 +16,5 @@ chapters:
   - file: knime_decision_tree_analysis
   - file: analisa-data-menggunakan-random-forest
     title: Analisa Data Menggunakan Random Forest
+  - file: Analisa_Data_Regresi_Linierx
+    title: Analisa Data Regresi Linier

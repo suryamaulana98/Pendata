@@ -1,178 +1,205 @@
 import json
 
-notebook = {
-    "cells": [
-        {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
-                "# Analisa Data Menggunakan Random Forest (Dataset Play Tennis)\n",
-                "\n",
-                "Jupyter notebook ini berisi penjelasan mengenai analisis data menggunakan algoritma Random Forest untuk dataset *Play Tennis*. Analisis ini mengacu pada tahapan alur (workflow) di KNIME Analytics Platform, serta implementasi kodenya menggunakan Python.\n",
-                "\n",
-                "## Alur KNIME (Workflow)\n",
-                "\n",
-                "Berikut adalah penjelasan untuk setiap node yang digunakan di KNIME berdasarkan gambar yang Anda berikan:\n",
-                "\n",
-                "1. **Excel Reader**\n",
-                "   Node ini berfungsi untuk membaca dataset berformat `.xlsx` (dalam hal ini `play_tennis_knime.xlsx`). Node akan memuat data ke dalam *workflow* agar siap diproses.\n",
-                "   > *(Silakan tambahkan gambar / hasil dari node Excel Reader di sini)*\n",
-                "\n",
-                "2. **Table Partitioner**\n",
-                "   Node ini digunakan untuk membagi (partitioning) dataset menjadi dua bagian, yaitu data latih (training data) dan data uji (testing data). Misalnya, proporsi 80% untuk latih dan 20% untuk uji.\n",
-                "   > *(Silakan tambahkan gambar konfigurasi / hasil pembagian di sini)*\n",
-                "\n",
-                "3. **Random Forest Learner**\n",
-                "   Node ini merupakan inti untuk melatih (training) model machine learning menggunakan algoritma Random Forest. Algoritma ini akan membangun sekumpulan pohon keputusan (Decision Trees) berdasarkan **data latih**.\n",
-                "   > *(Silakan tambahkan gambar model/pohon yang terbentuk di sini)*\n",
-                "\n",
-                "4. **Random Forest Predictor**\n",
-                "   Setelah model belajar pada tahap sebelumnya, node ini akan menerima model dari Learner dan mengaplikasikannya terhadap **data uji**. Node ini menghasilkan prediksi (misalnya prediksi apakah akan bermain tenis atau tidak).\n",
-                "   > *(Silakan tambahkan hasil dari prediksi di sini)*\n",
-                "\n",
-                "5. **Scorer**\n",
-                "   Node terakhir ini bertugas mengevaluasi kinerja dan kualitas model. Ia membandingkan hasil kelas aktual dari data uji dengan kelas tebakan (prediksi), lalu menghasilkan metrik performa seperti **Akurasi (Accuracy)** dan matriks kebingungan (Confusion Matrix).\n",
-                "   > *(Silakan tambahkan gambar metrik evaluasi/Scorer di sini)*\n",
-                "\n",
-                "---\n",
-                "\n",
-                "## Implementasi dengan Python"
-            ]
-        },
-        {
-            "cell_type": "code",
-            "metadata": {},
-            "execution_count": None,
-            "outputs": [],
-            "source": [
-                "import pandas as pd\n",
-                "import numpy as np\n",
-                "from sklearn.model_selection import train_test_split\n",
-                "from sklearn.ensemble import RandomForestClassifier\n",
-                "from sklearn.metrics import accuracy_score, classification_report, confusion_matrix\n",
-                "from sklearn.preprocessing import LabelEncoder"
-            ]
-        },
-        {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
-                "### 1 & 2. Excel Reader dan Pre-processing Sederhana\n",
-                "Membaca file data 'play_tennis_knime.xlsx'. Karena dataset *Play Tennis* umumnya berupa kategorikal (teks), algoritma di scikit-learn membutuhkan format numerik, sehingga kita mengonversinya (Label Encoding)."
-            ]
-        },
-        {
-            "cell_type": "code",
-            "metadata": {},
-            "execution_count": None,
-            "outputs": [],
-            "source": [
-                "# Mengasumsikan file ada di direktori yang sama\n",
-                "# df = pd.read_excel('play_tennis_knime.xlsx')\n",
-                "\n",
-                "# Karena kita belum meload file excel secara langsung di code ini, kita buat dummy struktur dataset *Play Tennis* \n",
-                "data = {\n",
-                "    'Outlook': ['Sunny','Sunny','Overcast','Rain','Rain','Rain','Overcast','Sunny','Sunny','Rain','Sunny','Overcast','Overcast','Rain'],\n",
-                "    'Temperature': ['Hot','Hot','Hot','Mild','Cool','Cool','Cool','Mild','Cool','Mild','Mild','Mild','Hot','Mild'],\n",
-                "    'Humidity': ['High','High','High','High','Normal','Normal','Normal','High','Normal','Normal','Normal','High','Normal','High'],\n",
-                "    'Wind': ['Weak','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Strong'],\n",
-                "    'PlayTennis': ['No','No','Yes','Yes','Yes','No','Yes','No','Yes','Yes','Yes','Yes','Yes','No']\n",
-                "}\n",
-                "df = pd.DataFrame(data)\n",
-                "print(\"Tampilan Awal Dataset:\")\n",
-                "print(df.head())\n",
-                "\n",
-                "# --- Label Encoding (Prapemrosesan) ---\n",
-                "le = LabelEncoder()\n",
-                "df['Outlook'] = le.fit_transform(df['Outlook'])\n",
-                "df['Temperature'] = le.fit_transform(df['Temperature'])\n",
-                "df['Humidity'] = le.fit_transform(df['Humidity'])\n",
-                "df['Wind'] = le.fit_transform(df['Wind'])\n",
-                "df['PlayTennis'] = le.fit_transform(df['PlayTennis'])\n",
-                "\n",
-                "X = df.drop('PlayTennis', axis=1)\n",
-                "y = df['PlayTennis']\n"
-            ]
-        },
-        {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
-                "### 3. Table Partitioner \n",
-                "Sama seperti Table Partitioner di KNIME, kita bagi menjadi Data Latih dan Data Uji (80% / 20%)."
-            ]
-        },
-        {
-            "cell_type": "code",
-            "metadata": {},
-            "execution_count": None,
-            "outputs": [],
-            "source": [
-                "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)"
-            ]
-        },
-        {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
-                "### 4 & 5. Random Forest Learner & Predictor\n",
-                "Melatih model Random Forest menggunakan fungsi Fit, lalu melakukan predisksi menggunakan Predict."
-            ]
-        },
-        {
-            "cell_type": "code",
-            "metadata": {},
-            "execution_count": None,
-            "outputs": [],
-            "source": [
-                "model = RandomForestClassifier(n_estimators=100, random_state=42)\n",
-                "# Evaluasi seperti model Learner (melatih data)\n",
-                "model.fit(X_train, y_train)\n",
-                "\n",
-                "# Menghasilkan input seperti Random Forest Predictor\n",
-                "y_pred = model.predict(X_test)\n",
-                "print(\"Prediksi:\", y_pred)"
-            ]
-        },
-        {
-            "cell_type": "markdown",
-            "metadata": {},
-            "source": [
-                "### 6. Scorer\n",
-                "Mengukur akurasi dan kinerja model akhir."
-            ]
-        },
-        {
-            "cell_type": "code",
-            "metadata": {},
-            "execution_count": None,
-            "outputs": [],
-            "source": [
-                "print(\"Akurasi Model:\", accuracy_score(y_test, y_pred))\n",
-                "print(\"\\nClassification Report:\\n\", classification_report(y_test, y_pred))\n",
-                "print(\"\\nConfusion Matrix:\\n\", confusion_matrix(y_test, y_pred))"
-            ]
-        }
-    ],
-    "metadata": {
-        "kernelspec": {
-            "display_name": "Python 3",
-            "language": "python",
-            "name": "python3"
-        },
-        "language_info": {
-            "codemirror_mode": {"name": "ipython", "version": 3},
-            "file_extension": ".py",
-            "mimetype": "text/x-python",
-            "name": "python",
-            "nbconvert_exporter": "python",
-            "pygments_lexer": "ipython3",
-            "version": "3.8.0"
-        }
+notebook_content = {
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Pembahasan Tugas: Regresi Linier (Manual Matrix & Scikit-Learn)\n",
+        "\n",
+        "Halo semua! Di catatan ini, kita akan ngebahas bareng-bareng secara bertahap tentang tugas **Regresi Linier** kita. Inti dari tugas ini sebenarnya simpel: ada sekumpulan titik-titik (data historis/observasi), lalu kita diminta mencari **garis lurus terbaik (garis regresi)** yang paling pas buat ngewakilin semua titik tersebut. Garis lurus ini nantinya bisa kita pakai buat nebak/prediksi nilai di masa depan.\n",
+        "\n",
+        "Kita punya 7 titik koordinat:\n",
+        "- A(2,2)\n",
+        "- B(4,3)\n",
+        "- C(5,5)\n",
+        "- D(3,4)\n",
+        "- E(3,3)\n",
+        "- F(4,5)\n",
+        "- G(5,6)\n",
+        "\n",
+        "Angka pertama itu sumbu X (misal: lamanya di kelas), dan angka kedua itu sumbu Y (misal: nilai).\n",
+        "\n",
+        "Buat mecahin masalah ini, kita bakal pakai 3 cara:\n",
+        "1. Visualisasi manual pake **GeoGebra** (biar kebayang bentuknya gimana).\n",
+        "2. Hitungan Matematika Dasar pake matrix $\\hat{\\beta} = (X^T X)^{-1} X^T Y$.\n",
+        "3. Cara *Magic* pake library Python (`sklearn`)."
+      ]
     },
-    "nbformat": 4,
-    "nbformat_minor": 4
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "## Langkah 1: Plotting Menggunakan GeoGebra\n",
+        "\n",
+        "Sebelum pusing liat rumus, mending kita gambar dulu titik-titiknya biar dapet *feeling* dari datanya.\n",
+        "\n",
+        "> **📸 TEMPATKAN GAMBAR PERTAMA DI SINI:**\n",
+        "> \n",
+        "> *Screenshot area grafik (scatter plot) dari GeoGebra setelah kamu masukin titik A sampai G di sana.*\n",
+        "> *Kalo kamu simpan foldernya pake nama `images`, masukin pake kode markdown ini:* `![Scatter Plot GeoGebra](images/geogebra_scatter.png)`\n",
+        "\n",
+        "**Penjelasan Gambar:**\n",
+        "Kalau diliat-liat titik A(2,2) sampe G(5,6) di atas, kelihatannya grafiknya emang tersebar, tapi arah tren-nya itu **naik ke atas**. Karena arahnya naik ke atas barengan (kiri bawah ke kanan atas), kita ambil kesimpulan kalau datanya punya **Korelasi Positif**. Artinya: makin besar nilai X, nilai Y-nya ikut membesar.\n",
+        "\n",
+        "Nah, kita bakal narik 1 garis lurus panjang dari ujung ke ujung. Tapi nggak mungkin satu lidi (garis lurus) itu membelah tepat di tengah semua titik sekaligus. Pasti ada sisa / beda jarak asli ke garisnya. Nah selisih jarak ini disebut **Residual** alias **Error**. Tugas Regresi Linier ini adalah mencari ukuran kemiringan garis yang paling jago nge-minimalisir Error tadi (Makanya disebut teknik *Least Squares*)."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "## Langkah 2: Menghitung secara Manual (Metode Matrix OLS)\n",
+        "\n",
+        "Bentuk umum persamaan garis lurus kan gampangnya: **y = intercept + (slope * x)** \n",
+        "- `intercept`: Lokasi awal garis memotong tembok vertikal (sumbu Y)\n",
+        "- `slope`: Ukuran kemiringan garis (nanjak atau nurun)\n",
+        "\n",
+        "Di dalam materi (PPT), kita dikasih rumus dewa buat nyari *slope* dan *intercept* pake cara Matrix (Ordinary Least Squares):\n",
+        "\n",
+        "$$ \\hat{\\beta} = (X^T X)^{-1} X^T Y $$\n",
+        "\n",
+        "Gak usah pusing dulu, bacanya pelan-pelan berurutan (step-by-step):\n",
+        "1. Anggap kita punya tabel **Matrix X** (isiannya angka sumbu X, tapi bagian paling kirinya diisi angka 1 semuanya buat syarat itungan regresi).\n",
+        "2. Punya tabel **Matrix Y** (isiannya target alias sumbu Y).\n",
+        "3. Pertama kita cari **$X^T$** (artinya dimensi Matrix X diputar / tertukar urutannya alias di-*Transpose*).\n",
+        "4. Habis itu kaliin matrix transpose tadi dengan marix X aslinya: **$(X^T X)$**\n",
+        "5. Hasil perhitungannya lalu diputar di-*Inverse* menjadi $(X^T X)^{-1}$.\n",
+        "6. Hasil akhirnya tinggal dikalikan sama $X^T$ terus dikaliin lagi deh sama $Y$.\n",
+        "7. Udah deh, jawaban akhirnya itu $\\hat{\\beta}$ ! Nilai pertama itu `intercept`, nilai kedua itu `slope` yang kita cari, beres!\n",
+        "\n",
+        "Capek itung manual? Kita cobain praktiknya di bawah pake kode Python (khususnya pakai library `numpy` pinter hitung Matrix):"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "# 1. Siapkan Nilai X dan Y sesuai koordinat di tugas kita\n",
+        "x_data = [2, 4, 5, 3, 3, 4, 5]\n",
+        "y_data = [2, 3, 5, 4, 3, 5, 6]\n",
+        "\n",
+        "# 2. Bentuk Matrix-nya (Matrix X di area kiri ditambahin angka 1 agar match)\n",
+        "X = np.array([[1, x] for x in x_data])\n",
+        "Y = np.array(y_data).reshape(-1, 1)  # Di-reshape biar turun kebawah bentuknya kolom\n",
+        "\n",
+        "print(\"Bentuk Matrix X (Angka 1 didepannya):\\n\", X)\n",
+        "print(\"\\nBentuk Matrix Y:\\n\", Y)\n",
+        "\n",
+        "# 3. Kita lakuin hitungan berurutan sesuai rumus --> Beta_hat = Inverse(X_transpose * X) * X_transpose * Y\n",
+        "# [Step A] Cari Transpose dari X\n",
+        "X_T = X.T\n",
+        "\n",
+        "# [Step B] Kalikan X_T dengan X\n",
+        "X_T_X = X_T.dot(X)\n",
+        "\n",
+        "# [Step C] Cari Inverse-nya\n",
+        "X_T_X_inv = np.linalg.inv(X_T_X)\n",
+        "\n",
+        "# [Step D] Kalikan hasil inverse dengan X_T\n",
+        "Step_D = X_T_X_inv.dot(X_T)\n",
+        "\n",
+        "# [Step Terakhir] Kalikan dengan Y agar dapet titik Beta-nya !!\n",
+        "beta_hat = Step_D.dot(Y)\n",
+        "\n",
+        "intercept_manual = beta_hat[0][0]\n",
+        "slope_manual = beta_hat[1][0]\n",
+        "\n",
+        "print(f\"\\n-- HASIL PERHITUNGAN MANUAL (MATEMATIKA MATRIX) --\")\n",
+        "print(f\"Ketemu Intercept-nya : {intercept_manual:.4f}\")\n",
+        "print(f\"Ketemu Slope-nya     : {slope_manual:.4f}\")\n",
+        "print(f\"\\n>> Persamaan Garis Regresi Terbaik Kita: y = {intercept_manual:.4f} + {slope_manual:.4f}x\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "## Langkah 3: Menggunakan Library Python `sklearn`\n",
+        "\n",
+        "Karena rumus itu kepanjangan dan ribet buat data ribuan di dunia nyata, orang-orang *Data Scientist* bikin library sakti namanya `scikit-learn` (`sklearn`). Kita cuma tinggal pake algoritma ML (Machine Learning)-nya dan manggil fungsi `LinearRegression()`.\n",
+        "\n",
+        "Regresi ngebuktiin dirinya sebagai **Supervised Learning** di tahap ini, karena saat kita 'ngajarin' mesin pakai fungsi `fit(x,y)`, kita nyediain jawaban aslinya (Y) agar si robot nangkep cara kerjanya. \n",
+        "\n",
+        "Yuk mari kita cocokkan ajaibnya `sklearn` dengan kerja keras kita bikin rumus Matrix manual tadi:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from sklearn.linear_model import LinearRegression\n",
+        "\n",
+        "# Kita bentuk X jadi 2D Array agar dapet restu si sklearn\n",
+        "X_sklearn = np.array(x_data).reshape(-1, 1)\n",
+        "Y_sklearn = np.array(y_data)\n",
+        "\n",
+        "# Panggil the magic model!\n",
+        "model = LinearRegression()\n",
+        "\n",
+        "# Ajarin (Training) model ke datanya (dibagian ini matrix rumit otomatis berhitung)\n",
+        "model.fit(X_sklearn, Y_sklearn)\n",
+        "\n",
+        "print(\"-- HASIL PERHITUNGAN SKLEARN (OTOMATATIS) --\")\n",
+        "print(f\"Intercept-nya     : {model.intercept_:.4f}\")\n",
+        "print(f\"Slope-nya         : {model.coef_[0]:.4f}\")\n",
+        "print(f\"\\n>> Persamaan Garis Regresi SKLearn: y = {model.intercept_:.4f} + {model.coef_[0]:.4f}x\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "## Langkah Akhir: Menarik Kesimpulan & Mengecek Geogebra\n",
+        "\n",
+        "Keren kan! Kode perhitungan panjang rumus Matrix ternyata hasilnya **SAMA PERSIS** kayak yang versi simpel library `sklearn`, dimana ketemu garis yang paling tokcer di fungsi akhir yaitu: \n",
+        "\n",
+        "**`y = 0.4286 + 0.9643x`**\n",
+        "\n",
+        "> **📸 TEMPATKAN GAMBAR KEDUA DI SINI:**\n",
+        "> \n",
+        "> *Sekarang buka ulang GeoGebra-nya. Di bagian kiri (area Input) ketik* `FitLine(A, B, C, D, E, F, G)` *(A-G wajib kapital, sesuaikan sama nama titik kamu)*.\n",
+        "> *Klik ENTER. Tar! Bakal muncul 1 buah garis lurus yang mematahkan semua titik itu. Di pojok kiri geogebra juga bisa dapet contekkan rumus garis itu yaitu `y = 0.96x + 0.43`. Ambil screenshoot yang ada garisnya.*\n",
+        "> *Ganti nama gambar di markdown nya dengan nama aslinya misalnya:* `![Regresi GeoGebra Garis](images/geogebra_regresi_garis.png)`\n",
+        "\n",
+        "**Apa artinya ini semua di akhir tugas?**\n",
+        "\n",
+        "Garis yang nongol di GeoGebra kamu (*y = 0.4286 + 0.9643x*) mewakili jalur prediktif yang Error alias Residualnya udah paling minim dari titik asli. Gunanya Model ini apa dong? \n",
+        "- Simpelnya: Ngebantu memprediksi masa depan.\n",
+        "- Misal ada soal tambahan dari dosen: \"Gimana kalau si X ukurannya tiba-tiba ketemu 20? Berapa kira-kira Y nya?!\" \n",
+        "- Kita nggak perlu mengira-ngira bingung. Tinggal serahin aja nilai X yang 20 ke fungsi mesin di atas: \n",
+        "$y = 0.4286 + (0.9643 \\times 20)$ \n",
+        "$y = 19.7146$. \n",
+        "\n",
+        "Semangat ngerjainnya semester ini, pasti dapet A!"
+      ]
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 4
 }
 
-with open("materi/analisa-data-menggunakan-random-forest.ipynb", "w") as f:
-    json.dump(notebook, f, indent=2)
+with open("materi/Analisa_Data_Regresi_Linierx.ipynb", "w") as f:
+    json.dump(notebook_content, f, indent=2)
+
+print("Rewrite Complete")
