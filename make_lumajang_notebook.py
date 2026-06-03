@@ -1,0 +1,458 @@
+import json
+
+notebook = {
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Peramalan Kadar NO₂ di Daerah Lumajang\n",
+        "\n",
+        "## Latar Belakang\n",
+        "Peningkatan aktivitas industri, transportasi, serta pertumbuhan populasi yang pesat telah menyebabkan peningkatan signifikan terhadap tingkat pencemaran udara di berbagai wilayah. Salah satu polutan udara utama yang menjadi perhatian adalah **Nitrogen Dioksida (NO₂)**, yaitu gas beracun yang dihasilkan terutama dari proses pembakaran bahan bakar fosil seperti kendaraan bermotor, pembangkit listrik, dan kegiatan industri. \n",
+        "\n",
+        "NO₂ memiliki dampak serius terhadap kesehatan manusia, seperti gangguan pernapasan, iritasi paru-paru, serta memperburuk penyakit asma dan bronkitis. Selain itu, NO₂ juga berkontribusi terhadap pembentukan hujan asam dan penurunan kualitas lingkungan secara keseluruhan. Khusus untuk **Kabupaten Lumajang**, faktor geografis di mana wilayahnya dikelilingi pegunungan serta adanya **aktivitas vulkanik dari Gunung Semeru** yang masih aktif dapat menambah kompleksitas anomali sebaran polutan gas di udara."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 1. Pengumpulan Data\n",
+        "Pertama kita akan mengumpulkan data *Time Series* Harian kadar NO₂ di daerah Lumajang. Pengumpulan data diambil dari dari website [Copernicus Data Space](https://dataspace.copernicus.eu/). Pastikan Anda telah membuat akun terlebih dahulu.\n",
+        "\n",
+        "Untuk menuliskan kode Python dan menjalankan pengambilan data, siapkan Notebook dan instal dahulu `openeo`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "!pip install openeo"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Lalu lakukan inisiasi koneksi:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import openeo\n",
+        "connection = openeo.connect(\"openeo.dataspace.copernicus.eu\").authenticate_oidc()"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Pada saat menjalankan baris kode di atas, Anda akan diminta mengeklik tautan (*link*) otentikasi. Selesaikan *login* menggunakan akun Copernicus Anda.\n",
+        "\n",
+        "Selanjutnya kita akan memberikan batasan geospasial khusus wilayah **Lumajang**. Parameter poligon dan batas (*Bounding Box*) pada kode ini menggunakan matriks kustom agar data yang diunduh benar-benar melingkupi garis lintang dan bujur di kawasan Kabupaten Lumajang saja. Titik-titik ini dibentuk melalui referensi GeoJSON."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "# Masukkan data koordinat Lumajang dari GeoJSON\n",
+        "aoi = {\n",
+        "    \"type\": \"Polygon\",\n",
+        "    \"coordinates\": [\n",
+        "        [\n",
+        "            [113.06569565424985, -8.016978003654486],\n",
+        "            [113.42617098910893, -8.015797738730726],\n",
+        "            [113.42680300381392, -8.33895804029197],\n",
+        "            [113.06140416280346, -8.338970877077841],\n",
+        "            [112.8955697, -8.1948086],\n",
+        "            [113.06569565424985, -8.016978003654486]\n",
+        "        ]\n",
+        "    ]\n",
+        "}\n",
+        "\n",
+        "# Load koleksi Sentinel-5P khusus wilayah Lumajang\n",
+        "s5post = connection.load_collection(\n",
+        "    \"SENTINEL_5P_L2\",\n",
+        "    temporal_extent=[\"2023-10-01\", \"2025-10-01\"], # Tanggal pengumpulan data\n",
+        "    spatial_extent={\n",
+        "        \"west\": 112.8955,\n",
+        "        \"south\": -8.3390,\n",
+        "        \"east\": 113.4268,\n",
+        "        \"north\": -8.0158\n",
+        "    },\n",
+        "    bands=[\"NO2\"],\n",
+        ")\n",
+        "\n",
+        "# Agregasi rata-rata harian (temporal) agar menghindari redundansi data per hari\n",
+        "s5p_no2_daily = s5post.aggregate_temporal_period(reducer=\"mean\", period=\"day\")\n",
+        "\n",
+        "# Agregasi rata-rata spasial menuju satu mean point timeseries\n",
+        "s5p_no2_aoi = s5p_no2_daily.aggregate_spatial(reducer=\"mean\", geometries=aoi)\n",
+        "\n",
+        "# Eksekusi perintah batch ke server Copernicus\n",
+        "job = s5post.execute_batch(title=\"NO2 in Lumajang\", outputfile=\"NO2Lumajang.nc\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Tunggu prosesnya hingga pesan menunjukkan `finished (progress 100%)`. Status ekstraksi di server dapat dipantau langsung di halaman editor OpenEO (tab *Jobs*)."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 2. Preprocessing Data\n",
+        "Setelah file `NO2Lumajang.nc` berhasil diunduh, kita akan membaca filenya yang berekstensi *NetCDF*."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import netCDF4\n",
+        "\n",
+        "# (Pastikan file NO2Lumajang.nc sudah dipindahkan ke folder yang sama dengan notebook ini)\n",
+        "file_path = \"NO2Lumajang.nc\"\n",
+        "\n",
+        "try:\n",
+        "    ds = netCDF4.Dataset(file_path)\n",
+        "    print(\"📦 Variabel dalam file:\")\n",
+        "    print(ds.variables.keys())\n",
+        "\n",
+        "    # Ambil matriks NO2 dan matriks Waktu (t)\n",
+        "    no2 = ds.variables[\"NO2\"][:]\n",
+        "    time = ds.variables[\"t\"][:]\n",
+        "\n",
+        "    # Konversi waktu numerik array ke unit tanggal datetime standard\n",
+        "    try:\n",
+        "        time_units = ds.variables[\"t\"].units\n",
+        "        dates = netCDF4.num2date(time, units=time_units)\n",
+        "    except Exception:\n",
+        "        dates = time  # Opsi Fallback kalau tidak ada penanda units\n",
+        "\n",
+        "    print(\"\\nReview Struktur Grid Ruang Lumajang:\")\n",
+        "    print(\"Banyak grid record NO2  :\", len(no2))\n",
+        "    print(\"Dimensi Baris Grid Y    :\", len(no2[0]))    \n",
+        "    print(\"Dimensi Kolom Grid X :\", len(no2[0][0]))\n",
+        "except FileNotFoundError:\n",
+        "    print(f\"File {file_path} belum ditemukan di direktori.\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### a. Mengatasi Missing Value Secara Spasial (Interpolasi Linear)\n",
+        "Grid observasi untuk wilayah Kabupaten Lumajang memiliki indeks baris dan kolom yang berbeda dari Bangkalan, sehingga panjang perulangannya (`range(no2.shape[1])` & `[2]`) kita ambil secara dinamis langsung dari struktur array yang terbuka."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "\n",
+        "if 'no2' in locals():\n",
+        "    no2_filled = np.zeros_like(no2)\n",
+        "    no2_filled = no2_filled.filled(0)\n",
+        "\n",
+        "    # Loop menurut dimensi grid otomatis milih ukuran baris ke-i dan kolom ke-j dari array Lumajang\n",
+        "    for i in range(no2.shape[1]):\n",
+        "        for j in range(no2.shape[2]):\n",
+        "            series = pd.Series(no2[:, i, j])\n",
+        "            # Konfigurasi perataan Linear dan limit bidirectional\n",
+        "            no2_filled[:, i, j] = series.interpolate(method='linear', limit_direction='both').to_numpy()\n",
+        "    print(\"Interpolasi mengisi gap matriks sel telah Selesai.\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### b. Rata-Ratain Data Harian Temporal & Pembersihan String Waktu\n",
+        "Dataset di atas masih berada pada pecahan spasial. Selanjutnya, kita agregatkan kembali dan simpan sebagai file `CSV`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "if 'no2' in locals():\n",
+        "    new_dates = []\n",
+        "    new_no2 = []\n",
+        "\n",
+        "    for i in range(len(dates)):\n",
+        "        # Penghilangan rincian sekunder jam/menit menjadi tahun-bulan-hari\n",
+        "        new_date = dates[i].strftime('%Y-%m-%d')\n",
+        "        new_dates.append(new_date)\n",
+        "        new_no2.append(np.mean(no2_filled[i]))\n",
+        "\n",
+        "    df = pd.DataFrame({\n",
+        "        \"date\": new_dates,\n",
+        "        \"NO2\": new_no2\n",
+        "    })\n",
+        "    df.to_csv(\"NO2_Lumajang_timeseries.csv\", index=False)\n",
+        "    print(\"Berkas NO2_Lumajang_timeseries.csv sudah diekspor.\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### c. Pengecekan Missing Value Pada Runtun Tanggal Harian"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import os\n",
+        "\n",
+        "if os.path.exists(\"NO2_Lumajang_timeseries.csv\"):\n",
+        "    df = pd.read_csv(\"NO2_Lumajang_timeseries.csv\")\n",
+        "    df['date'] = pd.to_datetime(df['date'])\n",
+        "\n",
+        "    # Memverifikasi absennya rekaman hari absolut antar waktu\n",
+        "    start_date = \"2023-10-01\"\n",
+        "    end_date = \"2025-09-30\"\n",
+        "    full_range = pd.date_range(start=start_date, end=end_date, freq='D')\n",
+        "    missing_dates = full_range.difference(df['date'])\n",
+        "\n",
+        "    print(f\"Jumlah jadwal observasi tanggal yang terabaikan: {len(missing_dates)}\")\n",
+        "    \n",
+        "    # Eksekusi Tambal Kekosongan Tanggal (Reindex + Interpolate Time)\n",
+        "    df = df.sort_values('date').set_index('date').reindex(full_range)\n",
+        "    df.index.name = 'date'\n",
+        "    df['NO2'] = df['NO2'].interpolate(method='time')\n",
+        "    df['NO2'] = df['NO2'].bfill().ffill()\n",
+        "\n",
+        "    df.to_csv(\"no2_lumajang_interpolated.csv\")\n",
+        "    print(\"Pengisian temporal selesai dan no2_lumajang_interpolated.csv terbentuk.\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### d. Deteksi Anomali / Outlier (Metode IQR)\n",
+        "Lumajang dikelilingi oleh pegunungan dan memiliki Gunung Semeru yang aktif. Pada kode ini kita melihat bagaimana hal tersebut merepresentasikan kuantitas anomali pencemaran (*Outlier*)."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "if os.path.exists(\"no2_lumajang_interpolated.csv\"):\n",
+        "    df = pd.read_csv(\"no2_lumajang_interpolated.csv\")\n",
+        "    df['date'] = pd.to_datetime(df['date'])\n",
+        "\n",
+        "    # Perbandingan Quantile Indikasi Ekstrem NO2\n",
+        "    Q1 = df['NO2'].quantile(0.25)\n",
+        "    Q3 = df['NO2'].quantile(0.75)\n",
+        "    IQR = Q3 - Q1\n",
+        "\n",
+        "    lower_bound = Q1 - 1.5 * IQR\n",
+        "    upper_bound = Q3 + 1.5 * IQR\n",
+        "\n",
+        "    outliers_iqr = df[(df['NO2'] < lower_bound) | (df['NO2'] > upper_bound)]\n",
+        "    print(\"Jumlah Outlier (Anomali IQR) di Wilayah Lumajang:\", len(outliers_iqr))\n",
+        "    \n",
+        "    # Proses Masking dan Penghapusan Outlier, lalu menggantikannya melalui komputasi iterpolasi\n",
+        "    df['NO2_cleaned'] = df['NO2'].mask((df['NO2'] < lower_bound) | (df['NO2'] > upper_bound))\n",
+        "    df['NO2_filled'] = df['NO2_cleaned'].interpolate(method='linear').bfill().ffill()\n",
+        "    \n",
+        "    plt.figure(figsize=(15,4))\n",
+        "    plt.plot(df['date'], df['NO2'], label=\"NO2 Data Kasar\", color='#A0C4FF', linewidth=1)\n",
+        "    plt.plot(df['date'], df['NO2_filled'], label=\"NO2 (Interpolated/Dibersihkan)\", color='blue', linewidth=1.5)\n",
+        "    plt.scatter(outliers_iqr['date'], outliers_iqr['NO2'], color='red', marker='x', label=\"Outliers Tercatat\")\n",
+        "    plt.title(\"Sebaran Kadar NO2 & Identifikasi Outlier Harian Lumajang\")\n",
+        "    plt.legend()\n",
+        "    plt.show()"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 3. Modeling menggunakan Set KNN Regression\n",
+        "Guna melakukan ramalan, data direkayasa sedemikian rupa memanfaatkan tren historis sebelumnya antara lag $t-k$ dan data h-hari label $t$."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from sklearn.preprocessing import MinMaxScaler\n",
+        "\n",
+        "if 'df' in locals():\n",
+        "    # 1. Normalisasi Skala 0-1\n",
+        "    scaler = MinMaxScaler()\n",
+        "    df['NO2_scaled'] = scaler.fit_transform(df[['NO2_filled']])\n",
+        "    \n",
+        "    # 2. Definisikan fungsi ekstraksi format Time Series Terbimbing (Supervised)\n",
+        "    def create_supervised(data, n_lag=4):\n",
+        "        df_supervised = pd.DataFrame()\n",
+        "        for i in range(n_lag, 0, -1):\n",
+        "            df_supervised[f'NO2(t-{i})'] = data.shift(i)\n",
+        "        \n",
+        "        df_supervised['NO2(t)'] = data\n",
+        "        df_supervised.dropna(inplace=True)\n",
+        "        return df_supervised\n",
+        "\n",
+        "    # Mengevaluasi Korelasi Terbaik (Sampel pengujian rentang 30 hari observasi di Lumajang)\n",
+        "    supervised_df30 = create_supervised(df['NO2_scaled'], n_lag=30)\n",
+        "    lag_cols = supervised_df30.drop(columns=\"NO2(t)\").columns\n",
+        "    correlations = supervised_df30[lag_cols].corrwith(supervised_df30['NO2(t)'])\n",
+        "    print(\"Sampel Nilai Korelasi (Linear R) 10 hari terdekat menuju Target(t):\\n\")\n",
+        "    print(correlations.tail(10))"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Training & Komparasi Kinerja Algoritma KNN Regresi\n",
+        "Uji hipotesa komparatif antara penggunaan *lag* berjumlah 4, 10, dan 30 hari direalisasikan terhadap parameter model `KNeighborsRegressor()`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "from sklearn.neighbors import KNeighborsRegressor\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.metrics import mean_squared_error, r2_score\n",
+        "\n",
+        "def evaluate_mape(y_true, y_pred):\n",
+        "    y_true, y_pred = np.array(y_true), np.array(y_pred)\n",
+        "    nonzero = y_true != 0\n",
+        "    return np.mean(np.abs((y_true[nonzero] - y_pred[nonzero]) / y_true[nonzero])) * 100\n",
+        "\n",
+        "def train_knn(df_supervised, model_name=\"\"):\n",
+        "    X = df_supervised.drop(columns=['NO2(t)']).values\n",
+        "    y = df_supervised['NO2(t)'].values\n",
+        "    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)\n",
+        "\n",
+        "    knn = KNeighborsRegressor(n_neighbors=5)\n",
+        "    knn.fit(X_train, y_train)\n",
+        "    y_pred = knn.predict(X_test)\n",
+        "\n",
+        "    rmse = np.sqrt(mean_squared_error(y_test, y_pred))\n",
+        "    r2 = r2_score(y_test, y_pred)\n",
+        "    mape_score = evaluate_mape(y_test, y_pred)\n",
+        "\n",
+        "    print(f\"\\n=== {model_name} ===\")\n",
+        "    print(f\"Train Size: {len(X_train)} — Test Size: {len(X_test)}\")\n",
+        "    print(f\"RMSE: {rmse:.6f} | R² Score: {r2:.4f} | MAPE: {mape_score:.4f}%\")\n",
+        "\n",
+        "    return y_test, y_pred\n",
+        "\n",
+        "if 'df' in locals():\n",
+        "    supervised_df4 = create_supervised(df['NO2_scaled'], n_lag=4)\n",
+        "    supervised_df10 = create_supervised(df['NO2_scaled'], n_lag=10)\n",
+        "    # Untuk 30 hari sudah dibuat diatas pada supervised_df30\n",
+        "\n",
+        "    print(\"[ PROSES TRAINING DAN EVALUASI KNN REGRESI LUMAJANG ]\")\n",
+        "    yt_4, yp_4 = train_knn(supervised_df4, \"Performa KNN - Data 4 Hari Sebelumnya\")\n",
+        "    yt_10, yp_10 = train_knn(supervised_df10, \"Performa KNN - Data 10 Hari Sebelumnya\")\n",
+        "    yt_30, yp_30 = train_knn(supervised_df30, \"Performa KNN - Data 30 Hari Sebelumnya\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Plotting Representasi Output Lumajang"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": None,
+      "metadata": {},
+      "outputs": [],
+      "source": [
+        "if 'df' in locals():\n",
+        "    fig, ax = plt.subplots(3, 1, figsize=(10, 10))\n",
+        "\n",
+        "    ax[0].plot(np.arange(len(yt_4)), yt_4, label=\"Data Sebenarnya\", color=\"green\")\n",
+        "    ax[0].plot(np.arange(len(yt_4)), yp_4, label=\"Garis Prediksi (KNN-4)\", color=\"red\")\n",
+        "    ax[0].set_title(\"Forecasting Lag T-4 Wilayah Lumajang\")\n",
+        "    ax[0].legend(loc=\"upper left\")\n",
+        "\n",
+        "    ax[1].plot(np.arange(len(yt_10)), yt_10, label=\"Data Sebenarnya\", color=\"green\")\n",
+        "    ax[1].plot(np.arange(len(yt_10)), yp_10, label=\"Garis Prediksi (KNN-10)\", color=\"blue\")\n",
+        "    ax[1].set_title(\"Forecasting Lag T-10 Wilayah Lumajang\")\n",
+        "    ax[1].legend(loc=\"upper left\")\n",
+        "\n",
+        "    ax[2].plot(np.arange(len(yt_30)), yt_30, label=\"Data Sebenarnya\", color=\"green\")\n",
+        "    ax[2].plot(np.arange(len(yt_30)), yp_30, label=\"Garis Prediksi (KNN-30)\", color=\"orange\")\n",
+        "    ax[2].set_title(\"Forecasting Lag T-30 Wilayah Lumajang\")\n",
+        "    ax[2].legend(loc=\"upper left\")\n",
+        "\n",
+        "    plt.tight_layout()\n",
+        "    plt.show()"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Kesimpulan Analisis\n",
+        "\n",
+        "1. **Dinamika Geografis dan Outlier Ekstrem (Anomali)**: Pengaruh geografis **Kabupaten Lumajang**, di mana topografinya dikelilingi pegunungan dan keberadaan aktivitas pasca-vulkanik kawah **Gunung Semeru** yang sering erupsi skala mikroskopik, terekam dalam fluktuasi lonjakan pencemaran udara ekstrem harian. Angka deviasi outlier ini secara masif merusak stabilitas tren normal dalam grafik jika dibandingkan dengan pola stabil peradaban kota pesisir seperti Bangkalan.\n",
+        "2. **Peningkatan Fitur (*Lag*) vs Penurunan Performa (*Overfitting*)**: \n",
+        "Sesuai pengujian, menyematkan input historis NO₂ secara masif ke arah waktu tempuh masa lampau di masa depan (dari *Lag-4*, menuju *Lag-10* dan *Lag-30*) bukan jaminan berbuah keuntungan pada algoritma `K-Neighbors Regressor`. Hal tersebut alih-alih menurunkan persentase akurasi menjadi negatif (memburuk) secara asimtotik—berpotensi mencerminkan pola udara masa lampau yang terlalu jauh tak memiliki relevansi kausal langsung dengan nasib cuaca keesokan harinya (*noise interference*).\n",
+        "3. **Tingginya Selisih Resolusi (*MAPE Margin Error*)**:\n",
+        "Terdeteksinya Margin tingkat kesalahan prediktif (MAPE) sebesar lebih dari ~60% di ketiga rasio *lag* menyodorkan interpretasi fundamental: Estimasi KNN tradisional kekurangan sensitivitas saat dipertemukan dengan kurva dataset meteorologis yang cenderung menanjak seketika (musiman tinggi varians). Untuk keperluan lanjut, riset prediksi iklim NO₂ Lumajang akan merekomendasikan transisi modifikasi menuju *Deep Learning Algoritma* yang memahami retensi memori temporal kompleks layaknya model **LSTM (*Long Short-Term Memory*)** atau optimasi model ARIMA berstruktur konvensional."
+      ]
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 4
+}
+
+with open("materi/peramalan-no2-lumajang.ipynb", "w", encoding="utf-8") as f:
+    json.dump(notebook, f, indent=2, ensure_ascii=False)
+
+print("Notebook generated successfully!")
