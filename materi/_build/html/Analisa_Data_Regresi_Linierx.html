@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Laporan Analisis Data: Regresi Linier (Pendekatan Analitik Matriks &amp; Scikit-Learn) &#8212; Catatan Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Analisa_Data_Regresi_Linierx';</script>
+    <link rel="canonical" href="/Pendata/Analisa_Data_Regresi_Linierx.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Peramalan Kadar NO₂ di Daerah Lumajang" href="peramalan-no2-lumajang.html" />
+    <link rel="prev" title="Analisa Data Menggunakan Random Forest" href="analisa-data-menggunakan-random-forest.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/surya.png" class="logo__image only-light" alt="Catatan Penambangan Data - Home"/>
+    <script>document.write(`<img src="_static/surya.png" class="logo__image only-dark" alt="Catatan Penambangan Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Pendahuluan
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="business-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="data-preparation.html">Data Preparation</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisa-data-menggunakan-random-forest.html">Analisa Data Menggunakan Random Forest</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisa Data Regresi Linier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peramalan-no2-lumajang.html">Peramalan Kadar NO2 di Lumajang</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Analisa_Data_Regresi_Linierx.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Laporan Analisis Data: Regresi Linier (Pendekatan Analitik Matriks & Scikit-Learn)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-visualisasi-data-melalui-scatter-plot">Langkah 1: Visualisasi Data melalui Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-perhitungan-matematis-metode-analitik-matriks">Langkah 2: Perhitungan Matematis (Metode Analitik Matriks)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-komputasi-model-menggunakan-pustaka-scikit-learn">Langkah 3: Komputasi Model Menggunakan Pustaka <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-akhir-verifikasi-data-regresi-analisa-visual-geogebra">Evaluasi Akhir: Verifikasi Data Regresi &amp; Analisa Visual GeoGebra</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="laporan-analisis-data-regresi-linier-pendekatan-analitik-matriks-scikit-learn">
+<h1>Laporan Analisis Data: Regresi Linier (Pendekatan Analitik Matriks &amp; Scikit-Learn)<a class="headerlink" href="#laporan-analisis-data-regresi-linier-pendekatan-analitik-matriks-scikit-learn" title="Permalink to this heading">#</a></h1>
+<p>Dokumen ini menyajikan pembahasan komprehensif mengenai penerapan metode <strong>Regresi Linier</strong>. Tujuan utama dari tugas ini adalah untuk mengidentifikasi, memodelkan, dan mengevaluasi hubungan linier dari observasi dua variabel. Pemodelan ini pada akhirnya akan menghasilkan sekumpulan parameter yang mendefinisikan garis regresi (<em>best fit line</em>) untuk tujuan prediksi data pada observasi yang belum terpetakan.</p>
+<p>Dataset yang dianalisis terdiri dari tujuh titik koordinat sebagai observasi empiris:</p>
+<ul class="simple">
+<li><p>A(2,2)</p></li>
+<li><p>B(4,3)</p></li>
+<li><p>C(5,5)</p></li>
+<li><p>D(3,4)</p></li>
+<li><p>E(3,3)</p></li>
+<li><p>F(4,5)</p></li>
+<li><p>G(5,6)</p></li>
+</ul>
+<p>Dalam struktur ini, angka pertama mewakili variabel prediktor tunggal atau <em>Independent Variable</em> (<span class="math notranslate nohighlight">\(X\)</span>), dan angka kedua mewakili variabel respons atau <em>Dependent Variable</em> (<span class="math notranslate nohighlight">\(Y\)</span>).</p>
+<p>Dalam tinjauan ini, persoalan akan diselesaikan melalui tiga metode analisis bertingkat:</p>
+<ol class="arabic simple">
+<li><p><strong>Analisis Visual</strong> menggunakan representasi grafis dengan <strong>GeoGebra</strong>.</p></li>
+<li><p><strong>Analisis Matematis / Analitik</strong> menerapkan model matriks berbasis metode Kuadrat Terkecil Biasa (<em>Ordinary Least Squares</em> OLS) dengan rumus <span class="math notranslate nohighlight">\(\hat{\beta} = (X^T X)^{-1} X^T Y\)</span>.</p></li>
+<li><p><strong>Analisis Komputasional</strong> menggunakan pustaka standard <em>Machine Learning</em> dalam ekosistem Python, yaitu <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="langkah-1-visualisasi-data-melalui-scatter-plot">
+<h2>Langkah 1: Visualisasi Data melalui Scatter Plot<a class="headerlink" href="#langkah-1-visualisasi-data-melalui-scatter-plot" title="Permalink to this heading">#</a></h2>
+<p>Tahapan pendahuluan sebelum melaksanakan estimasi model adalah mengobservasi pola distribusi data secara visual.</p>
+<blockquote>
+<div><p><img alt="Workflow KNIME" src="_images/awal.png" /></p>
+</div></blockquote>
+<p><strong>Interpretasi Grafis:</strong>
+Berdasarkan visualisasi diagram pencar matriks koordinat tersebut, distribusi sekelompok observasi membentuk sebuah tren yang cenderung bergerak ekuivalen naik dari arah kuadran kiri bawah menuju ke kanan atas. Formasi ini mengindikasikan eksistensi <strong>korelasi linier positif</strong>, di mana sebuah kenaikan pada skala nilai <span class="math notranslate nohighlight">\(X\)</span> cenderung akan diikuti pula oleh kenaikan proporsional terhadap estimasi nilai <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>Pemodelan regresi akan merancang suatu garis prediksi sedemikian rupa. Keberadaan fenomena variansi menyiratkan bahwa setiap observasi aktual niscaya tidak akan memotong tepat di garis lurus yang tunggal yang terbentuk. Diferensiasi rentang jarak absolut dari garis estimator linear ideal pada tiap individual diobservasi didefinisikan sebagai galat (<em>Residual/Error</em>). Konsekuensinya, obyektif komputasi ini bertumpu pada minimisasi total akumulasi sisa kuadrat residual, yang selanjutnya dipatenkan dengan sebutan metode <strong>Least Squares</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="langkah-2-perhitungan-matematis-metode-analitik-matriks">
+<h2>Langkah 2: Perhitungan Matematis (Metode Analitik Matriks)<a class="headerlink" href="#langkah-2-perhitungan-matematis-metode-analitik-matriks" title="Permalink to this heading">#</a></h2>
+<p>Model persamaan regresi linier secara konseptual dapat disubstitusikan ke dalam formula geometris:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_0 + \beta_1x \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> (<em>Intercept/Konstanta</em>): Menunjukkan nilai perpotongan yang melintasi proyeksi sumbu <span class="math notranslate nohighlight">\(Y\)</span> di saat prediktor <span class="math notranslate nohighlight">\(X = 0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span> (<em>Slope/Gradien</em>): Menunjukkan nilai pergerakan nilai ekspektasi <span class="math notranslate nohighlight">\(Y\)</span> setiap satuan perubahan kuantitas sumbu <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<p>Analisis regresional dari parameter estimator <span class="math notranslate nohighlight">\(\beta_0\)</span> maupun koefisien <span class="math notranslate nohighlight">\(\beta_1\)</span> digarap dengan metode aproksimasi matriks (OLS) mengacu kepada perumusan analitik sebagai berikut:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\beta} = (X^T X)^{-1} X^T Y \]</div>
+<p>Formulasi komputasi tersebut diklasifikasi dalam tahapan-tahapan berurutan:</p>
+<ol class="arabic simple">
+<li><p>Mendesain kerangka <strong>Matriks X</strong>. Kolom pertama diisi dengan nilai observasi konstan 1 (merepresentasikan titik intersepsi), sedangkan sisanya merangkum semua susunan nilai prediktor variabel <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Mendesain kerangka <strong>Vektor Y</strong>, bermuatan observasi empiris titik parameter akhir.</p></li>
+<li><p>Memproduksi hasil transposisi Matriks X yang dilambangkan dengan <span class="math notranslate nohighlight">\(X^T\)</span>.</p></li>
+<li><p>Menjalankan operasi ekuasi turunan perkalian skalar (<em>dot-product</em>) antara format matriks ter-transpos, <span class="math notranslate nohighlight">\(X^T\)</span>, dan parameter matriks orisinal, <span class="math notranslate nohighlight">\(X\)</span>, sehingga membentuk model matrik gramian: <span class="math notranslate nohighlight">\((X^T X)\)</span>.</p></li>
+<li><p>Mengkonversi inversi balikan operasi tersebut ke derivatif: <span class="math notranslate nohighlight">\((X^T X)^{-1}\)</span>.</p></li>
+<li><p>Perkalian berlanjut terhadap elemen <span class="math notranslate nohighlight">\(X^T\)</span> dan akhirnya dikomputasikan silang terhadap parameter vektor target <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Parameter nilai <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> dari formulasi di atas merepresentasikan struktur hierarkis nilai target dari elemen <strong>Intercept</strong> maupun <strong>Slope</strong> pada model data matematis.</p></li>
+</ol>
+<p>Berikut ini adalah penjabaran representasi kode fungsional untuk mengesekusi kalkulasi di atas secara terotomasi menggunakan komputasi librari linier aljabar, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 1. Representasi dataset observasi berdasarkan nilai koordinat (A - G)</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c1"># 2. Pembentukan matriks model (Design Matrix)</span>
+<span class="c1"># Inisialisasi parameter bernilai &#39;1&#39; direkatkan ke dalam komponen matriks agar mengakomodir keberadaan &#39;Intercept&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_data</span><span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Di-reshape menjadi format vektor kolom berdimensi dua tunggal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Fitur (X):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Vektor Respons (Y):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># 3. Implementasi Persamaan Kuadrat Terkecil (OLS Matrix Formulation): Beta_hat = Inverse(X_transpose * X) * X_transpose * Y</span>
+<span class="c1"># [Tahap A] Identifikasi Transpos dari Matriks X</span>
+<span class="n">X_T</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># [Tahap B] Proses perkalian dot/skalar Matriks X_T terhadap X</span>
+<span class="n">X_T_X</span> <span class="o">=</span> <span class="n">X_T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># [Tahap C] Menemukan Nilai Inversi dari matriks hasil perkalian (X_T_X)</span>
+<span class="n">X_T_X_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_T_X</span><span class="p">)</span>
+
+<span class="c1"># [Tahap D] Perkalian hasil Invers terhadap elemen X_T</span>
+<span class="n">Tahap_D</span> <span class="o">=</span> <span class="n">X_T_X_inv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_T</span><span class="p">)</span>
+
+<span class="c1"># [Tahap Evaluasi Akhir] Substitusi silang terhadap vektor komparatif Y dalam rangka menyelesaikan matriks koefisien (Beta Hat)</span>
+<span class="n">beta_hat</span> <span class="o">=</span> <span class="n">Tahap_D</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Menampung titik keluaran beta0 &amp; beta1</span>
+<span class="n">intercept_manual</span> <span class="o">=</span> <span class="n">beta_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">slope_manual</span> <span class="o">=</span> <span class="n">beta_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-- HASIL EVALUASI ANALITIK MATRIKS --&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersep (Konstanta Data)   : </span><span class="si">{</span><span class="n">intercept_manual</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope (Kemiringan Gradien) : </span><span class="si">{</span><span class="n">slope_manual</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt; Pemodelan Regresi OLS: y = </span><span class="si">{</span><span class="n">intercept_manual</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">slope_manual</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Fitur (X):
+ [[1 2]
+ [1 4]
+ [1 5]
+ [1 3]
+ [1 3]
+ [1 4]
+ [1 5]]
+
+Vektor Respons (Y):
+ [[2]
+ [3]
+ [5]
+ [4]
+ [3]
+ [5]
+ [6]]
+
+-- HASIL EVALUASI ANALITIK MATRIKS --
+Intersep (Konstanta Data)   : 0.0000
+Slope (Kemiringan Gradien) : 1.0769
+
+&gt;&gt; Pemodelan Regresi OLS: y = 0.0000 + 1.0769x
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="langkah-3-komputasi-model-menggunakan-pustaka-scikit-learn">
+<h2>Langkah 3: Komputasi Model Menggunakan Pustaka <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#langkah-3-komputasi-model-menggunakan-pustaka-scikit-learn" title="Permalink to this heading">#</a></h2>
+<p>Penjabaran algoritma perhitungan teknis matriks di atas merupakan pijakan logis dalam menyelesaikan operasi yang relevan menggunakan perantara optimasi <em>Machine Learning</em>. Dalam lingkungan komputasi riil, pembedahan parameter sering ditangani secara praktis menggunakan modul pendukung komprehensif, yakni <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
+<p>Regresi linier adalah entitas dari klasifikasi algoritma bertipe <em><strong>Supervised Learning</strong></em>. Keabsahan premis ini didasari dari pelacakan model terhadap intervensi data <em>training</em> bernilai pasti (Y aktual) guna menjabarkan fungsi <em>ground truth</em> sehingga kalkulasi pemodelan sistem komputasi berpotensi mencetus luaran hasil ekstrapolah rasional bagi kondisi serupa berikutnya.</p>
+<p>Proses eksekusi algoritma fungsional menggunakan representasi komputasi <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> terangkum sebagai berikut:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="c1"># Restrukturisasi array numerik X ke format terstruktur linier 2D dan menjaga stabilitas y berdimensi ekuivalen 1D</span>
+<span class="n">X_sklearn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Y_sklearn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_data</span><span class="p">)</span>
+
+<span class="c1"># Mengaktifkan entitas Model Regresi Linier</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># Memprogram model agar melakukan optimisasi analitik data otomatis (proses training melalui komputasi C underlying sklearn)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sklearn</span><span class="p">,</span> <span class="n">Y_sklearn</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- HASIL KOMPUTASI LIBRARY SCIKIT-LEARN --&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersep Model: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope Model   : </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt; Pemodelan Regresi Terotomatisasi : y = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-- HASIL KOMPUTASI LIBRARY SCIKIT-LEARN --
+Intersep Model: -0.0000
+Slope Model   : 1.0769
+
+&gt;&gt; Pemodelan Regresi Terotomatisasi : y = -0.0000 + 1.0769x
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="evaluasi-akhir-verifikasi-data-regresi-analisa-visual-geogebra">
+<h2>Evaluasi Akhir: Verifikasi Data Regresi &amp; Analisa Visual GeoGebra<a class="headerlink" href="#evaluasi-akhir-verifikasi-data-regresi-analisa-visual-geogebra" title="Permalink to this heading">#</a></h2>
+<p>Integrasi dua spektrum eksekusi metode (konsep operasional Matriks Manual maupun komputasi Pustaka Sistematis) secara substansial mencetak identitas koefisien numerik yang stabil dan bersinergi ekuivalen pada perumusan absolut (dengan nilai <em>intercept</em> mengarah tereduksi menjadi <span class="math notranslate nohighlight">\(0\)</span> atau diabaikan akibat sifat spesifik sebaran data <em>centring</em>):</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">1.0769x</span></code></strong></p>
+<blockquote>
+<div><p><img alt="Workflow KNIME" src="_images/akhir.png" /></p>
+</div></blockquote>
+<p><strong>Signifikansi Pemodelan</strong></p>
+<p>Formasi fungsi garis estimator linier yang dirender secara simetris dalam GeoGebra, dan disusul integrasi kalkulasi di lingkup algoritma Python, memastikan keberhasilan mereduksi total distorsi error residu (<em>residual loss</em>). Pencapaian kalkulasi ini merepresentasikan substansi fungsional terpenting bagi permodelan <em>Data Science</em>, yaitu kapabilitas prediksi data ekstrapolasi empiris luar model.</p>
+<ul class="simple">
+<li><p>Sebagai contoh konkret, andaikata pada periode selanjutnya direpresentasikan sampel dengan parameter rasio independen sebesar <span class="math notranslate nohighlight">\(x = 20\)</span>, sistem regresi terintegrasi di atas akan memastikan keluaran prediksi tanpa iterasi kalkulus repetitif.</p></li>
+<li><p>Formulasi prediksi adalah evaluasi substitusi linier:<br />
+<span class="math notranslate nohighlight">\(y = 1.0769 \times 20\)</span><br />
+<span class="math notranslate nohighlight">\(y = 21.538\)</span></p></li>
+</ul>
+<p>Konklusi ini memastikan model dapat diterapkan ke dalam parameter observasi berkelanjutan yang bersifat skalabel dan general.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analisa-data-menggunakan-random-forest.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analisa Data Menggunakan Random Forest</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="peramalan-no2-lumajang.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Peramalan Kadar NO₂ di Daerah Lumajang</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-visualisasi-data-melalui-scatter-plot">Langkah 1: Visualisasi Data melalui Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-perhitungan-matematis-metode-analitik-matriks">Langkah 2: Perhitungan Matematis (Metode Analitik Matriks)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-komputasi-model-menggunakan-pustaka-scikit-learn">Langkah 3: Komputasi Model Menggunakan Pustaka <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-akhir-verifikasi-data-regresi-analisa-visual-geogebra">Evaluasi Akhir: Verifikasi Data Regresi &amp; Analisa Visual GeoGebra</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Surya Maulana Akhmad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 Surya Maulana Akhmad.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes &#8212; Catatan Penambangan Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script src="_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'knime_naive_bayes_analysis';</script>
+    <link rel="canonical" href="/Pendata/knime_naive_bayes_analysis.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analisis Decision Tree Menggunakan KNIME" href="knime_decision_tree_analysis.html" />
+    <link rel="prev" title="Analisis Data Kesuburan Tanah dengan KNN" href="uts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/surya.png" class="logo__image only-light" alt="Catatan Penambangan Data - Home"/>
+    <script>document.write(`<img src="_static/surya.png" class="logo__image only-dark" alt="Catatan Penambangan Data - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Pendahuluan
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="business-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="data-preparation.html">Data Preparation</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisa-data-menggunakan-random-forest.html">Analisa Data Menggunakan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Analisa_Data_Regresi_Linierx.html">Analisa Data Regresi Linier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peramalan-no2-lumajang.html">Peramalan Kadar NO2 di Lumajang</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/knime_naive_bayes_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-data">Karakteristik Data:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teori-dasar-naive-bayes">3. Teori Dasar Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">4. Gaussian Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-langkah-demi-langkah">5. Perhitungan Manual Langkah-demi-Langkah</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-sampel-training">5.1 Dataset Sampel (Training)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-menghitung-probabilitas-apriori-prior-p-c">5.2 Langkah 1: Menghitung Probabilitas Apriori / Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c">5.3 Langkah 2: Menghitung Likelihood (Peluang Posterior per Fitur) <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-menghitung-nilai-posterior-prediksi">5.4 Langkah 3: Menghitung Nilai Posterior Prediksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keputusan-prediction">5.5 Keputusan (Prediction)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-analisis-penjelasan-workflow-knime">6. Tahapan Analisis (Penjelasan Workflow KNIME)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">1️. CSV Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">2️. Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">3️. Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-engine">4️. Rule Engine</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-renamer">5️. Column Renamer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#category-to-number">6️. Category to Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">7️. Table Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-gaussian-naive-bayes">8️. Python Script (Gaussian Naive Bayes)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">9️. Scorer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-workflow">Kesimpulan Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python-di-knime-python-script">7. Implementasi Python (Di KNIME Python Script)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-hasil">8. Kesimpulan dan Interpretasi Hasil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan-metode-naive-bayes">Kelebihan dan Kekurangan Metode Naive Bayes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-klasifikasi-menggunakan-gaussian-naive-bayes">
+<h1>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes<a class="headerlink" href="#analisis-klasifikasi-menggunakan-gaussian-naive-bayes" title="Permalink to this heading">#</a></h1>
+<section id="pendahuluan">
+<h2>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h2>
+<p>Pada penelitian ini dilakukan analisis klasifikasi untuk menentukan kelayakan kredit (risiko kredit) seseorang menggunakan algoritma <strong>Naive Bayes</strong>, khususnya <strong>Gaussian Naive Bayes</strong>.</p>
+<p>Permasalahan ini termasuk dalam kategori <strong>supervised learning</strong>, di mana model dilatih menggunakan data yang telah memiliki label (kelas/target) untuk memprediksi label pada data baru.</p>
+<p>Metode Naive Bayes dipilih karena:</p>
+<ul class="simple">
+<li><p>Cepat, sederhana, dan powerful dalam klasifikasi.</p></li>
+<li><p>Sangat efisien untuk dataset berdimensi tinggi.</p></li>
+<li><p>Berbasis probabilitas sehingga proses dan hasilnya lebih mudah diinterpretasikan.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="dataset">
+<h2>2. Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h2>
+<p>Dataset yang digunakan dalam studi ini adalah <strong>German Credit Dataset</strong>.</p>
+<p><strong>Link Dataset:</strong> <a class="reference external" href="https://www.kaggle.com/datasets/uciml/german-credit">German Credit Data Kaggle</a> atau UCI Machine Learning Repository.</p>
+<section id="karakteristik-data">
+<h3>Karakteristik Data:<a class="headerlink" href="#karakteristik-data" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Jumlah Sampel:</strong> 1000 Baris data nasabah</p></li>
+<li><p><strong>Fitur:</strong> Terdapat 20 fitur (sebelum filter/preprocessing)</p></li>
+<li><p><strong>Tipe Data:</strong></p>
+<ul>
+<li><p>Numerik (misal: <code class="docutils literal notranslate"><span class="pre">Age</span></code>, <code class="docutils literal notranslate"><span class="pre">Credit</span> <span class="pre">Amount</span></code>, <code class="docutils literal notranslate"><span class="pre">Duration</span></code>)</p></li>
+<li><p>Kategorikal (misal: <code class="docutils literal notranslate"><span class="pre">Job</span></code>, <code class="docutils literal notranslate"><span class="pre">Housing</span></code>, <code class="docutils literal notranslate"><span class="pre">Saving</span> <span class="pre">accounts</span></code>, <code class="docutils literal notranslate"><span class="pre">Checking</span> <span class="pre">account</span></code>)</p></li>
+</ul>
+</li>
+<li><p><strong>Target / Kelas (<code class="docutils literal notranslate"><span class="pre">Risk</span></code>):</strong></p>
+<ul>
+<li><p><strong>Good</strong> (Aman/Layak diberikan kredit)</p></li>
+<li><p><strong>Bad</strong> (Berisiko tinggi menunggak)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="teori-dasar-naive-bayes">
+<h2>3. Teori Dasar Naive Bayes<a class="headerlink" href="#teori-dasar-naive-bayes" title="Permalink to this heading">#</a></h2>
+<p>Naive Bayes didasarkan pada Teorema probabilitas Bayes yang memiliki asumsi unik: asumsikan bahwa setiap fitur dalam data bernilai mandiri / <em>mutually independent</em> relatif terhadap targetnya.</p>
+<p>Persamaan Dasar Teorema Bayes:
+$<span class="math notranslate nohighlight">\(
+P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)}
+\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(C|X)\)</span> = probabilitas kejadian suatu record data termasuk dalam kelas tertentu (C), jika diketahui profil ciri-cirinya (X).</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(X|C)\)</span> = nilai <em>likelihood</em>, probabilitas profil ciri-ciri tersebut terjadi dalam lingkup data berkelas C.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(C)\)</span> = probabilitas <em>prior</em> dari sebuah kelas (berapa banyak kelas C tersebut pada dataset kita).</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(X)\)</span> = probabilitas <em>evidence</em> atau bukti terjadinya.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="gaussian-naive-bayes">
+<h2>4. Gaussian Naive Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h2>
+<p>Ketika digunakan pada data <strong>numerik kontinu</strong>, fitur data di asumsikan memiliki distribusi probabilitas normal (kurva Gaussian). Probabilitas dihitung dengan:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x|C) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]</div>
+<p><strong>Penjelasan:</strong></p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\mu\)</span> (Miy)</strong> = Rata-rata dari nilai fitur <span class="math notranslate nohighlight">\(x\)</span> tersebut di suatu kelas.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\sigma^2\)</span> (Sigma Kuadrat)</strong> = Variansi dari data fitur tersebut pada suatu kelas.</p></li>
+<li><p>Formula ini berguna tanpa perlu melakukan pengelompokan (<em>binning/discretization</em>) yang kaku pada data bertipe numerik.</p></li>
+</ul>
+</section>
+<section id="perhitungan-manual-langkah-demi-langkah">
+<h2>5. Perhitungan Manual Langkah-demi-Langkah<a class="headerlink" href="#perhitungan-manual-langkah-demi-langkah" title="Permalink to this heading">#</a></h2>
+<p>Untuk memahami cara kerja Naive Bayes (khususnya untuk rasio data campuran Kategorikal dan Numerik), mari kita gunakan 5 baris pertama data sesungguhnya dari <code class="docutils literal notranslate"><span class="pre">german_credit</span></code> sebagai set pelatih (Training Set) dan baris ke-6 sebagai data Uji (Testing Data) yang tidak diketahui kelasnya.</p>
+<p><strong>Misi:</strong> Memprediksi nilai <code class="docutils literal notranslate"><span class="pre">Risk</span></code> data baru berdasarkan sampel yang ada. <em>(Catatan: karena nilai Risk sesungguhnya di 5 baris pertama ini tidak langsung tertulis, kita akan mengasumsikan label Risk Good/Bad sebagai ilustrasi perhitungan di bawah)</em>.</p>
+<section id="dataset-sampel-training">
+<h3>5.1 Dataset Sampel (Training)<a class="headerlink" href="#dataset-sampel-training" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Age (Numerik)</p></th>
+<th class="head"><p>Sex (Kategorikal)</p></th>
+<th class="head"><p>Credit amt (Numerik)</p></th>
+<th class="head"><p>Risk (Target)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>67</p></td>
+<td><p>male</p></td>
+<td><p>1169</p></td>
+<td><p><strong>Good</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>22</p></td>
+<td><p>female</p></td>
+<td><p>5951</p></td>
+<td><p><strong>Bad</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>49</p></td>
+<td><p>male</p></td>
+<td><p>2096</p></td>
+<td><p><strong>Good</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>45</p></td>
+<td><p>male</p></td>
+<td><p>7882</p></td>
+<td><p><strong>Good</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>53</p></td>
+<td><p>male</p></td>
+<td><p>4870</p></td>
+<td><p><strong>Bad</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Data Uji (Baris ke-5 dari dataset):</strong> <code class="docutils literal notranslate"><span class="pre">Age</span> <span class="pre">=</span> <span class="pre">24</span></code>, <code class="docutils literal notranslate"><span class="pre">Sex</span> <span class="pre">=</span> <span class="pre">male</span></code>, <code class="docutils literal notranslate"><span class="pre">Credit</span> <span class="pre">=</span> <span class="pre">9055</span></code>.
+<strong>Apakah nasabah ini tergolong Risk Good atau Bad?</strong> Kita hitung dengan Naive Bayes.</p>
+</section>
+<hr class="docutils" />
+<section id="langkah-1-menghitung-probabilitas-apriori-prior-p-c">
+<h3>5.2 Langkah 1: Menghitung Probabilitas Apriori / Prior <span class="math notranslate nohighlight">\(P(C)\)</span><a class="headerlink" href="#langkah-1-menghitung-probabilitas-apriori-prior-p-c" title="Permalink to this heading">#</a></h3>
+<p>Berapa bagian masing-masing kelas di dataset secara umum?</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(Good) = \frac{3}{5} = \mathbf{0.6}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(Bad) = \frac{2}{5} = \mathbf{0.4}\)</span></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c">
+<h3>5.3 Langkah 2: Menghitung Likelihood (Peluang Posterior per Fitur) <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c" title="Permalink to this heading">#</a></h3>
+<p>Karena Naive Bayes mengasumsikan antar-fitur tidak saling memengaruhi, kita hitung parsial.</p>
+<p><strong>A. Fitur Kategorikal: Sex (male)</strong>
+Peluang munculnya <code class="docutils literal notranslate"><span class="pre">Sex</span> <span class="pre">=</span> <span class="pre">male</span></code> apabila kelas targetnya adalah <code class="docutils literal notranslate"><span class="pre">Good</span></code> dan <code class="docutils literal notranslate"><span class="pre">Bad</span></code>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(Sex=male | Good) = \frac{3 \text{ pria di kelas Good}}{3 \text{ total nasabah Good}} = \mathbf{1.0}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(Sex=male | Bad) = \frac{1 \text{ pria di kelas Bad}}{2 \text{ total nasabah Bad}} = \mathbf{0.5}\)</span></p></li>
+</ul>
+<p><strong>B. Fitur Numerik: Estimasi Parameter Age (Umur) &amp; Credit Amount</strong>
+Kita gunakan Teorema Gaussian PDF. Diperlukan pencarian <strong>Mean (<span class="math notranslate nohighlight">\(\mu\)</span>)</strong> dan <strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong> untuk metrik dari Age berdasar kelasnya:</p>
+<p><em>Tabel Distribusi Fitur Age:</em></p>
+<ul class="simple">
+<li><p>Mean <code class="docutils literal notranslate"><span class="pre">Age</span></code> untuk <code class="docutils literal notranslate"><span class="pre">Good</span></code>: <span class="math notranslate nohighlight">\(\mu_{age,Good} = \frac{(67+49+45)}{3} = 53.67\)</span></p></li>
+<li><p>Varians <code class="docutils literal notranslate"><span class="pre">Age</span></code> untuk <code class="docutils literal notranslate"><span class="pre">Good</span></code>: <span class="math notranslate nohighlight">\(\sigma^2_{age,Good} = \frac{(67-53.67)^2 + (49-53.67)^2 + (45-53.67)^2}{3} \approx 91.56\)</span></p></li>
+<li><p>Mean <code class="docutils literal notranslate"><span class="pre">Age</span></code> untuk <code class="docutils literal notranslate"><span class="pre">Bad</span></code>: <span class="math notranslate nohighlight">\(\mu_{age,Bad} = \frac{(22+53)}{2} = 37.5\)</span></p></li>
+<li><p>Varians <code class="docutils literal notranslate"><span class="pre">Age</span></code> untuk <code class="docutils literal notranslate"><span class="pre">Bad</span></code>: <span class="math notranslate nohighlight">\(\sigma^2_{age,Bad} = \frac{(22-37.5)^2 + (53-37.5)^2}{2} = 240.25\)</span></p></li>
+</ul>
+<p>Sekarang kita substitusikan data uji <code class="docutils literal notranslate"><span class="pre">Age</span> <span class="pre">=</span> <span class="pre">24</span></code> ke fungsi Distribusi Normal (Gaussian):
+$<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{2\pi(91.56)}} \cdot e^{-\frac{(24-53.67)^2}{2(91.56)}} \approx \mathbf{0.00034}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(P(Age=24 | Bad) = \frac{1}{\sqrt{2\pi(240.25)}} \cdot e^{-\frac{(24-37.5)^2}{2(240.25)}} \approx \mathbf{0.0176}\)</span>$</p>
+</section>
+<hr class="docutils" />
+<section id="langkah-3-menghitung-nilai-posterior-prediksi">
+<h3>5.4 Langkah 3: Menghitung Nilai Posterior Prediksi<a class="headerlink" href="#langkah-3-menghitung-nilai-posterior-prediksi" title="Permalink to this heading">#</a></h3>
+<p>Kita akan mengalikan seluruh kemungkinan prior dan likelihood untuk data uji <span class="math notranslate nohighlight">\(X_{baru} = \{Age=24, Sex=male\}\)</span> (<em>catatan: Perhitungan disederhanakan tanpa kolom credit amount demi keringkasan baris matematika</em>).</p>
+<p><strong>Skor untuk Kelas Good:</strong>
+<span class="math notranslate nohighlight">\(\text{Score}(Good) = P(Good) \times P(Sex=male|Good) \times P(Age=24|Good)\)</span>
+<span class="math notranslate nohighlight">\(\text{Score}(Good) = 0.6 \times 1.0 \times 0.00034 = \mathbf{0.000204}\)</span></p>
+<p><strong>Skor untuk Kelas Bad:</strong>
+<span class="math notranslate nohighlight">\(\text{Score}(Bad) = P(Bad) \times P(Sex=male|Bad) \times P(Age=24|Bad)\)</span>
+<span class="math notranslate nohighlight">\(\text{Score}(Bad) = 0.4 \times 0.5 \times 0.0176 = \mathbf{0.00352}\)</span></p>
+</section>
+<section id="keputusan-prediction">
+<h3>5.5 Keputusan (Prediction)<a class="headerlink" href="#keputusan-prediction" title="Permalink to this heading">#</a></h3>
+<p>Karena <span class="math notranslate nohighlight">\(\text{Score}(Bad) &gt; \text{Score}(Good)\)</span> yaitu <span class="math notranslate nohighlight">\((0.00352 &gt; 0.000204)\)</span>, model Naive Bayes akan mengklasifikasikan nasabah baru (Umur 24, Pria) tersebut sebagai <strong>Risk = Bad</strong>.</p>
+</section>
+</section>
+<section id="tahapan-analisis-penjelasan-workflow-knime">
+<h2>6. Tahapan Analisis (Penjelasan Workflow KNIME)<a class="headerlink" href="#tahapan-analisis-penjelasan-workflow-knime" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah penjelasan ilmiah untuk masing-masing node sesuai workflow KNIME yang digunakan:</p>
+<section id="csv-reader">
+<h3>1️. CSV Reader<a class="headerlink" href="#csv-reader" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Mengimpor dataset <em>German Credit</em> ke dalam KNIME.</p>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Dataset mentah berasal dari file <code class="docutils literal notranslate"><span class="pre">.csv</span></code></p></li>
+<li><p>Semua proses data mining dimulai dari tahap akuisisi data</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/csv_german_credit.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="missing-value">
+<h3>2️. Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Menangani nilai yang hilang (NA / null) pada dataset.</p>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Algoritma <strong>Gaussian Naive Bayes tidak bisa memproses data kosong</strong></p></li>
+<li><p>Missing value dapat menyebabkan error saat training dan bias pada model.</p></li>
+</ul>
+<p><strong>Strategi yang digunakan:</strong></p>
+<ul class="simple">
+<li><p>Numerik → Mean</p></li>
+<li><p>Kategorikal → Most frequent (mode)</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/miss_value.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="column-filter">
+<h3>3️. Column Filter<a class="headerlink" href="#column-filter" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Memilih fitur yang relevan untuk analisis.</p>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Menghapus kolom yang tidak diperlukan (misalnya ID)</p></li>
+<li><p>Mengurangi noise dalam data</p></li>
+<li><p>Mempercepat proses training</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/columnn.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="rule-engine">
+<h3>4️. Rule Engine<a class="headerlink" href="#rule-engine" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Membuat label target baru (<code class="docutils literal notranslate"><span class="pre">risk</span></code>) berdasarkan aturan:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$Credit amount$ &lt;= 5000 =&gt; &quot;Good&quot;
+$Credit amount$ &gt; 5000 =&gt; &quot;Bad&quot;
+</pre></div>
+</div>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Dataset mungkin tidak memiliki label target yang terdefinisi sesuai batasan riset.</p></li>
+<li><p>Dibutuhkan klasifikasi (Good / Bad) untuk <em>supervised learning</em>.</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/rule.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="column-renamer">
+<h3>5️. Column Renamer<a class="headerlink" href="#column-renamer" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Mengubah nama kolom (misalnya <code class="docutils literal notranslate"><span class="pre">prediction</span></code> → <code class="docutils literal notranslate"><span class="pre">risk</span></code>)</p>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Menyamakan nama kolom dengan kebutuhan model</p></li>
+<li><p>Menghindari error di Python Script</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/renamer.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="category-to-number">
+<h3>6️. Category to Number<a class="headerlink" href="#category-to-number" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Mengubah data kategorikal menjadi numerik.
+Contoh: <code class="docutils literal notranslate"><span class="pre">male</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">female</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Gaussian Naive Bayes hanya menerima input numerik.</p></li>
+<li><p>Data kategorikal harus dikonversi agar bisa dihitung probabilitasnya.</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/category.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="table-partitioner">
+<h3>7️. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Membagi data menjadi 80% Training dan 20% Testing.</p>
+<p><strong>Setting penting:</strong></p>
+<ul class="simple">
+<li><p>Stratified → berdasarkan target <code class="docutils literal notranslate"><span class="pre">risk</span></code> (agar rasio kelas proporsional)</p></li>
+</ul>
+<p><strong>Alasan penggunaan:</strong></p>
+<ul class="simple">
+<li><p>Menghindari overfitting</p></li>
+<li><p>Menguji kemampuan generalisasi model</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="_images/partionerr.png" /></p>
+</section>
+<hr class="docutils" />
+<section id="python-script-gaussian-naive-bayes">
+<h3>8️. Python Script (Gaussian Naive Bayes)<a class="headerlink" href="#python-script-gaussian-naive-bayes" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Melakukan proses Training model, Prediksi, dan Evaluasi menggunakan <code class="docutils literal notranslate"><span class="pre">GaussianNB()</span></code>.</p>
+<p><strong>Dasar Teori Singkat:</strong></p>
+<ul class="simple">
+<li><p><strong>Teorema Bayes:</strong> Menghitung probabilitas suatu data masuk ke kelas tertentu.
+$<span class="math notranslate nohighlight">\( P(C|X) = \frac{P(X|C)P(C)}{P(X)} \)</span>$</p></li>
+<li><p><strong>Distribusi Gaussian:</strong> Mengasumsikan fitur numerik berdistribusi normal.
+$<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} \)</span>$</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="scorer">
+<h3>9️. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h3>
+<p><strong>Fungsi:</strong> Mengukur performa model.
+<strong>Output:</strong> Accuracy, Confusion Matrix, Precision, Recall, F1-Measure.</p>
+<p>** Rumus Evaluasi:**</p>
+<ul class="simple">
+<li><p><strong>Accuracy:</strong> $<span class="math notranslate nohighlight">\( Accuracy = \frac{TP+TN}{Total} \)</span>$</p></li>
+<li><p><strong>Precision:</strong> $<span class="math notranslate nohighlight">\( Precision = \frac{TP}{TP+FP} \)</span>$</p></li>
+<li><p><strong>Recall:</strong> $<span class="math notranslate nohighlight">\( Recall = \frac{TP}{TP+FN} \)</span>$</p></li>
+<li><p><strong>F1 Score:</strong> $<span class="math notranslate nohighlight">\( F1 = 2 \cdot \frac{Precision \cdot Recall}{Precision+Recall} \)</span>$</p></li>
+</ul>
+</section>
+</section>
+<section id="workflow-knime">
+<h2><img alt="Workflow KNIME" src="_images/skorer.png" /><a class="headerlink" href="#workflow-knime" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="kesimpulan-workflow">
+<h2>Kesimpulan Workflow<a class="headerlink" href="#kesimpulan-workflow" title="Permalink to this heading">#</a></h2>
+<p>Workflow ini secara keseluruhan mencerminkan pipeline <em>Data Mining</em> yang lengkap, yaitu:
+<code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">→</span> <span class="pre">Cleaning</span> <span class="pre">→</span> <span class="pre">Feature</span> <span class="pre">Engineering</span> <span class="pre">→</span> <span class="pre">Split</span> <span class="pre">→</span> <span class="pre">Model</span> <span class="pre">→</span> <span class="pre">Evaluasi</span></code></p>
+<p><strong>Insight penting:</strong></p>
+<ul class="simple">
+<li><p>Data preprocessing sangat berpengaruh terhadap hasil model.</p></li>
+<li><p>Encoding dan handling missing value adalah kunci utama.</p></li>
+<li><p>Naive Bayes bekerja cepat tapi sangat sensitif terhadap asumsi distribusi data (Gaussian).</p></li>
+</ul>
+</section>
+<section id="implementasi-python-di-knime-python-script">
+<h2>7. Implementasi Python (Di KNIME Python Script)<a class="headerlink" href="#implementasi-python-di-knime-python-script" title="Permalink to this heading">#</a></h2>
+<p>Node Python Script di KNIME berfungsi sebagai “ruang jembatan” yang menyambungkan KNIME API (<code class="docutils literal notranslate"><span class="pre">knio</span></code>) terhadap sintaks Pandas maupun <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> biasa.</p>
+<p>Berikut baris sintaks yang diisi di Node tersebut:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ================================</span>
+<span class="c1"># IMPORT LIBRARY</span>
+<span class="c1"># ================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>   <span class="c1"># Untuk komunikasi data antara KNIME dan Python</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>               <span class="c1"># Untuk manipulasi data dalam bentuk tabel (DataFrame)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>  <span class="c1"># Model Gaussian Naive Bayes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>  <span class="c1"># Untuk evaluasi akurasi model</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># LOAD DATA DARI KNIME</span>
+<span class="c1"># ================================</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>  <span class="c1"># Data training (80%)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>   <span class="c1"># Data testing (20%)</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># MENENTUKAN TARGET (LABEL)</span>
+<span class="c1"># ================================</span>
+
+<span class="n">target_col</span> <span class="o">=</span> <span class="s2">&quot;risk&quot;</span>  <span class="c1"># Label yang diprediksi</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># MEMISAHKAN FITUR DAN TARGET</span>
+<span class="c1"># ================================</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># MEMBUAT &amp; TRAIN MODEL</span>
+<span class="c1"># ================================</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># PREDIKSI &amp; EVALUASI</span>
+<span class="c1"># ================================</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">acc</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1"># OUTPUT KE KNIME</span>
+<span class="c1"># ================================</span>
+
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;Prediction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
+<span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">df_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="kesimpulan-dan-interpretasi-hasil">
+<h2>8. Kesimpulan dan Interpretasi Hasil<a class="headerlink" href="#kesimpulan-dan-interpretasi-hasil" title="Permalink to this heading">#</a></h2>
+<p>Setelah model selesai di-training dan dievaluasi (baik melalui Scorer KNIME maupun eksekusi script Python), kita dapat melakukan interpretasi mendalam terhadap hasil:</p>
+<ol class="arabic simple">
+<li><p><strong>Confusion Matrix &amp; Interpretasi:</strong></p>
+<ul class="simple">
+<li><p><strong>True Positive (TP) &amp; True Negative (TN):</strong> Menunjukkan jumlah nasabah yang diklasifikasikan dengan presisi tinggi.</p></li>
+<li><p><strong>False Negative (FN) / Nasabah <em>Bad</em> diprediksi <em>Good</em>:</strong> Ini adalah metrik paling krusial di dunia Perbankan. Membiarkan metrik FN terlalu tinggi dapat merugikan bank.</p></li>
+<li><p>Analisis model Naive Bayes umumnya berkinerja sangat baik menghasilkan probabilitas yang ajek meski matriksnya rentan terhadap bias data minoritas (<code class="docutils literal notranslate"><span class="pre">Bad</span></code> credit sering kali jauh lebih sedikit dari <code class="docutils literal notranslate"><span class="pre">Good</span></code> credit pada realita bisnis).</p></li>
+</ul>
+</li>
+</ol>
+<section id="kelebihan-dan-kekurangan-metode-naive-bayes">
+<h3>Kelebihan dan Kekurangan Metode Naive Bayes<a class="headerlink" href="#kelebihan-dan-kekurangan-metode-naive-bayes" title="Permalink to this heading">#</a></h3>
+<p><strong>Kekuatan / Kelebihan (Pros):</strong></p>
+<ul class="simple">
+<li><p><strong>Sangat Cepat &amp; Skalabel:</strong> Karena hanya melibatkan operasi probabilitas matematis (kali-bagi), proses re-training puluhan ribu baris data sangat memakan waktu singkat. Beban CPU/Memori di KNIME amat ringan.</p></li>
+<li><p><strong>Tahan terhadap Data Kosong (Robust to Missing Data):</strong> Berbeda dengan regresi atau neural networks, jika suatu data poin tidak memiliki salah satu nilai fitur, Naive Bayes semata menghiraukan probabilitas probabel tersebut tanpa menggagalkan pengujian.</p></li>
+<li><p><strong>Bekerja Baik pada High-Dimensional Data:</strong> Mampu bertahan ketika dataset (seperti <em>German Credit</em>) memiliki bervariasi jenis fitur independen.</p></li>
+</ul>
+<p><strong>Kelemahan / Kekurangan (Cons):</strong></p>
+<ul class="simple">
+<li><p><strong>Asumsi Independensi Mutlak (“Naif”):</strong> Syarat mutlak model ini adalah menganggap semua variabel tidak memiliki korelasi. Padahal di dunia nyata, data kredit perbankan seperti <code class="docutils literal notranslate"><span class="pre">Age</span></code> dan <code class="docutils literal notranslate"><span class="pre">Credit</span> <span class="pre">Amount</span></code> atau <code class="docutils literal notranslate"><span class="pre">Job</span></code> dan <code class="docutils literal notranslate"><span class="pre">Credit</span> <span class="pre">Amount</span></code> biasanya sangat berkorelasi (saling bergantung satu sama lain).</p></li>
+<li><p><strong>Zero-Frequency Problem:</strong> Apabila ada satu fitur kategorikal (<code class="docutils literal notranslate"><span class="pre">Purpose=car_new</span></code>) yang belum pernah muncul sama sekali di set <em>Training</em>, probabilitasnya jadi 0 dan mematikan total hasil kalkulasi akhirnya (dapat diakali menggunakan <em>Laplace Smoothing</em> bawaan <code class="docutils literal notranslate"><span class="pre">.GaussianNB()</span></code>).</p></li>
+<li><p>Kekurang-tepatan Estimasi (bukan penentu mutlak/absolut), di mana hasil persentase outputnya sebaiknya dijadikan pemeringkat <em>(rank)</em> daripada kepastian angka riil probabilitas mutlak <em>(calibrated probabilities)</em>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="uts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analisis Data Kesuburan Tanah dengan KNN</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="knime_decision_tree_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analisis Decision Tree Menggunakan KNIME</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#karakteristik-data">Karakteristik Data:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teori-dasar-naive-bayes">3. Teori Dasar Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">4. Gaussian Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-langkah-demi-langkah">5. Perhitungan Manual Langkah-demi-Langkah</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-sampel-training">5.1 Dataset Sampel (Training)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-menghitung-probabilitas-apriori-prior-p-c">5.2 Langkah 1: Menghitung Probabilitas Apriori / Prior <span class="math notranslate nohighlight">\(P(C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c">5.3 Langkah 2: Menghitung Likelihood (Peluang Posterior per Fitur) <span class="math notranslate nohighlight">\(P(X|C)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-menghitung-nilai-posterior-prediksi">5.4 Langkah 3: Menghitung Nilai Posterior Prediksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keputusan-prediction">5.5 Keputusan (Prediction)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-analisis-penjelasan-workflow-knime">6. Tahapan Analisis (Penjelasan Workflow KNIME)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">1️. CSV Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">2️. Missing Value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">3️. Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-engine">4️. Rule Engine</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-renamer">5️. Column Renamer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#category-to-number">6️. Category to Number</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-partitioner">7️. Table Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-gaussian-naive-bayes">8️. Python Script (Gaussian Naive Bayes)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">9️. Scorer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-workflow">Kesimpulan Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python-di-knime-python-script">7. Implementasi Python (Di KNIME Python Script)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-hasil">8. Kesimpulan dan Interpretasi Hasil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan-metode-naive-bayes">Kelebihan dan Kekurangan Metode Naive Bayes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Surya Maulana Akhmad
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026 Surya Maulana Akhmad.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
