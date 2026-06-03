@@ -448,7 +448,7 @@ Berdasarkan visualisasi diagram pencar matriks koordinat tersebut, distribusi se
 <p>Berikut ini adalah penjabaran representasi kode fungsional untuk mengesekusi kalkulasi di atas secara terotomasi menggunakan komputasi librari linier aljabar, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1"># 1. Representasi dataset observasi berdasarkan nilai koordinat (A - G)</span>
 <span class="n">x_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
@@ -526,7 +526,7 @@ Slope (Kemiringan Gradien) : 1.0769
 <p>Proses eksekusi algoritma fungsional menggunakan representasi komputasi <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> terangkum sebagai berikut:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 
 <span class="c1"># Restrukturisasi array numerik X ke format terstruktur linier 2D dan menjaga stabilitas y berdimensi ekuivalen 1D</span>
 <span class="n">X_sklearn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
