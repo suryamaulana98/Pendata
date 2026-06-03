@@ -37,7 +37,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import openeo
-connection = openeo.connect("openeo.dataspace.copernicus.eu").authenticate_oidc()
+['# Masukkan data koordinat Lumajang dari GeoJSON', 'aoi = {', '    "type": "Polygon",', '    "coordinates": [', '        [']
+...
+['# Agregasi rata-rata spasial menuju satu mean point timeseries', 's5p_no2_aoi = s5p_no2_daily.aggregate_spatial(reducer="mean", geometries=aoi)', '', '# Eksekusi perintah batch ke server Copernicus', 'job = s5post.execute_batch(title="NO2 in Lumajang", outputfile="NO2Lumajang.nc")']
 -------------------
 
