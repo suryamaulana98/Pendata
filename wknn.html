@@ -226,6 +226,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="analisa-data-menggunakan-random-forest.html">Analisa Data Menggunakan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Analisa_Data_Regresi_Linierx.html">Analisa Data Regresi Linier</a></li>
 </ul>
 
     </div>
@@ -558,21 +559,67 @@ d = 22.36
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="s1">&#39;Rumah&#39;</span><span class="p">:[</span><span class="s1">&#39;R1&#39;</span><span class="p">,</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span><span class="s1">&#39;R3&#39;</span><span class="p">,</span><span class="s1">&#39;R4&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="s1">&#39;Luas_Tanah&#39;</span><span class="p">:[</span><span class="mi">120</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>      <span class="mi">8</span> <span class="s1">&#39;Harga&#39;</span><span class="p">:[</span><span class="s1">&#39;Murah&#39;</span><span class="p">,</span><span class="s1">&#39;Mahal&#39;</span><span class="p">,</span><span class="s1">&#39;Murah&#39;</span><span class="p">,</span><span class="s1">&#39;Murah&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">}</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rumah</th>
+      <th>Luas_Tanah</th>
+      <th>Luas_Bangunan</th>
+      <th>Kamar</th>
+      <th>Harga</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>R1</td>
+      <td>120</td>
+      <td>90</td>
+      <td>3</td>
+      <td>Murah</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>R2</td>
+      <td>200</td>
+      <td>150</td>
+      <td>4</td>
+      <td>Mahal</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>R3</td>
+      <td>150</td>
+      <td>110</td>
+      <td>3</td>
+      <td>Murah</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>R4</td>
+      <td>90</td>
+      <td>70</td>
+      <td>2</td>
+      <td>Murah</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
