@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Analisis Data Kesuburan Tanah dengan KNN &#8212; Catatan Penambangan Data</title>
   
@@ -29,50 +28,44 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'uts';</script>
+    <script src="_static/custom.js?v=9b7500b0"></script>
     <link rel="canonical" href="/Pendata/uts.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Analisis Klasifikasi Menggunakan Gaussian Naive Bayes" href="knime_naive_bayes_analysis.html" />
-    <link rel="prev" title="Weighted K-Nearest Neighbor (WKNN)" href="wknn.html" />
+    <link rel="prev" title="Deployment" href="deployment.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,7 +162,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -209,6 +213,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
@@ -257,9 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -353,9 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -441,18 +448,18 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-data-kesuburan-tanah-dengan-knn">
-<h1>Analisis Data Kesuburan Tanah dengan KNN<a class="headerlink" href="#analisis-data-kesuburan-tanah-dengan-knn" title="Permalink to this heading">#</a></h1>
+<h1>Analisis Data Kesuburan Tanah dengan KNN<a class="headerlink" href="#analisis-data-kesuburan-tanah-dengan-knn" title="Link to this heading">#</a></h1>
 <section id="deskripsi-data-understanding">
-<h2>Deskripsi - Data Understanding<a class="headerlink" href="#deskripsi-data-understanding" title="Permalink to this heading">#</a></h2>
+<h2>Deskripsi - Data Understanding<a class="headerlink" href="#deskripsi-data-understanding" title="Link to this heading">#</a></h2>
 <p>Penelitian ini bertujuan untuk mengklasifikasikan tingkat kesuburan tanah ke dalam dua kategori, yaitu Subur dan Tidak Subur, menggunakan algoritma K-Nearest Neighbor (KNN). Dataset yang digunakan terdiri dari 2.000 sampel dengan 10 fitur agronomis serta mengandung missing values yang harus ditangani sebelum proses modeling.</p>
 <p>Algoritma KNN dipilih karena merupakan metode supervised learning berbasis jarak yang sederhana namun efektif, khususnya pada data numerik. KNN mengklasifikasikan data baru berdasarkan kedekatannya terhadap data latih.</p>
 <p><img alt="Workflow KNIME" src="_images/workflow-uts.png" /></p>
 <p>Alur ini mencerminkan tahapan data preprocessing → modeling → evaluasi dalam proses data mining.</p>
 </section>
 <section id="data-preprocessing">
-<h2>1. Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this heading">#</a></h2>
+<h2>1. Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
 <section id="excel-reader">
-<h3>1.1 Excel Reader<a class="headerlink" href="#excel-reader" title="Permalink to this heading">#</a></h3>
+<h3>1.1 Excel Reader<a class="headerlink" href="#excel-reader" title="Link to this heading">#</a></h3>
 <p>Node ini digunakan untuk membaca dataset dari file Excel ke dalam lingkungan KNIME.</p>
 <p><img alt="Workflow KNIME" src="_images/excel.png" /></p>
 <p>Alasan:
@@ -460,7 +467,7 @@ Data harus dimuat terlebih dahulu sebelum dapat dianalisis. Tahap ini merupakan 
 </section>
 <hr class="docutils" />
 <section id="missing-value">
-<h3>1.2 Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this heading">#</a></h3>
+<h3>1.2 Missing Value<a class="headerlink" href="#missing-value" title="Link to this heading">#</a></h3>
 <p>Node ini digunakan untuk menangani nilai yang hilang (missing values).</p>
 <p>Metode yang digunakan:</p>
 <p>Numerik → Mean
@@ -477,7 +484,7 @@ KNN menggunakan perhitungan jarak. Jika ada nilai kosong, maka jarak tidak dapat
 </section>
 <hr class="docutils" />
 <section id="one-to-many">
-<h3>1.3 One to Many<a class="headerlink" href="#one-to-many" title="Permalink to this heading">#</a></h3>
+<h3>1.3 One to Many<a class="headerlink" href="#one-to-many" title="Link to this heading">#</a></h3>
 <p>Mengubah data kategorikal menjadi numerik.</p>
 <p>Contoh:</p>
 <p>Lempung → (1,0,0)
@@ -488,7 +495,7 @@ KNN tidak dapat memproses data non-numerik karena menggunakan perhitungan jarak 
 </section>
 <hr class="docutils" />
 <section id="column-filter">
-<h3>1.4 Column Filter<a class="headerlink" href="#column-filter" title="Permalink to this heading">#</a></h3>
+<h3>1.4 Column Filter<a class="headerlink" href="#column-filter" title="Link to this heading">#</a></h3>
 <p>Menghapus kolom tidak penting seperti ID.</p>
 <p><img alt="Workflow KNIME" src="_images/column.png" /></p>
 <p>Alasan:
@@ -496,9 +503,9 @@ Kolom ID tidak memiliki hubungan dengan target dan hanya berfungsi sebagai ident
 </section>
 </section>
 <section id="pembagian-data">
-<h2>2. Pembagian Data<a class="headerlink" href="#pembagian-data" title="Permalink to this heading">#</a></h2>
+<h2>2. Pembagian Data<a class="headerlink" href="#pembagian-data" title="Link to this heading">#</a></h2>
 <section id="table-partitioner">
-<h3>Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h3>
+<h3>Table Partitioner<a class="headerlink" href="#table-partitioner" title="Link to this heading">#</a></h3>
 <p>Dataset dibagi menjadi:</p>
 <ul class="simple">
 <li><p>70% data training</p></li>
@@ -519,28 +526,28 @@ Kolom ID tidak memiliki hubungan dengan target dan hanya berfungsi sebagai ident
 </section>
 </section>
 <section id="normalisasi-data">
-<h2>3. Normalisasi Data<a class="headerlink" href="#normalisasi-data" title="Permalink to this heading">#</a></h2>
+<h2>3. Normalisasi Data<a class="headerlink" href="#normalisasi-data" title="Link to this heading">#</a></h2>
 <section id="normalizer-training">
-<h3>3.1 Normalizer (Training)<a class="headerlink" href="#normalizer-training" title="Permalink to this heading">#</a></h3>
+<h3>3.1 Normalizer (Training)<a class="headerlink" href="#normalizer-training" title="Link to this heading">#</a></h3>
 <p>Data dinormalisasi ke skala yang sama (misalnya 0–1).</p>
 <p>Alasan:
 KNN menggunakan jarak Euclidean:</p>
 </section>
 <section id="rumus-euclidean-distance">
-<h3>Rumus Euclidean Distance:<a class="headerlink" href="#rumus-euclidean-distance" title="Permalink to this heading">#</a></h3>
+<h3>Rumus Euclidean Distance:<a class="headerlink" href="#rumus-euclidean-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ d = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2} \]</div>
 <p><img alt="Workflow KNIME" src="_images/normalisasi.png" /></p>
 </section>
 <section id="normalizer-apply">
-<h3>3.2 Normalizer (Apply)<a class="headerlink" href="#normalizer-apply" title="Permalink to this heading">#</a></h3>
+<h3>3.2 Normalizer (Apply)<a class="headerlink" href="#normalizer-apply" title="Link to this heading">#</a></h3>
 <p>Normalisasi yang sama diterapkan ke data testing.</p>
 <p>Alasan:
 Data testing tidak boleh mempelajari parameter baru. Oleh karena itu, digunakan parameter dari data training.</p>
 </section>
 </section>
 <section id="modeling-knn">
-<h2>4. Modeling (KNN)<a class="headerlink" href="#modeling-knn" title="Permalink to this heading">#</a></h2>
+<h2>4. Modeling (KNN)<a class="headerlink" href="#modeling-knn" title="Link to this heading">#</a></h2>
 <p>K-Nearest Neighbor</p>
 <p>Parameter:</p>
 <ul class="simple">
@@ -558,10 +565,10 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 <p><img alt="Workflow KNIME" src="_images/modeling.png" /></p>
 </section>
 <section id="evaluasi-model-knn">
-<h2>5. Evaluasi Model KNN<a class="headerlink" href="#evaluasi-model-knn" title="Permalink to this heading">#</a></h2>
+<h2>5. Evaluasi Model KNN<a class="headerlink" href="#evaluasi-model-knn" title="Link to this heading">#</a></h2>
 <p><img alt="Workflow KNIME" src="_images/hasil.png" /></p>
 <section id="komponen-confusion-matrix">
-<h3>Komponen Confusion Matrix<a class="headerlink" href="#komponen-confusion-matrix" title="Permalink to this heading">#</a></h3>
+<h3>Komponen Confusion Matrix<a class="headerlink" href="#komponen-confusion-matrix" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>TP (True Positive)</strong>: Data Subur yang diprediksi Subur</p></li>
 <li><p><strong>TN (True Negative)</strong>: Data Tidak Subur yang diprediksi Tidak Subur</p></li>
@@ -570,82 +577,82 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 </ul>
 </section>
 <section id="accuracy">
-<h3>5.1 Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
+<h3>5.1 Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Accuracy = \frac{TP + TN}{TP + TN + FP + FN} \]</div>
 </section>
 <section id="penjelasan">
-<h3>Penjelasan:<a class="headerlink" href="#penjelasan" title="Permalink to this heading">#</a></h3>
+<h3>Penjelasan:<a class="headerlink" href="#penjelasan" title="Link to this heading">#</a></h3>
 <p>Accuracy mengukur persentase seluruh prediksi yang benar dari total data.</p>
 </section>
 <section id="interpretasi">
-<h3>Interpretasi:<a class="headerlink" href="#interpretasi" title="Permalink to this heading">#</a></h3>
+<h3>Interpretasi:<a class="headerlink" href="#interpretasi" title="Link to this heading">#</a></h3>
 <p>Jika accuracy tinggi, maka model secara umum memiliki performa yang baik.</p>
 </section>
 <section id="contoh">
-<h3>Contoh:<a class="headerlink" href="#contoh" title="Permalink to this heading">#</a></h3>
+<h3>Contoh:<a class="headerlink" href="#contoh" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Accuracy = \frac{304 + 296}{600} = 1.0 \]</div>
 </section>
 <section id="precision">
-<h3>5.2 Precision<a class="headerlink" href="#precision" title="Permalink to this heading">#</a></h3>
+<h3>5.2 Precision<a class="headerlink" href="#precision" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Precision = \frac{TP}{TP + FP} \]</div>
 </section>
 <section id="id1">
-<h3>Penjelasan:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Penjelasan:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Precision menunjukkan seberapa tepat model dalam memprediksi kelas positif.</p>
 </section>
 <section id="id2">
-<h3>Interpretasi:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>Interpretasi:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>Semakin tinggi precision, semakin sedikit kesalahan prediksi positif.</p>
 </section>
 <section id="id3">
-<h3>Contoh:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3>Contoh:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Precision = \frac{296}{296} = 1.0 \]</div>
 </section>
 <section id="recall">
-<h3>5.3 Recall<a class="headerlink" href="#recall" title="Permalink to this heading">#</a></h3>
+<h3>5.3 Recall<a class="headerlink" href="#recall" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Recall = \frac{TP}{TP + FN} \]</div>
 </section>
 <section id="id4">
-<h3>Penjelasan:<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3>Penjelasan:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>Recall mengukur kemampuan model dalam menemukan semua data positif.</p>
 </section>
 <section id="id5">
-<h3>Interpretasi:<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h3>Interpretasi:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <p>Semakin tinggi recall, semakin sedikit data positif yang terlewat.</p>
 </section>
 <section id="id6">
-<h3>Contoh:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h3>Contoh:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ Recall = \frac{296}{296} = 1.0 \]</div>
 </section>
 <section id="f1-score">
-<h3>5.4 F1-Score<a class="headerlink" href="#f1-score" title="Permalink to this heading">#</a></h3>
+<h3>5.4 F1-Score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} \]</div>
 </section>
 <section id="id7">
-<h3>Penjelasan:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h3>Penjelasan:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>F1-score merupakan kombinasi antara precision dan recall.</p>
 </section>
 <section id="id8">
-<h3>Interpretasi:<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3>Interpretasi:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>Digunakan ketika ingin keseimbangan antara precision dan recall.</p>
 </section>
 <section id="id9">
-<h3>Contoh:<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3>Contoh:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ F1 = 1.0 \]</div>
 </section>
 </section>
 <section id="analisis-hasil">
-<h2>6. Analisis Hasil<a class="headerlink" href="#analisis-hasil" title="Permalink to this heading">#</a></h2>
+<h2>6. Analisis Hasil<a class="headerlink" href="#analisis-hasil" title="Link to this heading">#</a></h2>
 <section id="confusion-matrix">
-<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h3>
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Actual \ Prediksi</p></th>
@@ -672,7 +679,7 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 </section>
 <hr class="docutils" />
 <section id="interpretasi-hasil">
-<h3>Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Permalink to this heading">#</a></h3>
+<h3>Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Link to this heading">#</a></h3>
 <p>Berdasarkan confusion matrix di atas, dapat dilihat bahwa:</p>
 <ul class="simple">
 <li><p>Tidak terdapat <strong>False Positive (FP = 0)</strong></p></li>
@@ -682,9 +689,9 @@ Model mencari 3 data terdekat berdasarkan jarak, kemudian menentukan kelas berda
 </section>
 <hr class="docutils" />
 <section id="evaluasi-metrik">
-<h3>Evaluasi Metrik<a class="headerlink" href="#evaluasi-metrik" title="Permalink to this heading">#</a></h3>
+<h3>Evaluasi Metrik<a class="headerlink" href="#evaluasi-metrik" title="Link to this heading">#</a></h3>
 <section id="id10">
-<h4>🔹 Accuracy<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h4>
+<h4>🔹 Accuracy<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
 <p>[
 Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
 ]</p>
@@ -693,19 +700,19 @@ Accuracy = \frac{304 + 296}{600} = 1.0
 ]</p>
 </section>
 <section id="id11">
-<h4>🔹 Precision<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
+<h4>🔹 Precision<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <p>[
 Precision = \frac{TP}{TP + FP} = \frac{296}{296} = 1.0
 ]</p>
 </section>
 <section id="id12">
-<h4>🔹 Recall<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
+<h4>🔹 Recall<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
 <p>[
 Recall = \frac{TP}{TP + FN} = \frac{296}{296} = 1.0
 ]</p>
 </section>
 <section id="id13">
-<h4>🔹 F1-Score<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h4>
+<h4>🔹 F1-Score<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
 <p>[
 F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = 1.0
 ]</p>
@@ -713,7 +720,7 @@ F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = 1.0
 </section>
 <hr class="docutils" />
 <section id="analisis">
-<h3>Analisis<a class="headerlink" href="#analisis" title="Permalink to this heading">#</a></h3>
+<h3>Analisis<a class="headerlink" href="#analisis" title="Link to this heading">#</a></h3>
 <p>Model K-Nearest Neighbor (KNN) menunjukkan performa yang sangat baik dengan nilai semua metrik evaluasi sebesar <strong>1.0</strong>. Hal ini mengindikasikan bahwa model mampu mengklasifikasikan seluruh data uji dengan benar tanpa kesalahan.</p>
 <p>Keberhasilan ini kemungkinan disebabkan oleh:</p>
 <ul class="simple">
@@ -724,7 +731,7 @@ F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = 1.0
 </section>
 <hr class="docutils" />
 <section id="kesimpulan">
-<h3>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h3>
+<h3>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
 <p>Model KNN efektif dalam mengklasifikasikan tingkat kesuburan tanah pada dataset ini. Namun, untuk memastikan keandalan model, disarankan untuk melakukan pengujian tambahan seperti cross-validation atau menggunakan dataset lain.</p>
 </section>
 </section>
@@ -761,12 +768,12 @@ F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall} = 1.0
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="wknn.html"
+       href="deployment.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Weighted K-Nearest Neighbor (WKNN)</p>
+        <p class="prev-next-title">Deployment</p>
       </div>
     </a>
     <a class="right-next"

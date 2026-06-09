@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes &#8212; Catatan Penambangan Data</title>
   
@@ -29,45 +28,39 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'knime_naive_bayes_analysis';</script>
+    <script src="_static/custom.js?v=9b7500b0"></script>
     <link rel="canonical" href="/Pendata/knime_naive_bayes_analysis.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -169,7 +162,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -209,6 +213,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
@@ -257,9 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -353,9 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -403,7 +410,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">9️. Scorer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-workflow">Kesimpulan Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python-di-knime-python-script">7. Implementasi Python (Di KNIME Python Script)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-hasil">8. Kesimpulan dan Interpretasi Hasil</a><ul class="nav section-nav flex-column">
@@ -422,9 +429,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-klasifikasi-menggunakan-gaussian-naive-bayes">
-<h1>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes<a class="headerlink" href="#analisis-klasifikasi-menggunakan-gaussian-naive-bayes" title="Permalink to this heading">#</a></h1>
+<h1>Analisis Klasifikasi Menggunakan Gaussian Naive Bayes<a class="headerlink" href="#analisis-klasifikasi-menggunakan-gaussian-naive-bayes" title="Link to this heading">#</a></h1>
 <section id="pendahuluan">
-<h2>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h2>
+<h2>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <p>Pada penelitian ini dilakukan analisis klasifikasi untuk menentukan kelayakan kredit (risiko kredit) seseorang menggunakan algoritma <strong>Naive Bayes</strong>, khususnya <strong>Gaussian Naive Bayes</strong>.</p>
 <p>Permasalahan ini termasuk dalam kategori <strong>supervised learning</strong>, di mana model dilatih menggunakan data yang telah memiliki label (kelas/target) untuk memprediksi label pada data baru.</p>
 <p>Metode Naive Bayes dipilih karena:</p>
@@ -436,11 +443,11 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="dataset">
-<h2>2. Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h2>
+<h2>2. Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
 <p>Dataset yang digunakan dalam studi ini adalah <strong>German Credit Dataset</strong>.</p>
 <p><strong>Link Dataset:</strong> <a class="reference external" href="https://www.kaggle.com/datasets/uciml/german-credit">German Credit Data Kaggle</a> atau UCI Machine Learning Repository.</p>
 <section id="karakteristik-data">
-<h3>Karakteristik Data:<a class="headerlink" href="#karakteristik-data" title="Permalink to this heading">#</a></h3>
+<h3>Karakteristik Data:<a class="headerlink" href="#karakteristik-data" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Jumlah Sampel:</strong> 1000 Baris data nasabah</p></li>
 <li><p><strong>Fitur:</strong> Terdapat 20 fitur (sebelum filter/preprocessing)</p></li>
@@ -460,7 +467,7 @@ document.write(`
 </section>
 </section>
 <section id="teori-dasar-naive-bayes">
-<h2>3. Teori Dasar Naive Bayes<a class="headerlink" href="#teori-dasar-naive-bayes" title="Permalink to this heading">#</a></h2>
+<h2>3. Teori Dasar Naive Bayes<a class="headerlink" href="#teori-dasar-naive-bayes" title="Link to this heading">#</a></h2>
 <p>Naive Bayes didasarkan pada Teorema probabilitas Bayes yang memiliki asumsi unik: asumsikan bahwa setiap fitur dalam data bernilai mandiri / <em>mutually independent</em> relatif terhadap targetnya.</p>
 <p>Persamaan Dasar Teorema Bayes:
 $<span class="math notranslate nohighlight">\(
@@ -476,7 +483,7 @@ P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)}
 </section>
 <hr class="docutils" />
 <section id="gaussian-naive-bayes">
-<h2>4. Gaussian Naive Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h2>
+<h2>4. Gaussian Naive Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Link to this heading">#</a></h2>
 <p>Ketika digunakan pada data <strong>numerik kontinu</strong>, fitur data di asumsikan memiliki distribusi probabilitas normal (kurva Gaussian). Probabilitas dihitung dengan:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -490,11 +497,11 @@ P(x|C) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </ul>
 </section>
 <section id="perhitungan-manual-langkah-demi-langkah">
-<h2>5. Perhitungan Manual Langkah-demi-Langkah<a class="headerlink" href="#perhitungan-manual-langkah-demi-langkah" title="Permalink to this heading">#</a></h2>
+<h2>5. Perhitungan Manual Langkah-demi-Langkah<a class="headerlink" href="#perhitungan-manual-langkah-demi-langkah" title="Link to this heading">#</a></h2>
 <p>Untuk memahami cara kerja Naive Bayes (khususnya untuk rasio data campuran Kategorikal dan Numerik), mari kita gunakan 5 baris pertama data sesungguhnya dari <code class="docutils literal notranslate"><span class="pre">german_credit</span></code> sebagai set pelatih (Training Set) dan baris ke-6 sebagai data Uji (Testing Data) yang tidak diketahui kelasnya.</p>
 <p><strong>Misi:</strong> Memprediksi nilai <code class="docutils literal notranslate"><span class="pre">Risk</span></code> data baru berdasarkan sampel yang ada. <em>(Catatan: karena nilai Risk sesungguhnya di 5 baris pertama ini tidak langsung tertulis, kita akan mengasumsikan label Risk Good/Bad sebagai ilustrasi perhitungan di bawah)</em>.</p>
 <section id="dataset-sampel-training">
-<h3>5.1 Dataset Sampel (Training)<a class="headerlink" href="#dataset-sampel-training" title="Permalink to this heading">#</a></h3>
+<h3>5.1 Dataset Sampel (Training)<a class="headerlink" href="#dataset-sampel-training" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>No</p></th>
@@ -543,7 +550,7 @@ P(x|C) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <hr class="docutils" />
 <section id="langkah-1-menghitung-probabilitas-apriori-prior-p-c">
-<h3>5.2 Langkah 1: Menghitung Probabilitas Apriori / Prior <span class="math notranslate nohighlight">\(P(C)\)</span><a class="headerlink" href="#langkah-1-menghitung-probabilitas-apriori-prior-p-c" title="Permalink to this heading">#</a></h3>
+<h3>5.2 Langkah 1: Menghitung Probabilitas Apriori / Prior <span class="math notranslate nohighlight">\(P(C)\)</span><a class="headerlink" href="#langkah-1-menghitung-probabilitas-apriori-prior-p-c" title="Link to this heading">#</a></h3>
 <p>Berapa bagian masing-masing kelas di dataset secara umum?</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(Good) = \frac{3}{5} = \mathbf{0.6}\)</span></p></li>
@@ -552,7 +559,7 @@ P(x|C) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <hr class="docutils" />
 <section id="langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c">
-<h3>5.3 Langkah 2: Menghitung Likelihood (Peluang Posterior per Fitur) <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c" title="Permalink to this heading">#</a></h3>
+<h3>5.3 Langkah 2: Menghitung Likelihood (Peluang Posterior per Fitur) <span class="math notranslate nohighlight">\(P(X|C)\)</span><a class="headerlink" href="#langkah-2-menghitung-likelihood-peluang-posterior-per-fitur-p-x-c" title="Link to this heading">#</a></h3>
 <p>Karena Naive Bayes mengasumsikan antar-fitur tidak saling memengaruhi, kita hitung parsial.</p>
 <p><strong>A. Fitur Kategorikal: Sex (male)</strong>
 Peluang munculnya <code class="docutils literal notranslate"><span class="pre">Sex</span> <span class="pre">=</span> <span class="pre">male</span></code> apabila kelas targetnya adalah <code class="docutils literal notranslate"><span class="pre">Good</span></code> dan <code class="docutils literal notranslate"><span class="pre">Bad</span></code>:</p>
@@ -575,7 +582,7 @@ $<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{
 </section>
 <hr class="docutils" />
 <section id="langkah-3-menghitung-nilai-posterior-prediksi">
-<h3>5.4 Langkah 3: Menghitung Nilai Posterior Prediksi<a class="headerlink" href="#langkah-3-menghitung-nilai-posterior-prediksi" title="Permalink to this heading">#</a></h3>
+<h3>5.4 Langkah 3: Menghitung Nilai Posterior Prediksi<a class="headerlink" href="#langkah-3-menghitung-nilai-posterior-prediksi" title="Link to this heading">#</a></h3>
 <p>Kita akan mengalikan seluruh kemungkinan prior dan likelihood untuk data uji <span class="math notranslate nohighlight">\(X_{baru} = \{Age=24, Sex=male\}\)</span> (<em>catatan: Perhitungan disederhanakan tanpa kolom credit amount demi keringkasan baris matematika</em>).</p>
 <p><strong>Skor untuk Kelas Good:</strong>
 <span class="math notranslate nohighlight">\(\text{Score}(Good) = P(Good) \times P(Sex=male|Good) \times P(Age=24|Good)\)</span>
@@ -585,15 +592,15 @@ $<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{
 <span class="math notranslate nohighlight">\(\text{Score}(Bad) = 0.4 \times 0.5 \times 0.0176 = \mathbf{0.00352}\)</span></p>
 </section>
 <section id="keputusan-prediction">
-<h3>5.5 Keputusan (Prediction)<a class="headerlink" href="#keputusan-prediction" title="Permalink to this heading">#</a></h3>
+<h3>5.5 Keputusan (Prediction)<a class="headerlink" href="#keputusan-prediction" title="Link to this heading">#</a></h3>
 <p>Karena <span class="math notranslate nohighlight">\(\text{Score}(Bad) &gt; \text{Score}(Good)\)</span> yaitu <span class="math notranslate nohighlight">\((0.00352 &gt; 0.000204)\)</span>, model Naive Bayes akan mengklasifikasikan nasabah baru (Umur 24, Pria) tersebut sebagai <strong>Risk = Bad</strong>.</p>
 </section>
 </section>
 <section id="tahapan-analisis-penjelasan-workflow-knime">
-<h2>6. Tahapan Analisis (Penjelasan Workflow KNIME)<a class="headerlink" href="#tahapan-analisis-penjelasan-workflow-knime" title="Permalink to this heading">#</a></h2>
+<h2>6. Tahapan Analisis (Penjelasan Workflow KNIME)<a class="headerlink" href="#tahapan-analisis-penjelasan-workflow-knime" title="Link to this heading">#</a></h2>
 <p>Berikut adalah penjelasan ilmiah untuk masing-masing node sesuai workflow KNIME yang digunakan:</p>
 <section id="csv-reader">
-<h3>1️. CSV Reader<a class="headerlink" href="#csv-reader" title="Permalink to this heading">#</a></h3>
+<h3>1️. CSV Reader<a class="headerlink" href="#csv-reader" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Mengimpor dataset <em>German Credit</em> ke dalam KNIME.</p>
 <p><strong>Alasan penggunaan:</strong></p>
 <ul class="simple">
@@ -604,7 +611,7 @@ $<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{
 </section>
 <hr class="docutils" />
 <section id="missing-value">
-<h3>2️. Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this heading">#</a></h3>
+<h3>2️. Missing Value<a class="headerlink" href="#missing-value" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Menangani nilai yang hilang (NA / null) pada dataset.</p>
 <p><strong>Alasan penggunaan:</strong></p>
 <ul class="simple">
@@ -620,7 +627,7 @@ $<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{
 </section>
 <hr class="docutils" />
 <section id="column-filter">
-<h3>3️. Column Filter<a class="headerlink" href="#column-filter" title="Permalink to this heading">#</a></h3>
+<h3>3️. Column Filter<a class="headerlink" href="#column-filter" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Memilih fitur yang relevan untuk analisis.</p>
 <p><strong>Alasan penggunaan:</strong></p>
 <ul class="simple">
@@ -632,7 +639,7 @@ $<span class="math notranslate nohighlight">\(P(Age=24 | Good) = \frac{1}{\sqrt{
 </section>
 <hr class="docutils" />
 <section id="rule-engine">
-<h3>4️. Rule Engine<a class="headerlink" href="#rule-engine" title="Permalink to this heading">#</a></h3>
+<h3>4️. Rule Engine<a class="headerlink" href="#rule-engine" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Membuat label target baru (<code class="docutils literal notranslate"><span class="pre">risk</span></code>) berdasarkan aturan:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$Credit amount$ &lt;= 5000 =&gt; &quot;Good&quot;
 $Credit amount$ &gt; 5000 =&gt; &quot;Bad&quot;
@@ -647,7 +654,7 @@ $Credit amount$ &gt; 5000 =&gt; &quot;Bad&quot;
 </section>
 <hr class="docutils" />
 <section id="column-renamer">
-<h3>5️. Column Renamer<a class="headerlink" href="#column-renamer" title="Permalink to this heading">#</a></h3>
+<h3>5️. Column Renamer<a class="headerlink" href="#column-renamer" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Mengubah nama kolom (misalnya <code class="docutils literal notranslate"><span class="pre">prediction</span></code> → <code class="docutils literal notranslate"><span class="pre">risk</span></code>)</p>
 <p><strong>Alasan penggunaan:</strong></p>
 <ul class="simple">
@@ -658,7 +665,7 @@ $Credit amount$ &gt; 5000 =&gt; &quot;Bad&quot;
 </section>
 <hr class="docutils" />
 <section id="category-to-number">
-<h3>6️. Category to Number<a class="headerlink" href="#category-to-number" title="Permalink to this heading">#</a></h3>
+<h3>6️. Category to Number<a class="headerlink" href="#category-to-number" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Mengubah data kategorikal menjadi numerik.
 Contoh: <code class="docutils literal notranslate"><span class="pre">male</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">female</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
 <p><strong>Alasan penggunaan:</strong></p>
@@ -670,7 +677,7 @@ Contoh: <code class="docutils literal notranslate"><span class="pre">male</span>
 </section>
 <hr class="docutils" />
 <section id="table-partitioner">
-<h3>7️. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h3>
+<h3>7️. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Membagi data menjadi 80% Training dan 20% Testing.</p>
 <p><strong>Setting penting:</strong></p>
 <ul class="simple">
@@ -685,7 +692,7 @@ Contoh: <code class="docutils literal notranslate"><span class="pre">male</span>
 </section>
 <hr class="docutils" />
 <section id="python-script-gaussian-naive-bayes">
-<h3>8️. Python Script (Gaussian Naive Bayes)<a class="headerlink" href="#python-script-gaussian-naive-bayes" title="Permalink to this heading">#</a></h3>
+<h3>8️. Python Script (Gaussian Naive Bayes)<a class="headerlink" href="#python-script-gaussian-naive-bayes" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Melakukan proses Training model, Prediksi, dan Evaluasi menggunakan <code class="docutils literal notranslate"><span class="pre">GaussianNB()</span></code>.</p>
 <p><strong>Dasar Teori Singkat:</strong></p>
 <ul class="simple">
@@ -697,7 +704,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 </section>
 <hr class="docutils" />
 <section id="scorer">
-<h3>9️. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h3>
+<h3>9️. Scorer<a class="headerlink" href="#scorer" title="Link to this heading">#</a></h3>
 <p><strong>Fungsi:</strong> Mengukur performa model.
 <strong>Output:</strong> Accuracy, Confusion Matrix, Precision, Recall, F1-Measure.</p>
 <p>** Rumus Evaluasi:**</p>
@@ -709,11 +716,11 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 </ul>
 </section>
 </section>
-<section id="workflow-knime">
-<h2><img alt="Workflow KNIME" src="_images/skorer.png" /><a class="headerlink" href="#workflow-knime" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h2><img alt="Workflow KNIME" src="_images/skorer.png" /><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 </section>
 <section id="kesimpulan-workflow">
-<h2>Kesimpulan Workflow<a class="headerlink" href="#kesimpulan-workflow" title="Permalink to this heading">#</a></h2>
+<h2>Kesimpulan Workflow<a class="headerlink" href="#kesimpulan-workflow" title="Link to this heading">#</a></h2>
 <p>Workflow ini secara keseluruhan mencerminkan pipeline <em>Data Mining</em> yang lengkap, yaitu:
 <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">→</span> <span class="pre">Cleaning</span> <span class="pre">→</span> <span class="pre">Feature</span> <span class="pre">Engineering</span> <span class="pre">→</span> <span class="pre">Split</span> <span class="pre">→</span> <span class="pre">Model</span> <span class="pre">→</span> <span class="pre">Evaluasi</span></code></p>
 <p><strong>Insight penting:</strong></p>
@@ -724,7 +731,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 </ul>
 </section>
 <section id="implementasi-python-di-knime-python-script">
-<h2>7. Implementasi Python (Di KNIME Python Script)<a class="headerlink" href="#implementasi-python-di-knime-python-script" title="Permalink to this heading">#</a></h2>
+<h2>7. Implementasi Python (Di KNIME Python Script)<a class="headerlink" href="#implementasi-python-di-knime-python-script" title="Link to this heading">#</a></h2>
 <p>Node Python Script di KNIME berfungsi sebagai “ruang jembatan” yang menyambungkan KNIME API (<code class="docutils literal notranslate"><span class="pre">knio</span></code>) terhadap sintaks Pandas maupun <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> biasa.</p>
 <p>Berikut baris sintaks yang diisi di Node tersebut:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ================================</span>
@@ -791,7 +798,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 </section>
 <hr class="docutils" />
 <section id="kesimpulan-dan-interpretasi-hasil">
-<h2>8. Kesimpulan dan Interpretasi Hasil<a class="headerlink" href="#kesimpulan-dan-interpretasi-hasil" title="Permalink to this heading">#</a></h2>
+<h2>8. Kesimpulan dan Interpretasi Hasil<a class="headerlink" href="#kesimpulan-dan-interpretasi-hasil" title="Link to this heading">#</a></h2>
 <p>Setelah model selesai di-training dan dievaluasi (baik melalui Scorer KNIME maupun eksekusi script Python), kita dapat melakukan interpretasi mendalam terhadap hasil:</p>
 <ol class="arabic simple">
 <li><p><strong>Confusion Matrix &amp; Interpretasi:</strong></p>
@@ -803,7 +810,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 </li>
 </ol>
 <section id="kelebihan-dan-kekurangan-metode-naive-bayes">
-<h3>Kelebihan dan Kekurangan Metode Naive Bayes<a class="headerlink" href="#kelebihan-dan-kekurangan-metode-naive-bayes" title="Permalink to this heading">#</a></h3>
+<h3>Kelebihan dan Kekurangan Metode Naive Bayes<a class="headerlink" href="#kelebihan-dan-kekurangan-metode-naive-bayes" title="Link to this heading">#</a></h3>
 <p><strong>Kekuatan / Kelebihan (Pros):</strong></p>
 <ul class="simple">
 <li><p><strong>Sangat Cepat &amp; Skalabel:</strong> Karena hanya melibatkan operasi probabilitas matematis (kali-bagi), proses re-training puluhan ribu baris data sangat memakan waktu singkat. Beban CPU/Memori di KNIME amat ringan.</p></li>
@@ -911,7 +918,7 @@ $<span class="math notranslate nohighlight">\( P(x|C) = \frac{1}{\sqrt{2\pi\sigm
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">9️. Scorer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-workflow">Kesimpulan Workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python-di-knime-python-script">7. Implementasi Python (Di KNIME Python Script)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-dan-interpretasi-hasil">8. Kesimpulan dan Interpretasi Hasil</a><ul class="nav section-nav flex-column">

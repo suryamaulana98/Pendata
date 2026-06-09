@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Data Preparation &#8212; Catatan Penambangan Data</title>
   
@@ -29,43 +28,39 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'data-preparation';</script>
+    <script src="_static/custom.js?v=9b7500b0"></script>
     <link rel="canonical" href="/Pendata/data-preparation.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -167,7 +162,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -207,6 +213,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
@@ -255,9 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -351,9 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -426,16 +435,16 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
-<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h1>
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
 <section id="studi-kasus-iris-flower-dataset">
-<h2>Studi Kasus: Iris Flower Dataset<a class="headerlink" href="#studi-kasus-iris-flower-dataset" title="Permalink to this heading">#</a></h2>
+<h2>Studi Kasus: Iris Flower Dataset<a class="headerlink" href="#studi-kasus-iris-flower-dataset" title="Link to this heading">#</a></h2>
 </section>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="pendahuluan">
-<h1>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h1>
+<h1>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h1>
 <section id="konsep-data-preparation-dalam-crisp-dm">
-<h2>3.1 Konsep Data Preparation dalam CRISP-DM<a class="headerlink" href="#konsep-data-preparation-dalam-crisp-dm" title="Permalink to this heading">#</a></h2>
+<h2>3.1 Konsep Data Preparation dalam CRISP-DM<a class="headerlink" href="#konsep-data-preparation-dalam-crisp-dm" title="Link to this heading">#</a></h2>
 <p>Data Preparation merupakan tahap ketiga dalam metodologi CRISP-DM setelah Business Understanding dan Data Understanding.
 Pada tahap ini data yang telah dipahami sebelumnya diproses lebih lanjut agar benar-benar siap digunakan
 untuk membangun model machine learning.</p>
@@ -450,9 +459,9 @@ untuk membangun model machine learning.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="persiapan-lingkungan-analisis">
-<h1>Persiapan Lingkungan Analisis<a class="headerlink" href="#persiapan-lingkungan-analisis" title="Permalink to this heading">#</a></h1>
+<h1>Persiapan Lingkungan Analisis<a class="headerlink" href="#persiapan-lingkungan-analisis" title="Link to this heading">#</a></h1>
 <section id="import-library">
-<h2>3.2 Import Library<a class="headerlink" href="#import-library" title="Permalink to this heading">#</a></h2>
+<h2>3.2 Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h2>
 <p>Library yang digunakan dalam tahap ini:</p>
 <ul class="simple">
 <li><p>pandas → manipulasi data</p></li>
@@ -473,9 +482,9 @@ untuk membangun model machine learning.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="membaca-dataset">
-<h1>Membaca Dataset<a class="headerlink" href="#membaca-dataset" title="Permalink to this heading">#</a></h1>
+<h1>Membaca Dataset<a class="headerlink" href="#membaca-dataset" title="Link to this heading">#</a></h1>
 <section id="memuat-dataset-awal">
-<h2>3.3 Memuat Dataset Awal<a class="headerlink" href="#memuat-dataset-awal" title="Permalink to this heading">#</a></h2>
+<h2>3.3 Memuat Dataset Awal<a class="headerlink" href="#memuat-dataset-awal" title="Link to this heading">#</a></h2>
 <p>Dataset dimuat kembali untuk memastikan seluruh proses preparation dilakukan pada data mentah yang konsisten.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -484,14 +493,84 @@ untuk membangun model machine learning.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Dataset terdiri dari empat fitur numerik dan satu label kategorikal (species).</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="pembersihan-data">
-<h1>Pembersihan Data<a class="headerlink" href="#pembersihan-data" title="Permalink to this heading">#</a></h1>
+<h1>Pembersihan Data<a class="headerlink" href="#pembersihan-data" title="Link to this heading">#</a></h1>
 <section id="pemeriksaan-duplikasi">
-<h2>3.4 Pemeriksaan Duplikasi<a class="headerlink" href="#pemeriksaan-duplikasi" title="Permalink to this heading">#</a></h2>
+<h2>3.4 Pemeriksaan Duplikasi<a class="headerlink" href="#pemeriksaan-duplikasi" title="Link to this heading">#</a></h2>
 <p>Duplikasi data dapat menyebabkan distribusi kelas tidak akurat dan memengaruhi evaluasi model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -501,15 +580,31 @@ untuk membangun model machine learning.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah duplikasi sebelum: 3
+Jumlah duplikasi sesudah: 0
+</pre></div>
+</div>
+</div>
 </div>
 <p>Jika hasil akhir menunjukkan nilai 0, maka dataset telah bersih dari duplikasi.</p>
 </section>
 <section id="pemeriksaan-missing-value">
-<h2>3.5 Pemeriksaan Missing Value<a class="headerlink" href="#pemeriksaan-missing-value" title="Permalink to this heading">#</a></h2>
+<h2>3.5 Pemeriksaan Missing Value<a class="headerlink" href="#pemeriksaan-missing-value" title="Link to this heading">#</a></h2>
 <p>Missing value dapat menyebabkan error dalam algoritma machine learning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sepal_length    0
+sepal_width     0
+petal_length    0
+petal_width     0
+species         0
+dtype: int64
 </pre></div>
 </div>
 </div>
@@ -518,9 +613,9 @@ untuk membangun model machine learning.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="transformasi-data">
-<h1>Transformasi Data<a class="headerlink" href="#transformasi-data" title="Permalink to this heading">#</a></h1>
+<h1>Transformasi Data<a class="headerlink" href="#transformasi-data" title="Link to this heading">#</a></h1>
 <section id="encoding-label">
-<h2>3.6 Encoding Label<a class="headerlink" href="#encoding-label" title="Permalink to this heading">#</a></h2>
+<h2>3.6 Encoding Label<a class="headerlink" href="#encoding-label" title="Link to this heading">#</a></h2>
 <p>Karena algoritma machine learning memerlukan data numerik,
 maka label species perlu dikonversi menjadi bentuk numerik menggunakan LabelEncoder.</p>
 <div class="cell docutils container">
@@ -531,14 +626,90 @@ maka label species perlu dikonversi menjadi bentuk numerik menggunakan LabelEnco
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+      <th>species_encoded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Kolom species_encoded kini merepresentasikan label dalam bentuk angka.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="seleksi-fitur">
-<h1>Seleksi Fitur<a class="headerlink" href="#seleksi-fitur" title="Permalink to this heading">#</a></h1>
+<h1>Seleksi Fitur<a class="headerlink" href="#seleksi-fitur" title="Link to this heading">#</a></h1>
 <section id="pemisahan-fitur-dan-target">
-<h2>3.7 Pemisahan Fitur dan Target<a class="headerlink" href="#pemisahan-fitur-dan-target" title="Permalink to this heading">#</a></h2>
+<h2>3.7 Pemisahan Fitur dan Target<a class="headerlink" href="#pemisahan-fitur-dan-target" title="Link to this heading">#</a></h2>
 <p>Dataset dipisahkan menjadi:</p>
 <ul class="simple">
 <li><p>X → fitur input</p></li>
@@ -552,13 +723,77 @@ maka label species perlu dikonversi menjadi bentuk numerik menggunakan LabelEnco
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="standarisasi-fitur">
-<h1>Standarisasi Fitur<a class="headerlink" href="#standarisasi-fitur" title="Permalink to this heading">#</a></h1>
+<h1>Standarisasi Fitur<a class="headerlink" href="#standarisasi-fitur" title="Link to this heading">#</a></h1>
 <section id="alasan-dilakukan-scaling">
-<h2>3.8 Alasan Dilakukan Scaling<a class="headerlink" href="#alasan-dilakukan-scaling" title="Permalink to this heading">#</a></h2>
+<h2>3.8 Alasan Dilakukan Scaling<a class="headerlink" href="#alasan-dilakukan-scaling" title="Link to this heading">#</a></h2>
 <p>Scaling penting untuk algoritma berbasis jarak seperti KNN karena
 fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 <div class="cell docutils container">
@@ -569,14 +804,78 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.915509</td>
+      <td>1.019971</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.157560</td>
+      <td>-0.128082</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.399610</td>
+      <td>0.331139</td>
+      <td>-1.414778</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.520635</td>
+      <td>0.101529</td>
+      <td>-1.300696</td>
+      <td>-1.3357</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.036535</td>
+      <td>1.249582</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Setelah scaling, seluruh fitur memiliki mean sekitar 0 dan standar deviasi sekitar 1.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="visualisasi-sebelum-dan-sesudah-scaling">
-<h1>Visualisasi Sebelum dan Sesudah Scaling<a class="headerlink" href="#visualisasi-sebelum-dan-sesudah-scaling" title="Permalink to this heading">#</a></h1>
+<h1>Visualisasi Sebelum dan Sesudah Scaling<a class="headerlink" href="#visualisasi-sebelum-dan-sesudah-scaling" title="Link to this heading">#</a></h1>
 <section id="sebelum-scaling">
-<h2>3.9 Sebelum Scaling<a class="headerlink" href="#sebelum-scaling" title="Permalink to this heading">#</a></h2>
+<h2>3.9 Sebelum Scaling<a class="headerlink" href="#sebelum-scaling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -585,10 +884,13 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/9625014da30f171d8874d44100a68981410df5988768c6e2c974ae84015f755b.png" src="_images/9625014da30f171d8874d44100a68981410df5988768c6e2c974ae84015f755b.png" />
+</div>
 </div>
 </section>
 <section id="sesudah-scaling">
-<h2>3.10 Sesudah Scaling<a class="headerlink" href="#sesudah-scaling" title="Permalink to this heading">#</a></h2>
+<h2>3.10 Sesudah Scaling<a class="headerlink" href="#sesudah-scaling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -597,12 +899,15 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/a8b541bfc23149fcb0f1921873f9da31dc32078439fa2f94a6c403652e39c2a2.png" src="_images/a8b541bfc23149fcb0f1921873f9da31dc32078439fa2f94a6c403652e39c2a2.png" />
+</div>
 </div>
 <p>Distribusi setelah scaling terlihat lebih terpusat dan seragam.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="menyimpan-dataset-final-untuk-modeling">
-<h1>Menyimpan Dataset Final untuk Modeling<a class="headerlink" href="#menyimpan-dataset-final-untuk-modeling" title="Permalink to this heading">#</a></h1>
+<h1>Menyimpan Dataset Final untuk Modeling<a class="headerlink" href="#menyimpan-dataset-final-untuk-modeling" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_modeling</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
@@ -612,6 +917,76 @@ fitur dengan rentang lebih besar dapat mendominasi perhitungan jarak.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.915509</td>
+      <td>1.019971</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.157560</td>
+      <td>-0.128082</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.399610</td>
+      <td>0.331139</td>
+      <td>-1.414778</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.520635</td>
+      <td>0.101529</td>
+      <td>-1.300696</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.036535</td>
+      <td>1.249582</td>
+      <td>-1.357737</td>
+      <td>-1.3357</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Dataset ini kini siap digunakan untuk tahap Modeling tanpa perlu pengolahan tambahan.</p>
 <div class="toctree-wrapper compound">
