@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>K-Nearest Neighbor (KNN) dan KNN Imputation &#8212; Catatan Penambangan Data</title>
   
@@ -29,45 +28,39 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'knn-missing-values';</script>
+    <script src="_static/custom.js?v=9b7500b0"></script>
     <link rel="canonical" href="/Pendata/knn-missing-values.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -169,7 +162,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -209,6 +213,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_decision_tree_analysis.html">Analisis Decision Tree Menggunakan KNIME</a></li>
@@ -257,9 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -353,9 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -402,7 +409,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbor-knn-dan-knn-imputation">
-<h1>K-Nearest Neighbor (KNN) dan KNN Imputation<a class="headerlink" href="#k-nearest-neighbor-knn-dan-knn-imputation" title="Permalink to this heading">#</a></h1>
+<h1>K-Nearest Neighbor (KNN) dan KNN Imputation<a class="headerlink" href="#k-nearest-neighbor-knn-dan-knn-imputation" title="Link to this heading">#</a></h1>
 <p>Notebook ini membahas algoritma <strong>K-Nearest Neighbor (KNN)</strong> serta penerapannya untuk <strong>mengisi missing value</strong> pada dataset.</p>
 <p>Materi yang dibahas:</p>
 <ol class="arabic simple">
@@ -416,7 +423,7 @@ document.write(`
 <li><p>Implementasi menggunakan Python</p></li>
 </ol>
 <section id="k-nearest-neighbor-knn">
-<h2>1. K-Nearest Neighbor (KNN)<a class="headerlink" href="#k-nearest-neighbor-knn" title="Permalink to this heading">#</a></h2>
+<h2>1. K-Nearest Neighbor (KNN)<a class="headerlink" href="#k-nearest-neighbor-knn" title="Link to this heading">#</a></h2>
 <p>K-Nearest Neighbor (KNN) merupakan salah satu algoritma dalam <strong>machine learning</strong> yang digunakan untuk melakukan <strong>klasifikasi maupun regresi</strong>.</p>
 <p>Algoritma ini bekerja berdasarkan prinsip <strong>kedekatan antar data</strong>. Suatu data baru akan diprediksi nilainya dengan melihat data lain yang memiliki karakteristik paling mirip.</p>
 <p>Konsep utama KNN adalah:</p>
@@ -427,7 +434,7 @@ document.write(`
 <p>Huruf <strong>K</strong> dalam KNN menunjukkan jumlah tetangga terdekat yang digunakan dalam proses pengambilan keputusan.</p>
 </section>
 <section id="cara-kerja-algoritma-knn">
-<h2>2. Cara Kerja Algoritma KNN<a class="headerlink" href="#cara-kerja-algoritma-knn" title="Permalink to this heading">#</a></h2>
+<h2>2. Cara Kerja Algoritma KNN<a class="headerlink" href="#cara-kerja-algoritma-knn" title="Link to this heading">#</a></h2>
 <p>Langkah kerja algoritma KNN secara umum adalah:</p>
 <ol class="arabic simple">
 <li><p>Menentukan nilai <strong>K</strong> (jumlah tetangga terdekat).</p></li>
@@ -442,11 +449,11 @@ document.write(`
 </ul>
 </section>
 <section id="euclidean-distance">
-<h2>3. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Permalink to this heading">#</a></h2>
+<h2>3. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Link to this heading">#</a></h2>
 <p>Salah satu metode yang paling umum digunakan untuk menghitung jarak dalam KNN adalah <strong>Euclidean Distance</strong>.</p>
 <p>Euclidean Distance menghitung jarak garis lurus antara dua titik dalam ruang multidimensi.</p>
 <section id="rumus-euclidean-distance">
-<h3>Rumus Euclidean Distance<a class="headerlink" href="#rumus-euclidean-distance" title="Permalink to this heading">#</a></h3>
+<h3>Rumus Euclidean Distance<a class="headerlink" href="#rumus-euclidean-distance" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
@@ -462,7 +469,7 @@ d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
 </section>
 </section>
 <section id="missing-value">
-<h2>4. Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this heading">#</a></h2>
+<h2>4. Missing Value<a class="headerlink" href="#missing-value" title="Link to this heading">#</a></h2>
 <p>Missing value adalah kondisi dimana suatu atribut dalam dataset tidak memiliki nilai.</p>
 <p>Missing value dapat disebabkan oleh beberapa faktor:</p>
 <ul class="simple">
@@ -473,7 +480,7 @@ d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
 <p>Jika tidak ditangani dengan baik, missing value dapat mempengaruhi hasil analisis dan performa model.</p>
 </section>
 <section id="knn-imputation">
-<h2>5. KNN Imputation<a class="headerlink" href="#knn-imputation" title="Permalink to this heading">#</a></h2>
+<h2>5. KNN Imputation<a class="headerlink" href="#knn-imputation" title="Link to this heading">#</a></h2>
 <p>KNN Imputation adalah metode untuk <strong>mengisi missing value menggunakan konsep KNN</strong>.</p>
 <p>Langkah-langkahnya:</p>
 <ol class="arabic simple">
@@ -485,7 +492,7 @@ d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
 </ol>
 </section>
 <section id="dataset-harga-rumah">
-<h2>Dataset Harga Rumah<a class="headerlink" href="#dataset-harga-rumah" title="Permalink to this heading">#</a></h2>
+<h2>Dataset Harga Rumah<a class="headerlink" href="#dataset-harga-rumah" title="Link to this heading">#</a></h2>
 <p>Dataset berikut menggambarkan karakteristik beberapa rumah.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -534,7 +541,7 @@ d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
 <p>Kita akan memperkirakan nilai harga rumah R5 menggunakan metode <strong>KNN</strong>.</p>
 </section>
 <section id="atribut-yang-digunakan">
-<h2>Atribut yang Digunakan<a class="headerlink" href="#atribut-yang-digunakan" title="Permalink to this heading">#</a></h2>
+<h2>Atribut yang Digunakan<a class="headerlink" href="#atribut-yang-digunakan" title="Link to this heading">#</a></h2>
 <p>Untuk memperkirakan harga rumah, atribut pembanding yang digunakan adalah:</p>
 <ul class="simple">
 <li><p>Luas Tanah</p></li>
@@ -543,7 +550,7 @@ d(p,q) = \sqrt{\sum_{i=1}^{n}(p_i - q_i)^2}
 </ul>
 </section>
 <section id="contoh-perhitungan-euclidean-distance">
-<h2>Contoh Perhitungan Euclidean Distance<a class="headerlink" href="#contoh-perhitungan-euclidean-distance" title="Permalink to this heading">#</a></h2>
+<h2>Contoh Perhitungan Euclidean Distance<a class="headerlink" href="#contoh-perhitungan-euclidean-distance" title="Link to this heading">#</a></h2>
 <p>Perhitungan jarak antara rumah <strong>R5</strong> dan <strong>R1</strong>.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -576,67 +583,21 @@ d = \sqrt{500} = 22.36
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s1">&#39;Rumah&#39;</span><span class="p">:[</span><span class="s1">&#39;R1&#39;</span><span class="p">,</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span><span class="s1">&#39;R3&#39;</span><span class="p">,</span><span class="s1">&#39;R4&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s1">&#39;Luas_Tanah&#39;</span><span class="p">:[</span><span class="mi">120</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">90</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>      <span class="mi">8</span>     <span class="s1">&#39;Harga&#39;</span><span class="p">:[</span><span class="mi">850</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">600</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Rumah</th>
-      <th>Luas_Tanah</th>
-      <th>Luas_Bangunan</th>
-      <th>Jumlah_Kamar</th>
-      <th>Harga</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>R1</td>
-      <td>120</td>
-      <td>90</td>
-      <td>3</td>
-      <td>850</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>R2</td>
-      <td>200</td>
-      <td>150</td>
-      <td>4</td>
-      <td>1500</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>R3</td>
-      <td>150</td>
-      <td>110</td>
-      <td>3</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>R4</td>
-      <td>90</td>
-      <td>70</td>
-      <td>2</td>
-      <td>600</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,7 +685,7 @@ d = \sqrt{500} = 22.36
 </div>
 </section>
 <section id="menentukan-nilai-k">
-<h2>Menentukan Nilai K<a class="headerlink" href="#menentukan-nilai-k" title="Permalink to this heading">#</a></h2>
+<h2>Menentukan Nilai K<a class="headerlink" href="#menentukan-nilai-k" title="Link to this heading">#</a></h2>
 <p>Misalkan dipilih <strong>K = 3</strong> tetangga terdekat.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -797,7 +758,7 @@ d = \sqrt{500} = 22.36
 </div>
 </section>
 <section id="menghitung-estimasi-harga">
-<h2>Menghitung Estimasi Harga<a class="headerlink" href="#menghitung-estimasi-harga" title="Permalink to this heading">#</a></h2>
+<h2>Menghitung Estimasi Harga<a class="headerlink" href="#menghitung-estimasi-harga" title="Link to this heading">#</a></h2>
 <p>Nilai harga diperkirakan menggunakan rata-rata harga dari tetangga terdekat.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -815,7 +776,7 @@ d = \sqrt{500} = 22.36
 </div>
 </section>
 <section id="kesimpulan">
-<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
 <p>Dengan menggunakan metode <strong>K-Nearest Neighbor</strong>, nilai harga rumah R5 dapat diperkirakan berdasarkan rumah yang memiliki karakteristik paling mirip.</p>
 <p>Metode ini bekerja dengan mencari tetangga terdekat berdasarkan <strong>Euclidean Distance</strong> kemudian menggunakan <strong>rata-rata nilai dari tetangga tersebut</strong>.</p>
 <p>KNN merupakan metode yang sederhana namun cukup efektif untuk:</p>

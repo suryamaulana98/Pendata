@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Analisis Decision Tree Menggunakan KNIME &#8212; Catatan Penambangan Data</title>
   
@@ -29,45 +28,39 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
-    <script src="_static/custom.js"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'knime_decision_tree_analysis';</script>
+    <script src="_static/custom.js?v=9b7500b0"></script>
     <link rel="canonical" href="/Pendata/knime_decision_tree_analysis.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -169,7 +162,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -209,6 +213,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="modeling.html">Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Analisis Data Kesuburan Tanah dengan KNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knime_naive_bayes_analysis.html">Analisis Klasifikasi Menggunakan Gaussian Naive Bayes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Decision Tree Menggunakan KNIME</a></li>
@@ -257,9 +264,9 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -353,9 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -454,11 +461,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-decision-tree-menggunakan-knime">
-<h1>Analisis Decision Tree Menggunakan KNIME<a class="headerlink" href="#analisis-decision-tree-menggunakan-knime" title="Permalink to this heading">#</a></h1>
+<h1>Analisis Decision Tree Menggunakan KNIME<a class="headerlink" href="#analisis-decision-tree-menggunakan-knime" title="Link to this heading">#</a></h1>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="pendahuluan">
-<h1>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h1>
+<h1>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h1>
 <p>Pada proyek ini dilakukan proses klasifikasi menggunakan algoritma <strong>Decision Tree</strong> pada platform <strong>KNIME Analytics Platform</strong>.</p>
 <p>Decision Tree merupakan salah satu algoritma pada teknik <strong>supervised learning</strong> yang digunakan untuk melakukan prediksi berdasarkan pola dari data historis.</p>
 <p>Algoritma ini bekerja dengan cara:</p>
@@ -476,7 +483,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="workflow-knime">
-<h1>2. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Permalink to this heading">#</a></h1>
+<h1>2. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h1>
 <p>Berikut workflow KNIME yang digunakan:</p>
 <p><img alt="Workflow KNIME" src="_images/workfloww.png" /></p>
 <p>Workflow terdiri dari beberapa node utama:</p>
@@ -492,9 +499,9 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="excel-reader">
-<h1>3. Excel Reader<a class="headerlink" href="#excel-reader" title="Permalink to this heading">#</a></h1>
+<h1>3. Excel Reader<a class="headerlink" href="#excel-reader" title="Link to this heading">#</a></h1>
 <section id="fungsi">
-<h2>Fungsi<a class="headerlink" href="#fungsi" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#fungsi" title="Link to this heading">#</a></h2>
 <p>Node <strong>Excel Reader</strong> digunakan untuk membaca dataset dari file Excel ke dalam KNIME.</p>
 <p><img alt="Workflow KNIME" src="_images/excell.png" /></p>
 <p>Dataset yang dimuat berisi:</p>
@@ -506,7 +513,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="proses-yang-terjadi">
-<h2>Proses yang Terjadi<a class="headerlink" href="#proses-yang-terjadi" title="Permalink to this heading">#</a></h2>
+<h2>Proses yang Terjadi<a class="headerlink" href="#proses-yang-terjadi" title="Link to this heading">#</a></h2>
 <p>Pada tahap ini KNIME akan:</p>
 <ul class="simple">
 <li><p>membaca file dataset</p></li>
@@ -516,7 +523,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="alasan-menggunakan-excel-reader">
-<h2>Alasan Menggunakan Excel Reader<a class="headerlink" href="#alasan-menggunakan-excel-reader" title="Permalink to this heading">#</a></h2>
+<h2>Alasan Menggunakan Excel Reader<a class="headerlink" href="#alasan-menggunakan-excel-reader" title="Link to this heading">#</a></h2>
 <p>Karena dataset yang digunakan disimpan dalam format:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.xlsx
 </pre></div>
@@ -526,9 +533,9 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="table-partitioner">
-<h1>4. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Permalink to this heading">#</a></h1>
+<h1>4. Table Partitioner<a class="headerlink" href="#table-partitioner" title="Link to this heading">#</a></h1>
 <section id="id1">
-<h2>Fungsi<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>Node <strong>Table Partitioner</strong> digunakan untuk membagi dataset menjadi:</p>
 <ul class="simple">
 <li><p>data training</p></li>
@@ -538,9 +545,9 @@ document.write(`
 <p><img alt="Workflow KNIME" src="_images/tablee.png" /></p>
 </section>
 <section id="konfigurasi-yang-digunakan">
-<h2>Konfigurasi yang Digunakan<a class="headerlink" href="#konfigurasi-yang-digunakan" title="Permalink to this heading">#</a></h2>
+<h2>Konfigurasi yang Digunakan<a class="headerlink" href="#konfigurasi-yang-digunakan" title="Link to this heading">#</a></h2>
 <section id="pembagian-data">
-<h3>Pembagian Data<a class="headerlink" href="#pembagian-data" title="Permalink to this heading">#</a></h3>
+<h3>Pembagian Data<a class="headerlink" href="#pembagian-data" title="Link to this heading">#</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>90% → Training Data
 10% → Testing Data
 </pre></div>
@@ -549,9 +556,9 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="tujuan-pembagian-data">
-<h2>Tujuan Pembagian Data<a class="headerlink" href="#tujuan-pembagian-data" title="Permalink to this heading">#</a></h2>
+<h2>Tujuan Pembagian Data<a class="headerlink" href="#tujuan-pembagian-data" title="Link to this heading">#</a></h2>
 <section id="training-data">
-<h3>Training Data<a class="headerlink" href="#training-data" title="Permalink to this heading">#</a></h3>
+<h3>Training Data<a class="headerlink" href="#training-data" title="Link to this heading">#</a></h3>
 <p>Digunakan untuk:</p>
 <ul class="simple">
 <li><p>melatih model</p></li>
@@ -561,7 +568,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="testing-data">
-<h3>Testing Data<a class="headerlink" href="#testing-data" title="Permalink to this heading">#</a></h3>
+<h3>Testing Data<a class="headerlink" href="#testing-data" title="Link to this heading">#</a></h3>
 <p>Digunakan untuk:</p>
 <ul class="simple">
 <li><p>menguji performa model</p></li>
@@ -572,7 +579,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="mengapa-menggunakan-90-10">
-<h2>Mengapa Menggunakan 90:10?<a class="headerlink" href="#mengapa-menggunakan-90-10" title="Permalink to this heading">#</a></h2>
+<h2>Mengapa Menggunakan 90:10?<a class="headerlink" href="#mengapa-menggunakan-90-10" title="Link to this heading">#</a></h2>
 <p>Karena:</p>
 <ul class="simple">
 <li><p>dataset relatif tidak terlalu besar</p></li>
@@ -584,9 +591,9 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="decision-tree-learner">
-<h1>5. Decision Tree Learner<a class="headerlink" href="#decision-tree-learner" title="Permalink to this heading">#</a></h1>
+<h1>5. Decision Tree Learner<a class="headerlink" href="#decision-tree-learner" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2>Fungsi<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>Node <strong>Decision Tree Learner</strong> digunakan untuk:</p>
 <ul class="simple">
 <li><p>membangun model pohon keputusan</p></li>
@@ -597,7 +604,7 @@ document.write(`
 <p><img alt="Workflow KNIME" src="_images/decision.png" /></p>
 </section>
 <section id="output">
-<h2>Output<a class="headerlink" href="#output" title="Permalink to this heading">#</a></h2>
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h2>
 <p>Node ini menghasilkan:</p>
 <ul class="simple">
 <li><p>model pohon keputusan</p></li>
@@ -608,15 +615,15 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="decision-tree-view">
-<h1>6. Decision Tree View<a class="headerlink" href="#decision-tree-view" title="Permalink to this heading">#</a></h1>
+<h1>6. Decision Tree View<a class="headerlink" href="#decision-tree-view" title="Link to this heading">#</a></h1>
 <section id="id3">
-<h2>Fungsi<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p><img alt="Workflow KNIME" src="_images/view.png" /></p>
 <p>Node ini digunakan untuk menampilkan visualisasi pohon keputusan.</p>
 </section>
 <hr class="docutils" />
 <section id="tujuan">
-<h2>Tujuan<a class="headerlink" href="#tujuan" title="Permalink to this heading">#</a></h2>
+<h2>Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h2>
 <p>Agar pengguna dapat:</p>
 <ul class="simple">
 <li><p>melihat struktur tree</p></li>
@@ -627,7 +634,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="hasil-yang-bisa-dilihat-interpretasi-visual">
-<h2>Hasil yang Bisa Dilihat (Interpretasi Visual)<a class="headerlink" href="#hasil-yang-bisa-dilihat-interpretasi-visual" title="Permalink to this heading">#</a></h2>
+<h2>Hasil yang Bisa Dilihat (Interpretasi Visual)<a class="headerlink" href="#hasil-yang-bisa-dilihat-interpretasi-visual" title="Link to this heading">#</a></h2>
 <p>Berdasarkan visualisasi tree yang dihasilkan, model Decision Tree telah membentuk struktur pohon sebagai berikut:</p>
 <ol class="arabic simple">
 <li><p><strong>Root Node (Node Utama)</strong>: Atribut <code class="docutils literal notranslate"><span class="pre">Humidity</span></code> terpilih sebagai root. Atribut ini dipilih sebagai pemecah utama karena memiliki nilai probabilitas Information Gain / Gain Ratio terbaik.</p></li>
@@ -649,9 +656,9 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="decision-tree-predictor">
-<h1>7. Decision Tree Predictor<a class="headerlink" href="#decision-tree-predictor" title="Permalink to this heading">#</a></h1>
+<h1>7. Decision Tree Predictor<a class="headerlink" href="#decision-tree-predictor" title="Link to this heading">#</a></h1>
 <section id="id4">
-<h2>Fungsi<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p><img alt="Workflow KNIME" src="_images/tree.png" /></p>
 <p>Node ini digunakan untuk:</p>
 <ul class="simple">
@@ -661,7 +668,7 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section id="cara-kerja">
-<h2>Cara Kerja<a class="headerlink" href="#cara-kerja" title="Permalink to this heading">#</a></h2>
+<h2>Cara Kerja<a class="headerlink" href="#cara-kerja" title="Link to this heading">#</a></h2>
 <p>Data testing akan:</p>
 <ul class="simple">
 <li><p>masuk ke model decision tree</p></li>
@@ -671,7 +678,7 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section id="id5">
-<h2>Output<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2>Output<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>Node ini menghasilkan kolom baru:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Prediction
 </pre></div>
@@ -681,23 +688,23 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="scorer">
-<h1>8. Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h1>
+<h1>8. Scorer<a class="headerlink" href="#scorer" title="Link to this heading">#</a></h1>
 <p><img alt="Workflow KNIME" src="_images/sko.png" /></p>
 <section id="id6">
-<h2>Fungsi<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>Node <strong>Scorer</strong> digunakan untuk mengevaluasi performa model secara agregat dengan membandingkan <strong>label asli</strong> dan <strong>hasil prediksi model</strong>.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="model-writer">
-<h1>9. Model Writer<a class="headerlink" href="#model-writer" title="Permalink to this heading">#</a></h1>
+<h1>9. Model Writer<a class="headerlink" href="#model-writer" title="Link to this heading">#</a></h1>
 <section id="id7">
-<h2>Fungsi<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2>Fungsi<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>Node <strong>Model Writer</strong> digunakan untuk menyimpan model Decision Tree.</p>
 </section>
 <hr class="docutils" />
 <section id="id8">
-<h2>Tujuan<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h2>Tujuan<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>Agar model dapat:</p>
 <ul class="simple">
 <li><p>digunakan kembali</p></li>
@@ -708,7 +715,7 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section id="file-yang-dihasilkan">
-<h2>File yang Dihasilkan<a class="headerlink" href="#file-yang-dihasilkan" title="Permalink to this heading">#</a></h2>
+<h2>File yang Dihasilkan<a class="headerlink" href="#file-yang-dihasilkan" title="Link to this heading">#</a></h2>
 <p>Biasanya dalam format:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.model
 </pre></div>
@@ -717,7 +724,7 @@ IF Humidity = High AND Outlook = ... THEN Play Tennis = ...
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="alur-lengkap-workflow">
-<h1>10. Alur Lengkap Workflow<a class="headerlink" href="#alur-lengkap-workflow" title="Permalink to this heading">#</a></h1>
+<h1>10. Alur Lengkap Workflow<a class="headerlink" href="#alur-lengkap-workflow" title="Link to this heading">#</a></h1>
 <p>Berikut urutan proses pada workflow secara visual:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Excel Reader
       ↓
@@ -735,9 +742,9 @@ Model Writer   Tree View   Decision Tree Predictor
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="rumus-matematika-gain-ratio">
-<h1>11. Rumus Matematika (Gain Ratio)<a class="headerlink" href="#rumus-matematika-gain-ratio" title="Permalink to this heading">#</a></h1>
+<h1>11. Rumus Matematika (Gain Ratio)<a class="headerlink" href="#rumus-matematika-gain-ratio" title="Link to this heading">#</a></h1>
 <section id="a-entropy">
-<h2>A. Entropy<a class="headerlink" href="#a-entropy" title="Permalink to this heading">#</a></h2>
+<h2>A. Entropy<a class="headerlink" href="#a-entropy" title="Link to this heading">#</a></h2>
 <p>Entropy digunakan untuk mengukur tingkat ketidakteraturan (impurity) dari suatu kumpulan data.</p>
 <p>Rumus:</p>
 <div class="math notranslate nohighlight">
@@ -754,7 +761,7 @@ Entropy(S) = - \sum_{i=1}^{k} p_i \log_2 p_i
 </section>
 <hr class="docutils" />
 <section id="b-information-gain">
-<h2>B. Information Gain<a class="headerlink" href="#b-information-gain" title="Permalink to this heading">#</a></h2>
+<h2>B. Information Gain<a class="headerlink" href="#b-information-gain" title="Link to this heading">#</a></h2>
 <p>Information Gain digunakan untuk mengukur seberapa baik suatu atribut mengurangi entropy.</p>
 <p>Rumus:</p>
 <div class="math notranslate nohighlight">
@@ -772,7 +779,7 @@ Gain(S,A) = Entropy(S) - \sum \frac{|S_v|}{|S|} Entropy(S_v)
 </section>
 <hr class="docutils" />
 <section id="c-split-info">
-<h2>C. Split Info<a class="headerlink" href="#c-split-info" title="Permalink to this heading">#</a></h2>
+<h2>C. Split Info<a class="headerlink" href="#c-split-info" title="Link to this heading">#</a></h2>
 <p>Split Info digunakan untuk mengukur penyebaran data setelah proses pemisahan.</p>
 <p>Rumus:</p>
 <div class="math notranslate nohighlight">
@@ -788,7 +795,7 @@ SplitInfo(A) = - \sum \frac{n_i}{n} \log_2 \frac{n_i}{n}
 </section>
 <hr class="docutils" />
 <section id="d-gain-ratio">
-<h2>D. Gain Ratio<a class="headerlink" href="#d-gain-ratio" title="Permalink to this heading">#</a></h2>
+<h2>D. Gain Ratio<a class="headerlink" href="#d-gain-ratio" title="Link to this heading">#</a></h2>
 <p>Gain Ratio merupakan hasil akhir yang digunakan pada algoritma C4.5.</p>
 <p>Rumus:</p>
 <div class="math notranslate nohighlight">
@@ -800,9 +807,9 @@ GainRatio(A) = \frac{Gain(A)}{SplitInfo(A)}
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="kelebihan-dan-kekurangan-decision-tree">
-<h1>12. Kelebihan dan Kekurangan Decision Tree<a class="headerlink" href="#kelebihan-dan-kekurangan-decision-tree" title="Permalink to this heading">#</a></h1>
+<h1>12. Kelebihan dan Kekurangan Decision Tree<a class="headerlink" href="#kelebihan-dan-kekurangan-decision-tree" title="Link to this heading">#</a></h1>
 <section id="kelebihan">
-<h2>Kelebihan<a class="headerlink" href="#kelebihan" title="Permalink to this heading">#</a></h2>
+<h2>Kelebihan<a class="headerlink" href="#kelebihan" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Mudah dipahami dan divisualisasikan</p></li>
 <li><p>Bisa menangani data kategorikal dan numerik</p></li>
@@ -813,7 +820,7 @@ GainRatio(A) = \frac{Gain(A)}{SplitInfo(A)}
 </section>
 <hr class="docutils" />
 <section id="kekurangan">
-<h2>Kekurangan<a class="headerlink" href="#kekurangan" title="Permalink to this heading">#</a></h2>
+<h2>Kekurangan<a class="headerlink" href="#kekurangan" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Rentan terhadap overfitting</p></li>
 <li><p>Struktur pohon mudah berubah jika data berubah sedikit</p></li>
@@ -823,7 +830,7 @@ GainRatio(A) = \frac{Gain(A)}{SplitInfo(A)}
 </section>
 <hr class="docutils" />
 <section id="solusi-overfitting">
-<h2>Solusi Overfitting<a class="headerlink" href="#solusi-overfitting" title="Permalink to this heading">#</a></h2>
+<h2>Solusi Overfitting<a class="headerlink" href="#solusi-overfitting" title="Link to this heading">#</a></h2>
 <p>Biasanya digunakan teknik:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -834,7 +841,7 @@ Pruning
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="kesimpulan">
-<h1>13. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h1>
+<h1>13. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h1>
 <p>Berdasarkan workflow yang dibuat pada KNIME:</p>
 <ul class="simple">
 <li><p>algoritma Decision Tree berhasil membangun model klasifikasi</p></li>
