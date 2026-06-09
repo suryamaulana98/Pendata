@@ -10,6 +10,9 @@ chapters:
       - file: normalisasi-data
       - file: knn-missing-values
       - file: wknn
+  - file: modeling
+  - file: evaluation
+  - file: deployment
   - file: uts
     title: UTS - Analisis Data Kesuburan Tanah dengan KNN
   - file: knime_naive_bayes_analysis
