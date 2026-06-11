@@ -23,3 +23,6 @@ chapters:
     title: Analisa Data Regresi Linier
   - file: peramalan-no2-lumajang
     title: Peramalan Kadar NO2 di Lumajang
+
+  - file: tugas_skforecast_explainability
+    title: Analisis Model Forecaster Explainability
