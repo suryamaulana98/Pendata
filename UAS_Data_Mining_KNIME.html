@@ -411,6 +411,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">7. Modeling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-yang-digunakan">Metode yang Digunakan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-decision-tree-predictor-classified-data">Hasil Decision Tree Predictor (Classified Data)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">8. Evaluation</a><ul class="nav section-nav flex-column">
@@ -637,15 +638,29 @@ Analisis latar belakang pendidikan orang tua memperlihatkan bahwa ada tren di ma
 <h3>Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h3>
 <p>Workflow untuk proses <em>training</em> dan <em>testing</em> dibentuk dengan rangkaian node berikut:</p>
 <ul class="simple">
-<li><p><strong>CSV Reader:</strong> Gerbang awal untuk mengimpor dataset berformat .csv ke dalam KNIME.</p></li>
-<li><p><strong>Number to String:</strong> Mengubah tipe data kolom target (<code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code>) dari numerik (Integer) menjadi kategorikal (String) untuk target klasifikasi.</p></li>
-<li><p><strong>Table Partitioner:</strong> Membagi dataset secara acak menjadi dua bagian: Data Latih (Train 80%) dan Data Uji (Test 20%).</p></li>
-<li><p><strong>Decision Tree Learner:</strong> Melatih data <em>Train</em> untuk membangun algoritma pohon keputusan dan memodelkan pola.</p></li>
-<li><p><strong>Decision Tree Predictor:</strong> Menerapkan model yang telah dibuat untuk memprediksi target kelas pada Data Uji yang belum pernah dilihat model.</p></li>
-<li><p><strong>Decision Tree View:</strong> Menampilkan visualisasi bentuk pohon keputusan (<em>tree</em>) untuk memudahkan membaca aturan (rules).</p></li>
-<li><p><strong>Scorer:</strong> Membandingkan nilai tebakan dari node Predictor dengan nilai aslinya di Data Uji, lalu menghitung tingkat keberhasilan (akurasi) model.</p></li>
+<li><p><strong>CSV Reader:</strong> Pintu masuk (gerbang awal) untuk membaca dan mengimpor file dataset mentah berformat .csv ke dalam KNIME.</p></li>
+<li><p><strong>Number to String:</strong> Bertugas mengubah tipe data kolom target (<code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code>) dari Angka (Integer) menjadi Teks/Kategori (String). Ini sangat wajib dilakukan agar algoritma tahu bahwa angka 0-7 adalah nama kelas/kategori nilai, bukan angka matematis untuk regresi.</p></li>
+<li><p><strong>Table Partitioner:</strong> Membagi total data (145 baris) menjadi dua kubu secara acak. Jalur atas adalah <strong>Data Latih (80% = 116 data)</strong> untuk mengajari model, dan jalur bawah adalah <strong>Data Uji (20% = 29 data)</strong> untuk mengetes model.</p></li>
+<li><p><strong>Decision Tree Learner:</strong> Sebagai “otak” dari model. Node ini menerima Data Latih (116 data) dan belajar mencari pola untuk membentuk algoritma Pohon Keputusan (<em>Decision Tree</em>).</p></li>
+<li><p><strong>Decision Tree View:</strong> Node visualisasi untuk melihat bentuk percabangan pohon keputusan (<em>If-Then rules</em>) yang dipelajari oleh <em>Learner</em>.</p></li>
+<li><p><strong>Decision Tree Predictor:</strong> Berfungsi sebagai “pemberi ujian”. Menerapkan model yang sudah dilatih pada Data Uji (29 data yang belum pernah dilihat) untuk menebak <em>Grade</em> masing-masing mahasiswa.</p></li>
+<li><p><strong>Scorer:</strong> Sebagai penilai (<em>Grader</em>). Node ini membandingkan kunci jawaban asli dengan hasil tebakan dari <em>Predictor</em>, lalu menghitung akurasinya.</p></li>
 </ul>
 <p><img alt="Workflow KNIME" src="_images/auas.png" /></p>
+</section>
+<section id="hasil-decision-tree-predictor-classified-data">
+<h3>Hasil Decision Tree Predictor (Classified Data)<a class="headerlink" href="#hasil-decision-tree-predictor-classified-data" title="Link to this heading">#</a></h3>
+<p>Berikut adalah penjelasan mengenai cara membaca tabel hasil prediksi (<em>Classified Data</em>) dari node <strong>Decision Tree Predictor</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Bukti Data Uji 29 Baris:</strong> Tabel prediksi menghasilkan <code class="docutils literal notranslate"><span class="pre">Rows:</span> <span class="pre">29</span></code>. Ini adalah bukti fisik mutlak bahwa <em>Table Partitioner</em> benar-benar bekerja memisahkan 20% data dari total 145 data untuk dijadikan soal ujian (<em>Test Set</em>).</p></li>
+<li><p><strong>Kolom GRADE (Kunci Jawaban Asli):</strong> Merupakan nilai atau kelas aktual yang sebenarnya didapatkan oleh mahasiswa.</p></li>
+<li><p><strong>Kolom Prediction(GRADE) (Hasil Tebakan):</strong> Merupakan tebakan yang dihasilkan oleh model <em>Decision Tree</em>.</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Tebakan Benar (TP/TN):</strong> Jika nilai asli dan hasil prediksi sama (misalnya nilai asli <code class="docutils literal notranslate"><span class="pre">2</span></code>, ditebak <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p></li>
+<li><p><strong>Tebakan Meleset (FP/FN):</strong> Jika nilai asli berbeda dengan hasil tebakan (misalnya nilai asli <code class="docutils literal notranslate"><span class="pre">3</span></code>, ditebak <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
+</ul>
+<p>Tabel <em>Classified Data</em> inilah yang nantinya disetorkan ke node <strong>Scorer</strong> untuk menghitung akurasi akhir. <em>Scorer</em> memindai bahwa dari 29 baris, model berhasil menebak tepat sasaran di 11 baris, sehingga menghasilkan akurasi <strong>11/29 = 37.9%</strong>.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -819,6 +834,7 @@ Penelitian berikutnya disarankan untuk menambah ragam metode klasifikasi (misal:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">7. Modeling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-yang-digunakan">Metode yang Digunakan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-decision-tree-predictor-classified-data">Hasil Decision Tree Predictor (Classified Data)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">8. Evaluation</a><ul class="nav section-nav flex-column">
