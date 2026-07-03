@@ -637,11 +637,13 @@ Analisis latar belakang pendidikan orang tua memperlihatkan bahwa ada tren di ma
 <h3>Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h3>
 <p>Workflow untuk proses <em>training</em> dan <em>testing</em> dibentuk dengan rangkaian node berikut:</p>
 <ul class="simple">
-<li><p><strong>CSV Reader:</strong> Input data sumber asli.</p></li>
-<li><p><strong>Partitioning:</strong> Membagi data menjadi kelompok <em>Train</em> (misalnya 80%) untuk pelatihan dan <em>Test</em> (20%) untuk pengujian.</p></li>
-<li><p><strong>Decision Tree Learner:</strong> Melatih data <em>Train</em> untuk membangun algoritma pohon keputusan dan menghasilkan model akhir.</p></li>
-<li><p><strong>Decision Tree Predictor:</strong> Menggunakan model yang telah dibuat dan memprediksi target untuk data set <em>Test</em> yang belum pernah “dilihat” model.</p></li>
-<li><p><strong>Scorer:</strong> Menghitung akurasi prediksi hasil tebakan dibandingkan nilai aslinya.</p></li>
+<li><p><strong>CSV Reader:</strong> Gerbang awal untuk mengimpor dataset berformat .csv ke dalam KNIME.</p></li>
+<li><p><strong>Number to String:</strong> Mengubah tipe data kolom target (<code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code>) dari numerik (Integer) menjadi kategorikal (String) untuk target klasifikasi.</p></li>
+<li><p><strong>Table Partitioner:</strong> Membagi dataset secara acak menjadi dua bagian: Data Latih (Train 80%) dan Data Uji (Test 20%).</p></li>
+<li><p><strong>Decision Tree Learner:</strong> Melatih data <em>Train</em> untuk membangun algoritma pohon keputusan dan memodelkan pola.</p></li>
+<li><p><strong>Decision Tree Predictor:</strong> Menerapkan model yang telah dibuat untuk memprediksi target kelas pada Data Uji yang belum pernah dilihat model.</p></li>
+<li><p><strong>Decision Tree View:</strong> Menampilkan visualisasi bentuk pohon keputusan (<em>tree</em>) untuk memudahkan membaca aturan (rules).</p></li>
+<li><p><strong>Scorer:</strong> Membandingkan nilai tebakan dari node Predictor dengan nilai aslinya di Data Uji, lalu menghitung tingkat keberhasilan (akurasi) model.</p></li>
 </ul>
 <p><img alt="Workflow KNIME" src="_images/auas.png" /></p>
 </section>
@@ -668,8 +670,23 @@ $<span class="math notranslate nohighlight">\(
 <li><p><strong>False Positive (FP):</strong> Prediksi mengatakan <em>Grade X</em>, namun aslinya salah (kesalahan menebak positif).</p></li>
 <li><p><strong>False Negative (FN):</strong> Prediksi mengatakan bukan <em>Grade X</em>, namun aslinya justru <em>Grade X</em> (gagal mengenali kejadian).</p></li>
 </ul>
-<p><strong>Interpretasi Hasil:</strong>
-Nilai akurasi yang diperoleh menggambarkan kekuatan model kita dalam menangani data yang terbatas ini. Berdasarkan analisis di <em>Confusion Matrix</em>, dapat dilihat adanya konsentrasi nilai di garis diagonal yang membuktikan bahwa kemampuan model <em>Decision Tree</em> dalam memprediksi nilai mahasiswa cukup tangguh. Beberapa klasifikasi yang meleset seringkali disebabkan tumpang tindih pola perilaku antara nilai yang sangat dekat (misalnya CC dengan CB).</p>
+<p><strong>Interpretasi Hasil dan Perhitungan Akurasi (Berdasarkan Output Node Scorer):</strong></p>
+<p><strong>1. Pembuktian Data Uji (Test Set)</strong>
+Jika kita menjumlahkan elemen pada salah satu baris Confusion Matrix, kita akan mendapatkan total data uji:</p>
+<ul class="simple">
+<li><p><strong>Rumus:</strong> True Positive (TP) + False Positive (FP) + True Negative (TN) + False Negative (FN)</p></li>
+<li><p><strong>Baris 1:</strong> 5 + 2 + 19 + 3 = <strong>29 data</strong>
+Ini membuktikan <em>Table Partitioner</em> (rasio 80:20) telah berjalan, karena 20% dari 145 baris data adalah 29 data untuk diuji.</p></li>
+</ul>
+<p><strong>2. Perhitungan Overall Accuracy (0.379)</strong>
+Akurasi keseluruhan diperoleh dari jumlah total tebakan benar (Total True Positive) dibagi total data uji.</p>
+<ul class="simple">
+<li><p><strong>Total Tebakan Benar (Semua TP):</strong> 5 + 2 + 2 + 0 + 0 + 0 + 0 + 2 = <strong>11</strong></p></li>
+<li><p><strong>Akurasi:</strong> 11 / 29 = 0.3793… (<strong>0.379</strong> atau <strong>37.9%</strong>)
+Angka 37.9% ini menunjukkan model hanya menebak benar 11 dari 29 data. Akurasi ini rendah dikarenakan dataset menargetkan klasifikasi kompleks <strong>8 kelas nilai (multi-class)</strong> (Fail hingga AA), di mana terdapat tumpang tindih (<em>overlap</em>) pola kebiasaan mahasiswa pada <em>grade</em> yang berdekatan.</p></li>
+</ul>
+<p><strong>3. Cohen’s Kappa (0.27)</strong>
+Nilai <em>Cohen’s Kappa</em> sebesar 0.27 berada dalam rentang <strong>“Fair Agreement”</strong> (Tingkat kesesuaian wajar). Ini menegaskan bahwa meskipun akurasi 37.9%, model tidak sekadar menebak jawaban secara acak (random guess), melainkan sudah memprediksi berdasarkan <em>rules</em> algoritma pohon keputusan yang valid.</p>
 <p><em>[Placeholder: Masukkan Screenshot Hasil Node Scorer atau Confusion Matrix]</em></p>
 </section>
 </section>
